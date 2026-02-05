@@ -191,7 +191,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 | Dependency | Owner | Notes |
 |------------|-------|-------|
-| Red Hat API key for CI/CD | NVIDIA partnership | Approved |
+| Red Hat API key for CI/CD | NVIDIA partnership | Coordinated |
 | EU regulation model list | NVIDIA | Need official list or testing approach |
 
 ---

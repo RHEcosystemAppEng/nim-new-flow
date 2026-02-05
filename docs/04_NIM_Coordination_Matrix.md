@@ -146,7 +146,7 @@
 
 | Risk | Owner | Status | Mitigation |
 |------|-------|--------|------------|
-| NVIDIA API key approval delayed | Tomer | Resolved | Approval obtained |
+| NVIDIA API key coordination delayed | Tomer | Resolved | Coordination complete |
 | EU restriction list incomplete | Tomer | Open | Conservative filtering |
 | Dashboard team bandwidth | Dashboard Lead | Open | Early coordination |
 | Upgrade path complexity | All | Open | Thorough testing |

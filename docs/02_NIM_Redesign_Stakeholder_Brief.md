@@ -96,7 +96,7 @@ The solution shifts metadata fetching to build time and moves secret management 
 | Backend | DataScienceCluster CRD changes (opendatahub-operator) |
 | Model Serving | Account removal, metadata shipping (odh-model-controller) |
 | Dashboard | Wizard integration, OdhDashboardConfig |
-| NVIDIA Partnership | API key for build-time (Approved) |
+| NVIDIA Partnership | API key for build-time |
 | Documentation | User and admin guides |
 
 ### External Dependencies
