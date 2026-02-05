@@ -9,12 +9,12 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 | Project | Repository | Role |
 |---------|-----------|------|
 | opendatahub-operator | https://github.com/opendatahub-io/opendatahub-operator | Main operator, deploys components via DataScienceCluster CRD |
-| odh-model-controller | https://github.com/opendatahub-io/odh-model-controller | Backend code for model operations, currently hosts Account CRD/Controller |
+| odh-model-controller | https://github.com/opendatahub-io/odh-model-controller | Model Serving code, currently hosts Account CRD/Controller |
 | odh-dashboard | https://github.com/opendatahub-io/odh-dashboard | Frontend UI, hosts OdhDashboardConfig CRD |
 
 ---
 
-## Phase 1: Backend Removal (odh-model-controller)
+## Phase 1: Model Serving Changes (odh-model-controller)
 
 ### 1.1 Remove Account CRD and Controller
 
@@ -65,9 +65,9 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Phase 2: Operator Changes (opendatahub-operator)
+## Phase 2: Backend Changes (opendatahub-operator)
 
-### 2.1 Remove NIM Backend Flag
+### 2.1 Remove NIM Component from DataScienceCluster
 
 **Tasks:**
 - [ ] Remove NIM-specific enablement flag from DataScienceCluster CRD
@@ -182,8 +182,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 | Task | Team | Dependency |
 |------|------|------------|
-| Backend removal | Backend (you) | None |
-| Operator changes | Backend (you) | Phase 1 complete |
+| Model Serving changes | Model Serving (you) | None |
+| Backend changes | Backend | Phase 1 complete |
 | Dashboard changes | Frontend team | Phases 1-2 complete |
 | Documentation | Docs team | Phases 1-3 complete |
 

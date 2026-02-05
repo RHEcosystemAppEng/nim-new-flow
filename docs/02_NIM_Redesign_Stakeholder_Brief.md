@@ -93,7 +93,8 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 | Team | Responsibility |
 |------|----------------|
-| Backend | Account removal, metadata shipping, DataScienceCluster CRD changes |
+| Backend | DataScienceCluster CRD changes (opendatahub-operator) |
+| Model Serving | Account removal, metadata shipping (odh-model-controller) |
 | Dashboard | Wizard integration, OdhDashboardConfig |
 | NVIDIA Partnership | API key for build-time (Approved) |
 | Documentation | User and admin guides |
@@ -152,5 +153,5 @@ The solution shifts metadata fetching to build time and moves secret management 
 1. Share ADR with stakeholders
 2. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
 3. Assign team members and create Jira tasks
-4. [Begin Phase 1 implementation](03_NIM_Redesign_Implementation_Plan.md) (Backend removal)
+4. [Begin Phase 1 implementation](03_NIM_Redesign_Implementation_Plan.md) (Model Serving changes)
 5. Coordinate with Dashboard team on Wizard integration

@@ -2,7 +2,7 @@
 
 ## Project Responsibilities
 
-### odh-model-controller (Backend)
+### odh-model-controller (Model Serving)
 **Lead:** Tomer Figenblat
 
 | Task | Description | Dependencies | Deliverable |
@@ -15,7 +15,7 @@
 | Update Kustomization | Include NIM resources in component | ConfigMap, Template | Kustomization update |
 | EU restriction marking | Mark restricted models in ConfigMap | EU investigation | ConfigMap update |
 
-### opendatahub-operator (Operator)
+### opendatahub-operator (Backend)
 **Lead:** TBD
 
 | Task | Description | Dependencies | Deliverable |
@@ -45,7 +45,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                         Phase 1                              │
-│                    Backend Changes                           │
+│                  Model Serving Changes                       │
 │                  (odh-model-controller)                      │
 │                                                              │
 │   ┌─────────────┐    ┌─────────────┐    ┌────────────────┐  │
@@ -59,12 +59,12 @@
                               ▼                    ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                         Phase 2                              │
-│                    Operator Changes                          │
+│                    Backend Changes                           │
 │                 (opendatahub-operator)                       │
 │                                                              │
 │   ┌─────────────┐    ┌─────────────────────────────────────┐│
 │   │  Remove NIM │    │    Include NIM ConfigMap and       ││
-│   │Backend Flag │    │    Template in Component Deploy    ││
+│   │  NIM Flag   │    │    Template in Component Deploy    ││
 │   └─────────────┘    └─────────────────────────────────────┘│
 │                                        │                     │
 └────────────────────────────────────────┼─────────────────────┘
@@ -89,10 +89,10 @@
 
 | From | To | Topic | Frequency |
 |------|-----|-------|-----------|
-| Backend (Tomer) | Dashboard Team | Interface specs, ConfigMap schema | As needed |
-| Backend (Tomer) | Operator Team | Resource inclusion, flag removal | As needed |
-| Backend (Tomer) | NVIDIA | EU restrictions | As needed |
-| Dashboard Team | Backend (Tomer) | Questions on specs, schema changes | As needed |
+| Model Serving (Tomer) | Dashboard Team | Interface specs, ConfigMap schema | As needed |
+| Model Serving (Tomer) | Backend Team | Resource inclusion, flag removal | As needed |
+| Model Serving (Tomer) | NVIDIA | EU restrictions | As needed |
+| Dashboard Team | Model Serving (Tomer) | Questions on specs, schema changes | As needed |
 | All | Stakeholders | Status updates | Weekly |
 
 ---
@@ -100,15 +100,15 @@
 ## Sync Points
 
 ### Sync 1: Pre-Implementation
-**Attendees:** Backend, Dashboard, Operator leads  
+**Attendees:** Model Serving, Backend, Dashboard leads  
 **Agenda:**
 - Review ADR and implementation plan
 - Confirm interface contracts
 - Identify blockers
 - Assign tasks
 
-### Sync 2: Backend Complete
-**Attendees:** Backend, Dashboard, Operator leads  
+### Sync 2: Model Serving Complete
+**Attendees:** Model Serving, Backend, Dashboard leads  
 **Agenda:**
 - Demo backend changes
 - Review ConfigMap schema
@@ -157,7 +157,7 @@
 
 ### Epic: NIM Integration Redesign (NVPE-390)
 
-**Backend Stories:**
+**Model Serving Stories:**
 - NVPE-XXX: Remove Account CRD from odh-model-controller
 - NVPE-XXX: Remove Account Controller from odh-model-controller
 - NVPE-XXX: Create metadata generation script
@@ -165,8 +165,8 @@
 - NVPE-XXX: Investigate EU model restrictions
 - NVPE-XXX: Update kustomization for NIM resources
 
-**Operator Stories:**
-- NVPE-XXX: Remove NIM backend flag from DataScienceCluster
+**Backend Stories:**
+- NVPE-XXX: Remove NIM component from DataScienceCluster CRD
 - NVPE-XXX: Include NIM resources in component deployment
 
 **Dashboard Stories:**
@@ -194,8 +194,8 @@
 
 | Role | Name | Email | Slack |
 |------|------|-------|-------|
-| Backend Lead | Tomer Figenblat | tfigenbl@redhat.com | @tomer |
-| Operator Lead | TBD | | |
+| Model Serving Lead | Tomer Figenblat | tfigenbl@redhat.com | @tomer |
+| Backend Lead | TBD | | |
 | Dashboard Lead | TBD | | |
 | QE Lead | TBD | | |
 | PM | TBD | | |
