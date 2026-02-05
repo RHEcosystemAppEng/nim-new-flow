@@ -377,23 +377,6 @@ When populating model dropdown:
 
 ---
 
-## Migration Considerations
-
-### Handling Existing Deployments
-
-- Existing NIM deployments (from old flow) will continue to work
-- No migration needed for running InferenceServices
-- Old Account CRs will become orphaned but are harmless
-
-### Cleanup Recommendations
-
-Admins may want to clean up old resources:
-- Old Account CRs in main namespace
-- Old ConfigMaps created by controller
-- Old prototype secrets in main namespace
-
----
-
 ## Questions for Dashboard Team
 
 1. What's the preferred approach for EU region detection?

@@ -87,40 +87,13 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 ---
 
-## Required Coordination
+## Coordination
 
-### [Teams Involved](04_NIM_Coordination_Matrix.md)
+This work involves Backend, Model Serving, Dashboard, and Documentation teams. NVIDIA coordination for build-time API key usage is complete.
 
-| Team | Responsibility |
-|------|----------------|
-| Backend | DataScienceCluster CRD changes (opendatahub-operator) |
-| Model Serving | Account removal, metadata shipping (odh-model-controller) |
-| Dashboard | Wizard integration, OdhDashboardConfig |
-| NVIDIA Partnership | API key for build-time |
-| Documentation | User and admin guides |
+See [Coordination Matrix](04_NIM_Coordination_Matrix.md) for full details on team responsibilities, dependencies, risks, and contacts.
 
-### External Dependencies
-
-1. **NVIDIA Coordination** ✓
-   - Agreement for using Red Hat API key at build time
-   - Key only used to fetch tags
-   - Not exposed at runtime
-
-2. **[EU Regulation Handling](06_NIM_EU_Regulation_Investigation.md)**
-   - Some models return 451 for EU regions
-   - Need approach to identify and mark restricted models
-   - Dashboard must filter based on region
-
----
-
-## Risks and Mitigations
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| NVIDIA changes their API | Metadata becomes stale/incompatible | Version schema, update with each release |
-| Build-time API key security | Potential credential exposure | Secure CI/CD, limited scope (tags only) |
-| Upgrade leaves orphaned resources | Clutter, confusion | Cleanup script + documentation |
-| Air-gap can't use shipped metadata | Feature unusable | Custom ConfigMap + docs |
+**Key External Dependency:** [EU Regulation Handling](06_NIM_EU_Regulation_Investigation.md) - Some models may be restricted in EU regions.
 
 ---
 
@@ -142,9 +115,10 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 ## Related Documents
 
-- [ADR: NIM Integration Redesign](./ADR_%20NIM%20Integration%20Redesign.md)
-- [Implementation Plan](./NIM_Redesign_Implementation_Plan.md)
-- [Dashboard Interface Specification](./NIM_Dashboard_Interface_Spec.md) *(to be created)*
+- [ADR: NIM Integration Redesign](01_ADR_NIM_Integration_Redesign.md)
+- [Implementation Plan](03_NIM_Redesign_Implementation_Plan.md)
+- [Dashboard Interface Specification](05_NIM_Dashboard_Interface_Spec.md)
+- [Coordination Matrix](04_NIM_Coordination_Matrix.md)
 
 ---
 
@@ -153,5 +127,5 @@ The solution shifts metadata fetching to build time and moves secret management 
 1. Share ADR with stakeholders
 2. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
 3. Assign team members and create Jira tasks
-4. [Begin Phase 1 implementation](03_NIM_Redesign_Implementation_Plan.md) (Model Serving changes)
+4. [Begin implementation](03_NIM_Redesign_Implementation_Plan.md)
 5. Coordinate with Dashboard team on Wizard integration

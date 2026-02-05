@@ -178,34 +178,12 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Dependencies and Coordination
+## Coordination and Risks
 
-### Cross-Team Dependencies
-
-| Task | Team | Dependency |
-|------|------|------------|
-| Model Serving changes | Model Serving | None |
-| Backend changes | Backend | Model Serving changes |
-| Dashboard changes | Frontend team | Model Serving + Backend changes |
-| Documentation | Docs team | All code changes |
-
-### External Dependencies
-
-| Dependency | Owner | Notes |
-|------------|-------|-------|
-| Red Hat API key for CI/CD | NVIDIA partnership | Coordinated |
-| EU regulation model list | NVIDIA | Need official list or testing approach |
-
----
-
-## Risk Assessment
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| NVIDIA API changes | High | Version the ConfigMap schema, monitor NVIDIA announcements |
-| EU regulation complexity | Medium | Conservative approach - exclude uncertain models |
-| Upgrade path issues | Medium | Thorough testing, cleanup scripts |
-| Air-gap deployment complexity | Low | Clear documentation, custom ConfigMap support |
+See [Coordination Matrix](04_NIM_Coordination_Matrix.md) for:
+- Cross-team dependencies and communication
+- Risk register and mitigation strategies
+- Contact list and Jira structure
 
 ---
 
@@ -228,20 +206,4 @@ When upgrading from the old architecture:
 
 ## Future Enhancements (Out of Scope)
 
-The following items are enabled by this redesign but not part of the initial implementation. See [Future Enhancements](07_NIM_Future_Enhancements.md) for details.
-
-1. **Dual ServingRuntime Templates** - Support for both HTTP and gRPC servings
-2. **API Key Update Mechanism** - Per-project key management makes this feasible
-3. **Enhanced Air-Gap Support** - Full offline deployment with custom registries
-
----
-
-## Timeline Coordination Notes
-
-This document intentionally does not include time estimates. Coordinate with stakeholders and teams to determine scheduling based on:
-- Team availability
-- Sprint planning
-- Cross-team dependencies
-- Testing resource availability
-
-> **Note:** All workstreams are part of the same release. They are organized by project/team, not as sequential phases.
+See [Future Enhancements](07_NIM_Future_Enhancements.md) for features enabled by this redesign (key rotation, dual-protocol, enhanced air-gap).

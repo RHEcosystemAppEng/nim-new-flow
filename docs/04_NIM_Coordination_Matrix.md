@@ -44,7 +44,6 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                         Phase 1                              │
 │                  Model Serving Changes                       │
 │                  (odh-model-controller)                      │
 │                                                              │
@@ -58,20 +57,18 @@
                               │                    │
                               ▼                    ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                         Phase 2                              │
 │                    Backend Changes                           │
 │                 (opendatahub-operator)                       │
 │                                                              │
 │   ┌─────────────┐    ┌─────────────────────────────────────┐│
 │   │  Remove NIM │    │    Include NIM ConfigMap and       ││
-│   │  NIM Flag   │    │    Template in Component Deploy    ││
+│   │  Component  │    │    Template in Component Deploy    ││
 │   └─────────────┘    └─────────────────────────────────────┘│
 │                                        │                     │
 └────────────────────────────────────────┼─────────────────────┘
                                          │
                                          ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                         Phase 3                              │
 │                   Dashboard Changes                          │
 │                    (odh-dashboard)                           │
 │                                                              │
@@ -81,6 +78,8 @@
 │   └──────────────┘  └──────────────┘  └──────────────────┘  │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
+
+Note: All work is part of the same release. Arrows show dependencies, not sequential phases.
 ```
 
 ---
