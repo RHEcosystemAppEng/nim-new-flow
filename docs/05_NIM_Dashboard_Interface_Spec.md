@@ -1,11 +1,5 @@
 # NIM Integration - Dashboard Interface Specification
 
-**Author:** Tomer Figenblat  
-**Date:** February 2026  
-**Audience:** Dashboard/Frontend Team
-
----
-
 ## Overview
 
 This document specifies the interface contracts and requirements for the Dashboard team to implement the new NIM integration flow. With this redesign, the Dashboard becomes the primary orchestrator for NIM deployments, eliminating the need for backend controller involvement.

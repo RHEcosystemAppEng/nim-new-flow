@@ -1,12 +1,5 @@
 # NIM Integration Redesign - Stakeholder Brief
 
-**Author:** [Tomer Figenblat](mailto:tfigenbl@redhat.com)  
-**Date:** February 2026  
-**Technical Details:** [ADR: NIM Integration Redesign](01_ADR_NIM_Integration_Redesign.md)  
-**Related Jira:** [NVPE-390](https://issues.redhat.com/browse/NVPE-390)
-
----
-
 ## Executive Summary
 
 We are proposing a significant redesign of the NVIDIA NIM integration in OpenDataHub and Red Hat OpenShift AI. This redesign addresses critical user experience and security concerns while simplifying the codebase and enabling future enhancements.

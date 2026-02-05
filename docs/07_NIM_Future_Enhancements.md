@@ -1,11 +1,5 @@
 # NIM Future Enhancements
 
-**Author:** [Tomer Figenblat](mailto:tfigenbl@redhat.com)  
-**Date:** February 2026  
-**Status:** Planning (Out of Scope for Current Redesign)
-
----
-
 ## Overview
 
 The NIM integration redesign enables several future enhancements that are not part of the initial implementation. This document captures these opportunities for future planning.

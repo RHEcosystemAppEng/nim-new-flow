@@ -1,11 +1,5 @@
 # NIM EU Regulation Investigation
 
-**Author:** Tomer Figenblat  
-**Date:** February 2026  
-**Status:** Investigation Required
-
----
-
 ## Background
 
 Some NVIDIA NIM models are not available in the European Union due to regulatory restrictions. When attempting to access metadata for these models from an EU location, the NVIDIA API returns HTTP status code 451 ("Unavailable For Legal Reasons").

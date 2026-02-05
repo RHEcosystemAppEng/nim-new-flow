@@ -1,10 +1,5 @@
 # NIM Redesign - Coordination Matrix
 
-**Author:** Tomer Figenblat  
-**Date:** February 2026
-
----
-
 ## Project Responsibilities
 
 ### odh-model-controller (Backend)
