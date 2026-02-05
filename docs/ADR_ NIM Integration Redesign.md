@@ -81,8 +81,22 @@ Alt text: Streamlined flow where metadata is "baked in" and secrets are local to
 
 The OdhDashboardConfig CRD will be updated:
 
-| apiVersion: opendatahub.io/v1alphakind: OdhDashboardConfigmetadata:  name: odh-dashboard-configspec:  \# ... existing fields ...  nimConfig:    \# Allows overriding the default shipped metadata    customConfigMap:       name: "custom-nim-models"      namespace: "redhat-ods-applications"    \# Toggle for the Dashboard Wizard to perform outbound key validation    \# Set to 'true' to disable validation for restricted networks    disableKeyValidation: false  |
-| :---- |
+```yaml
+apiVersion: opendatahub.io/v1alpha
+kind: OdhDashboardConfig
+metadata:
+  name: odh-dashboard-config
+spec:
+  # ... existing fields ...
+  nimConfig:
+    # Allows overriding the default shipped metadata
+    customConfigMap: 
+      name: "custom-nim-models"
+      namespace: "redhat-ods-applications"
+    # Toggle for the Dashboard Wizard to perform outbound key validation
+    # Set to 'true' to disable validation for restricted networks
+    disableKeyValidation: false 
+```
 
 ### Documentation Roadmap
 
