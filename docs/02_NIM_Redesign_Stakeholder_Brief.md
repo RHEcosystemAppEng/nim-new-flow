@@ -1,8 +1,9 @@
 # NIM Integration Redesign - Stakeholder Brief
 
-**Author:** Tomer Figenblat  
+**Author:** [Tomer Figenblat](mailto:tfigenbl@redhat.com)  
 **Date:** February 2026  
-**Related Jira:** NVPE-390
+**Technical Details:** [ADR: NIM Integration Redesign](01_ADR_NIM_Integration_Redesign.md)  
+**Related Jira:** [NVPE-390](https://issues.redhat.com/browse/NVPE-390)
 
 ---
 
@@ -57,8 +58,9 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 ### Architecture Changes
 
-1. **Remove Backend Controller**
+1. **Remove Backend**
    - Delete Account CRD and Controller from odh-model-controller
+   - Remove NIM component from DataScienceCluster CRD (under KServe)
    - Eliminate async reconciliation loop
 
 2. **Build-Time Metadata**
@@ -88,30 +90,29 @@ The solution shifts metadata fetching to build time and moves secret management 
 ### For Engineering
 - **Reduced code complexity** - Remove entire controller
 - **Lower maintenance burden** - No runtime API dependencies
-- **Enable future features** - Key rotation, dual-protocol support
+- **Enable future features** - Key rotation, dual-protocol support (see [Future Enhancements](07_NIM_Future_Enhancements.md))
 
 ---
 
 ## Required Coordination
 
-### Teams Involved
+### [Teams Involved](04_NIM_Coordination_Matrix.md)
 
-| Team | Responsibility | Key Contact |
-|------|----------------|-------------|
-| Backend (Kserve) | Account removal, metadata shipping | Tomer Figenblat |
-| Operator | DataScienceCluster CRD changes | TBD |
-| Dashboard | Wizard integration, OdhDashboardConfig | TBD |
-| NVIDIA Partnership | API key for build-time | Approved |
-| Documentation | User and admin guides | TBD |
+| Team | Responsibility |
+|------|----------------|
+| Backend | Account removal, metadata shipping, DataScienceCluster CRD changes |
+| Dashboard | Wizard integration, OdhDashboardConfig |
+| NVIDIA Partnership | API key for build-time (Approved) |
+| Documentation | User and admin guides |
 
 ### External Dependencies
 
-1. **NVIDIA Approval** ✓
-   - Need agreement for using Red Hat API key at build time
+1. **NVIDIA Coordination** ✓
+   - Agreement for using Red Hat API key at build time
    - Key only used to fetch tags
    - Not exposed at runtime
 
-2. **EU Regulation Handling**
+2. **[EU Regulation Handling](06_NIM_EU_Regulation_Investigation.md)**
    - Some models return 451 for EU regions
    - Need approach to identify and mark restricted models
    - Dashboard must filter based on region
@@ -120,12 +121,12 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 ## Risks and Mitigations
 
-| Risk | Mitigation |
-|------|------------|
-| NVIDIA API changes | Version ConfigMap schema, regular updates |
-| Build-time key security | Secure CI/CD pipeline, limited scope |
-| Upgrade complexity | Migration script, clear cleanup procedures |
-| Air-gap deployments | Custom ConfigMap support, documentation |
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| NVIDIA changes their API | Metadata becomes stale/incompatible | Version schema, update with each release |
+| Build-time API key security | Potential credential exposure | Secure CI/CD, limited scope (tags only) |
+| Upgrade leaves orphaned resources | Clutter, confusion | Cleanup script + documentation |
+| Air-gap can't use shipped metadata | Feature unusable | Custom ConfigMap + docs |
 
 ---
 
@@ -155,8 +156,8 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 ## Next Steps
 
-1. Review and approve ADR with stakeholders
-2. ~~Obtain NVIDIA approval for build-time API key usage~~ Done
+1. Share ADR with stakeholders
+2. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
 3. Assign team members and create Jira tasks
-4. Begin Phase 1 implementation (Backend removal)
+4. [Begin Phase 1 implementation](03_NIM_Redesign_Implementation_Plan.md) (Backend removal)
 5. Coordinate with Dashboard team on Wizard integration

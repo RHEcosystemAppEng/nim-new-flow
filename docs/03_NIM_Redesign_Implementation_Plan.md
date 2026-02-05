@@ -226,7 +226,7 @@ When upgrading from the old architecture:
 
 ## Future Enhancements (Out of Scope)
 
-The following items are enabled by this redesign but not part of the initial implementation:
+The following items are enabled by this redesign but not part of the initial implementation. See [Future Enhancements](07_NIM_Future_Enhancements.md) for details.
 
 1. **Dual ServingRuntime Templates** - Support for both HTTP and gRPC servings
 2. **API Key Update Mechanism** - Per-project key management makes this feasible

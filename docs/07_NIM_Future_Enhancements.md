@@ -1,0 +1,156 @@
+# NIM Future Enhancements
+
+**Author:** [Tomer Figenblat](mailto:tfigenbl@redhat.com)  
+**Date:** February 2026  
+**Status:** Planning (Out of Scope for Current Redesign)
+
+---
+
+## Overview
+
+The NIM integration redesign enables several future enhancements that are not part of the initial implementation. This document captures these opportunities for future planning.
+
+---
+
+## 1. API Key Rotation
+
+### Current Limitation
+
+With the existing architecture, API keys are scattered across multiple namespaces (copied from the main namespace to each user project). This makes key rotation extremely difficult - there's no central management or tracking of where keys are used.
+
+### Enabled by Redesign
+
+With per-project key management in the new architecture:
+- Each project has its own API key stored locally
+- Keys are not shared between projects
+- Clear ownership and lifecycle per deployment
+
+### Proposed Implementation
+
+1. **Dashboard Key Management UI**
+   - View existing NIM deployments and their key status
+   - Update key for a specific deployment
+   - Validate new key before applying
+
+2. **Key Update Flow**
+   - User provides new API key
+   - Dashboard validates against NVIDIA API
+   - Dashboard updates the Opaque Secret in the project
+   - Pod restart triggers new key usage
+
+3. **Considerations**
+   - Should key update trigger automatic pod restart?
+   - How to handle validation failures during update?
+   - Audit logging for key changes?
+
+---
+
+## 2. Dual-Protocol Support (HTTP/gRPC)
+
+### Current State
+
+The current ServingRuntime template only supports one protocol configuration. Users cannot choose between HTTP and gRPC serving.
+
+### Enabled by Redesign
+
+With build-time template shipping:
+- Multiple templates can be included in the product
+- Templates are static and well-tested
+- No runtime generation complexity
+
+### Proposed Implementation
+
+1. **Multiple ServingRuntime Templates**
+   - `nvidia-nim-runtime-http` - HTTP/REST protocol
+   - `nvidia-nim-runtime-grpc` - gRPC protocol
+
+2. **Wizard Protocol Selection**
+   - Add protocol dropdown to deployment wizard
+   - Show appropriate template based on selection
+   - Document use cases for each protocol
+
+3. **Considerations**
+   - Default protocol selection?
+   - Can users switch protocol after deployment?
+   - Performance implications documentation?
+
+---
+
+## 3. Enhanced Air-Gap Support
+
+### Current State
+
+Air-gap support requires manual configuration and custom ConfigMaps. No tooling exists to simplify the process.
+
+### Enabled by Redesign
+
+With externalized metadata and configuration:
+- Clear separation between product defaults and custom config
+- `disableKeyValidation` flag for offline environments
+- Custom ConfigMap override mechanism
+
+### Proposed Implementation
+
+1. **Air-Gap Preparation Scripts**
+   - Script to identify required models
+   - Script to mirror images to internal registry
+   - Script to pre-download model weights
+   - Script to generate custom ConfigMap
+
+2. **Offline Model Catalog**
+   - Generate offline-compatible metadata
+   - Update container image references to internal registry
+   - Include checksum validation
+
+3. **Documentation**
+   - Step-by-step air-gap setup guide
+   - Troubleshooting common issues
+   - Upgrade procedures for air-gap environments
+
+---
+
+## 4. Model Favorites / Pinned Models
+
+### Concept
+
+Allow users or admins to "pin" frequently used models for easier access in the dropdown.
+
+### Proposed Implementation
+
+- Store preferences in Dashboard config or user settings
+- Show pinned models at top of dropdown
+- Admin-level pinning for organization-wide defaults
+
+---
+
+## 5. Model Usage Analytics
+
+### Concept
+
+Track which models are deployed and usage patterns to inform future decisions.
+
+### Proposed Implementation
+
+- Aggregate deployment counts per model
+- Track deployment success/failure rates
+- Feed data to product telemetry (opt-in)
+
+---
+
+## Priority Assessment
+
+| Enhancement | Value | Complexity | Suggested Priority |
+|-------------|-------|------------|-------------------|
+| API Key Rotation | High | Medium | P1 - Next iteration |
+| Dual-Protocol Support | Medium | Low | P1 - Next iteration |
+| Enhanced Air-Gap | High | High | P2 - Follow-up |
+| Model Favorites | Low | Low | P3 - Nice to have |
+| Usage Analytics | Medium | Medium | P3 - Nice to have |
+
+---
+
+## Next Steps
+
+1. Gather feedback on priorities from stakeholders
+2. Create Jira epics for P1 items after current redesign completes
+3. Include in roadmap planning for next quarter
