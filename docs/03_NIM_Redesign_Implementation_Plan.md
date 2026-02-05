@@ -184,7 +184,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 | Task | Team | Dependency |
 |------|------|------------|
-| Model Serving changes | Model Serving (you) | None |
+| Model Serving changes | Model Serving | None |
 | Backend changes | Backend | Model Serving changes |
 | Dashboard changes | Frontend team | Model Serving + Backend changes |
 | Documentation | Docs team | All code changes |

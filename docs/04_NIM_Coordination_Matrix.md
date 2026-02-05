@@ -3,7 +3,7 @@
 ## Project Responsibilities
 
 ### odh-model-controller (Model Serving)
-**Lead:** Tomer Figenblat
+**NIM Task Owner:** Tomer Figenblat
 
 | Task | Description | Dependencies | Deliverable |
 |------|-------------|--------------|-------------|
@@ -89,10 +89,10 @@
 
 | From | To | Topic | Frequency |
 |------|-----|-------|-----------|
-| Model Serving (Tomer) | Dashboard Team | Interface specs, ConfigMap schema | As needed |
-| Model Serving (Tomer) | Backend Team | Resource inclusion, flag removal | As needed |
-| Model Serving (Tomer) | NVIDIA | EU restrictions | As needed |
-| Dashboard Team | Model Serving (Tomer) | Questions on specs, schema changes | As needed |
+| NIM (Tomer) | Dashboard Team | Interface specs, ConfigMap schema | As needed |
+| NIM (Tomer) | Backend Team | Resource inclusion, flag removal | As needed |
+| NIM (Tomer) | NVIDIA | EU restrictions | As needed |
+| Dashboard Team | NIM (Tomer) | Questions on specs, schema changes | As needed |
 | All | Stakeholders | Status updates | Weekly |
 
 ---
@@ -194,7 +194,7 @@
 
 | Role | Name | Email | Slack |
 |------|------|-------|-------|
-| Model Serving Lead | Tomer Figenblat | tfigenbl@redhat.com | @tomer |
+| NIM Task Owner | Tomer Figenblat | tfigenbl@redhat.com | @tomer |
 | Backend Lead | TBD | | |
 | Dashboard Lead | TBD | | |
 | QE Lead | TBD | | |
