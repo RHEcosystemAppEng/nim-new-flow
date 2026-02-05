@@ -197,10 +197,12 @@ When upgrading from the old architecture:
 - Old Templates created by controller need cleanup
 - Old Pull Secrets (prototypes) need cleanup
 
-### Migration Script Tasks
+### Cleanup Implementation
 
-- [ ] Create migration script to clean up obsolete resources
-- [ ] Document manual cleanup steps if needed
+The opendatahub-operator already has cleanup logic that runs during upgrades. We will extend this existing mechanism to handle NIM resource cleanup:
+
+- [ ] Add cleanup logic to opendatahub-operator for obsolete NIM resources
+- [ ] Document what gets cleaned up automatically vs. manually
 
 ---
 
