@@ -14,9 +14,9 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Phase 1: Model Serving Changes (odh-model-controller)
+## Model Serving Changes (odh-model-controller)
 
-### 1.1 Remove Account CRD and Controller
+### Remove Account CRD and Controller
 
 **Tasks:**
 - [ ] Remove Account CRD definition
@@ -33,12 +33,12 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Update documentation
 
 **Files to Modify/Remove:**
-- `api/v1beta1/account_types.go` (or similar)
-- `controllers/account_controller.go`
-- `config/crd/bases/` (Account CRD YAML)
-- Related tests in `controllers/`
+- Account CRD definition
+- Account controller and reconciliation logic
+- NIM utility functions
+- Related tests
 
-### 1.2 Add Build-Time Metadata Generation
+### Add Build-Time Metadata Generation
 
 **Tasks:**
 - [ ] Create script to fetch NIM model metadata during CI/CD
@@ -54,20 +54,20 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - `config/nim/servingruntime-template.yaml`
 - `config/nim/kustomization.yaml`
 
-### 1.3 EU Regulation Handling (Build-Time)
+### EU Regulation Handling (Build-Time) - TBD
+
+> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](06_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
-- [ ] Investigate which models return 451 for EU
-- [ ] Modify metadata generation script to:
-  - Test each model endpoint from EU perspective
-  - Mark models with `euRestricted: true` flag in ConfigMap
+- [ ] Investigate whether models can be identified as EU-restricted at build time
+- [ ] If feasible, modify metadata generation script to mark restricted models
 - [ ] Document the approach for EU model restrictions
 
 ---
 
-## Phase 2: Backend Changes (opendatahub-operator)
+## Backend Changes (opendatahub-operator)
 
-### 2.1 Remove NIM Component from DataScienceCluster
+### Remove NIM Component from DataScienceCluster
 
 **Tasks:**
 - [ ] Remove NIM-specific enablement flag from DataScienceCluster CRD
@@ -79,7 +79,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - Kserve component handling code
 - Related tests
 
-### 2.2 Include NIM Resources in Component Image
+### Include NIM Resources in Component Image
 
 **Tasks:**
 - [ ] Ensure NIM ConfigMap is deployed with component
@@ -88,9 +88,9 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Phase 3: Dashboard Enhancements (odh-dashboard)
+## Dashboard Enhancements (odh-dashboard)
 
-### 3.1 OdhDashboardConfig CRD Updates
+### OdhDashboardConfig CRD Updates
 
 **Tasks:**
 - [ ] Add `nimConfig` section to OdhDashboardConfig spec:
@@ -104,7 +104,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Implement logic to read custom ConfigMap when specified
 - [ ] Implement toggle for key validation (for air-gap)
 
-### 3.2 Wizard Integration
+### Wizard Integration
 
 **Tasks:**
 - [ ] Move API key collection from Application screen to Wizard
@@ -118,14 +118,16 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
   - ServingRuntime (from cluster-level template)
   - InferenceService (with model container image)
 
-### 3.3 EU Regulation Handling (Runtime)
+### EU Regulation Handling (Runtime) - TBD
+
+> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](06_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
-- [ ] Detect user's geographic location or cluster region
-- [ ] Filter dropdown to exclude `euRestricted: true` models when in EU
+- [ ] Determine how to detect if filtering is needed (cluster region, config flag, etc.)
+- [ ] If models are marked, filter dropdown accordingly
 - [ ] Display appropriate message for restricted models
 
-### 3.4 Application Screen Updates
+### Application Screen Updates
 
 **Tasks:**
 - [ ] Keep application screen enablement requirement (optional)
@@ -134,16 +136,16 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Phase 4: Documentation and Air-Gap Support
+## Documentation and Air-Gap Support
 
-### 4.1 Admin Documentation
+### Admin Documentation
 
 **Tasks:**
 - [ ] Document how to create custom ConfigMap for restricted environments
 - [ ] Document OdhDashboardConfig options
 - [ ] Document air-gap deployment process
 
-### 4.2 User Documentation
+### User Documentation
 
 **Tasks:**
 - [ ] Update user guides for new Wizard flow
@@ -151,16 +153,16 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Phase 5: Testing and Validation
+## Testing and Validation
 
-### 5.1 Unit Tests
+### Unit Tests
 
 **Tasks:**
 - [ ] Update/remove tests for removed Account controller
 - [ ] Add tests for new ConfigMap loading logic
 - [ ] Add tests for OdhDashboardConfig handling
 
-### 5.2 Integration Tests
+### Integration Tests
 
 **Tasks:**
 - [ ] Test end-to-end NIM deployment flow
@@ -168,7 +170,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Test air-gap mode (disabled validation)
 - [ ] Test EU restriction filtering
 
-### 5.3 Upgrade Testing
+### Upgrade Testing
 
 **Tasks:**
 - [ ] Test upgrade from current architecture to new architecture
@@ -183,9 +185,9 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 | Task | Team | Dependency |
 |------|------|------------|
 | Model Serving changes | Model Serving (you) | None |
-| Backend changes | Backend | Phase 1 complete |
-| Dashboard changes | Frontend team | Phases 1-2 complete |
-| Documentation | Docs team | Phases 1-3 complete |
+| Backend changes | Backend | Model Serving changes |
+| Dashboard changes | Frontend team | Model Serving + Backend changes |
+| Documentation | Docs team | All code changes |
 
 ### External Dependencies
 
@@ -239,5 +241,7 @@ The following items are enabled by this redesign but not part of the initial imp
 This document intentionally does not include time estimates. Coordinate with stakeholders and teams to determine scheduling based on:
 - Team availability
 - Sprint planning
-- Dependencies between phases
+- Cross-team dependencies
 - Testing resource availability
+
+> **Note:** All workstreams are part of the same release. They are organized by project/team, not as sequential phases.
