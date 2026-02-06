@@ -124,23 +124,6 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Documentation and Air-Gap Support
-
-### Admin Documentation
-
-**Tasks:**
-- [ ] Document how to create custom ConfigMap for restricted environments
-- [ ] Document OdhDashboardConfig options
-- [ ] Document air-gap deployment process
-
-### User Documentation
-
-**Tasks:**
-- [ ] Update user guides for new Wizard flow
-- [ ] Document API key requirements and validation
-
----
-
 ## Testing and Validation
 
 ### Unit Tests
