@@ -284,24 +284,8 @@ When a user deploys a NIM model through the Wizard:
 
 ### API Key Validation Errors
 
-| Error | User Message |
-|-------|--------------|
-| 401 Unauthorized | "The API key is invalid. Please check and try again." |
-| 403 Forbidden | "This API key does not have permission to access NIM models." |
-| Network Error | "Unable to validate API key. Check network connectivity." |
-
-### ConfigMap Errors
-
-| Error | Behavior |
-|-------|----------|
-| ConfigMap not found | Show error, disable NIM in Wizard |
-| Invalid JSON | Show error, disable NIM in Wizard |
-| Schema version mismatch | Log warning, attempt parsing with fallback |
-
-### Deployment Errors
-
-- If any resource creation fails, rollback previously created resources
-- Display specific error with affected resource
+- `200` = Validation successful
+- Any other response = Validation failed, show generic error message
 
 ---
 
@@ -332,6 +316,3 @@ When a user deploys a NIM model through the Wizard:
 ## Open Questions
 
 1. What's the preferred approach for EU region detection?
-2. Should we support multiple API keys per project?
-3. Do we need to support updating/rotating API keys for existing deployments?
-4. What's the UX for model version upgrades?
