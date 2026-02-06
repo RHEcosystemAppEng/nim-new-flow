@@ -99,15 +99,6 @@ spec:
     disableKeyValidation: false 
 ```
 
-### Documentation Roadmap
-
-We will provide scripts and instructions for preparing air-gapped environments:
-
-* **Identify Required Models:** Determine the specific NIM models required by the customer.
-* **Mirror Container Images:** Mirror NIM container images from NVIDIA registry to an internal registry.
-* **Pre-load Models into PVCs:** Pre-download model weights into PersistentVolumeClaims for offline use.
-* **Configure Custom ConfigMaps:** Create customConfigMap with model metadata pointing to internal registry.
-
 ## Addressing Potential Concerns
 
 * **Why use a Red Hat key at build-time?** The key is used **only to fetch tags/versions** so the model list is populated immediately upon installation without scraping latency.  
