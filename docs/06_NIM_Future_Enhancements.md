@@ -107,9 +107,9 @@ With externalized metadata and configuration:
 
 | Enhancement | Value | Complexity | Suggested Priority |
 |-------------|-------|------------|-------------------|
-| API Key Rotation | High | Medium | P1 - Next iteration |
-| Dual-Protocol Support | Medium | Low | P1 - Next iteration |
-| Enhanced Air-Gap | High | High | P2 - Follow-up |
+| Enhanced Air-Gap | High | High | P1 - Next iteration |
+| API Key Rotation | High | Medium | P2 - Follow-up |
+| Dual-Protocol Support | Medium | Low | P2 - Follow-up |
 
 ---
 

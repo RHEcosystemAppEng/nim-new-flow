@@ -20,6 +20,7 @@ This repository contains the planning and design documentation for a significant
 | [04 - Dashboard Interface Spec](docs/04_NIM_Dashboard_Interface_Spec.md) | Technical specification for Dashboard/Frontend team |
 | [05 - EU Regulation Investigation](docs/05_NIM_EU_Regulation_Investigation.md) | Investigation into EU model restrictions (HTTP 451) |
 | [06 - Future Enhancements](docs/06_NIM_Future_Enhancements.md) | Out-of-scope features enabled by this redesign |
+| [07 - API Endpoints](docs/07_NIM_API_Endpoints.md) | NVIDIA API endpoints used by the integration |
 
 ## Projects Involved
 
