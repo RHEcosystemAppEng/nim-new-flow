@@ -19,7 +19,7 @@ We are proposing a significant redesign of the NVIDIA NIM integration in OpenDat
 
 # Context
 
-The existing architecture for NVIDIA NIM integration necessitates a redesign due to two major technical drawbacks: **high user-facing latency** and a **security risk**. The high latency is caused by an asynchronous backend process for scraping model metadata that is incompatible with the RHOAI deployment wizard's requirement for synchronous availability. The security risk stems from the Dashboard disseminating sensitive API credentials by copying them from an administrative namespace into individual user project namespaces.
+The existing architecture for NVIDIA NIM integration necessitates a redesign due to two major technical drawbacks: **high user-facing latency** and a **security risk**. The high latency is caused by an asynchronous backend process for scraping model metadata that creates friction with the need for synchronous availability to provide an optimal experience in the RHOAI deployment wizard. The security risk stems from the Dashboard disseminating sensitive API credentials by copying them from an administrative namespace into individual user project namespaces.
 
 This document proposes shifting to **Build-Time Metadata Fetching** and **Decentralized Secret Management**. By fetching NIM model metadata during the build process and shipping it as an immutable artifact, we ensure all necessary information is immediately available to the Dashboard at installation. Additionally, to address the security risk, we propose a shift to **Decentralized Secret Management**, empowering the Dashboard to generate secrets directly within the target user projects and eliminating cross-namespace leakage.
 
