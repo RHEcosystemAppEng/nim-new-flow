@@ -28,12 +28,13 @@ With per-project key management in the new architecture:
 2. **Key Update Flow**
    - User provides new API key
    - Dashboard validates against NVIDIA API
-   - Dashboard updates the Opaque Secret in the project
+   - Dashboard updates the Opaque Secret and Pull Secret in the project
    - Pod restart triggers new key usage
 
 3. **Considerations**
    - Should key update trigger automatic pod restart?
    - How to handle validation failures during update?
+   - If the container image is already pulled and exists on the cluster, should the new pod force a fresh pull?
 
 ---
 
@@ -77,23 +78,18 @@ Air-gap support requires manual configuration and custom ConfigMaps. No tooling 
 ### Enabled by Redesign
 
 With externalized metadata and configuration:
-- Clear separation between product defaults and custom config
 - `disableKeyValidation` flag for offline environments
 - Custom ConfigMap override mechanism
 
 ### Proposed Implementation
 
 1. **Air-Gap Preparation Scripts**
-   - Script to identify required models
-   - Script to mirror images to internal registry
+   - Customer provides a list of required models
+   - Script to mirror images to internal registry (based on that list)
    - Script to pre-load models into PVCs
    - Script to generate custom ConfigMap
 
-2. **Offline Model Catalog**
-   - Generate offline-compatible metadata
-   - Update container image references to internal registry
-
-3. **Documentation**
+2. **Documentation**
    - Step-by-step air-gap setup guide
    - Troubleshooting common issues
    - Upgrade procedures for air-gap environments
