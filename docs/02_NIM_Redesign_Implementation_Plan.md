@@ -78,40 +78,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ## Dashboard Enhancements (odh-dashboard)
 
-### Wizard Integration
-
-**Tasks:**
-- [ ] Add `nimConfig` section to OdhDashboardConfig CRD:
-  ```yaml
-  nimConfig:
-    customConfigMap:
-      name: "custom-nim-models"
-      namespace: "redhat-ods-applications"
-    disableKeyValidation: false
-  ```
-- [ ] Move API key collection from Application screen to Wizard
-- [ ] Implement direct NVIDIA API key validation in Wizard (with toggle for air-gap via `disableKeyValidation`)
-- [ ] Populate model dropdown from shipped ConfigMap (with custom ConfigMap override support)
-- [ ] Create resources directly in user's project:
-  - Opaque Secret (API key for model download)
-  - Pull Secret (for container image pull)
-  - PVC (based on user input)
-  - ServingRuntime (from cluster-level template)
-  - InferenceService (with model container image)
-
-### EU Regulation Handling (Runtime) - TBD
-
-> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
-
-**Tasks:**
-- [ ] Determine how to detect if filtering is needed (cluster region, config flag, etc.)
-- [ ] If models are marked, filter dropdown accordingly
-
-### Application Screen Updates
-
-**Tasks:**
-- [ ] Remove API key collection from application screen
-- [ ] Keep application screen enablement requirement (optional)
+See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for detailed technical requirements and resource contracts.
 
 ---
 
@@ -122,19 +89,11 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **Tasks:**
 - [ ] Remove tests for removed Account controller
 - [ ] Add tests for new ConfigMap loading logic
-- [ ] Add tests for OdhDashboardConfig handling
 
 ### Integration Tests
 
 **Tasks:**
 - [ ] Test end-to-end NIM deployment flow
-- [ ] Test custom ConfigMap override
-- [ ] Test air-gap mode (disabled validation)
-- [ ] Test EU restriction filtering
-
-### Upgrade Testing
-
-**Tasks:**
 - [ ] Test upgrade from current architecture to new architecture
 - [ ] Verify cleanup of obsolete resources (Account CR, etc.)
 
