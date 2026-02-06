@@ -56,7 +56,7 @@ credentials=<api_key>
 
 ## 3. Model Tags/Metadata
 
-**Endpoint:** `GET https://api.ngc.nvidia.com/v2/org/nim/team/{team}/repos/{repo}`
+**Endpoint:** `GET https://api.ngc.nvidia.com/v2/org/{org}/team/{team}/repos/{repo}`
 
 **Example:** `GET https://api.ngc.nvidia.com/v2/org/nim/team/nvidia/repos/nv-embedqa-e5-v5-pb24h2`
 
