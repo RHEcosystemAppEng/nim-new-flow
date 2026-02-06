@@ -36,7 +36,7 @@ With build-time metadata fetching:
 - Check if there's an API field indicating restriction
 - Request API enhancement if not available
 
-**Approach C: Model Metadata Analysis**
+**Approach B: Model Metadata Analysis**
 - Check if model IDs or names follow a pattern for restricted models
 - Check if model metadata includes any regional availability info
 
