@@ -106,14 +106,12 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **Tasks:**
 - [ ] Determine how to detect if filtering is needed (cluster region, config flag, etc.)
 - [ ] If models are marked, filter dropdown accordingly
-- [ ] Display appropriate message for restricted models
 
 ### Application Screen Updates
 
 **Tasks:**
-- [ ] Keep application screen enablement requirement (optional)
 - [ ] Remove API key collection from application screen
-- [ ] Update status indicators
+- [ ] Keep application screen enablement requirement (optional)
 
 ---
 
@@ -122,7 +120,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 ### Unit Tests
 
 **Tasks:**
-- [ ] Update/remove tests for removed Account controller
+- [ ] Remove tests for removed Account controller
 - [ ] Add tests for new ConfigMap loading logic
 - [ ] Add tests for OdhDashboardConfig handling
 
