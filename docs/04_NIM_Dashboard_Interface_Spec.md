@@ -172,25 +172,22 @@ spec:
 
 The Dashboard should validate the user's API key directly with NVIDIA.
 
-**Endpoint:** `https://api.ngc.nvidia.com/v2/org/nim/team/meta/repos/llama-3.1-8b-instruct`
+**Endpoint:** `POST https://api.ngc.nvidia.com/v3/keys/get-caller-info`
 
 **Headers:**
 ```
+Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer <api_key>
-Content-Type: application/json
 ```
 
-**Expected Responses:**
-| Status | Meaning |
-|--------|---------|
-| 200 | Key is valid |
-| 401 | Key is invalid |
-| 403 | Key valid but lacks permissions |
-| 451 | Unavailable for legal reasons (EU restriction) |
+**Body:**
+```
+credentials=<api_key>
+```
 
-**Notes:**
-- Any model endpoint can be used for validation; we just need to confirm the key works
-- The 451 response is used to detect EU-restricted models
+**Response:**
+- `200` = Key validated successfully
+- Any other status = Key not validated
 
 ---
 
