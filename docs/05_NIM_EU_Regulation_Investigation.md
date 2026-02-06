@@ -128,9 +128,8 @@ nimConfig:
 ### When EU User Sees Restricted Model
 
 If for some reason a restricted model appears (misconfiguration):
-- User selects model
-- Wizard attempts validation or deployment
-- API returns 451
+- User selects model and deploys
+- Deployment fails at image pull or model download stage
 - Show clear message: "This model is not available in your region due to regulatory restrictions."
 
 ### Model Unavailability Message
