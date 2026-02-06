@@ -34,7 +34,7 @@ Separately, the subject of Decentralized Secret Management will be addressed as 
 The enablement phase is an administrative requirement to prepare the cluster for NIM workloads:
 
 1. **Credential Collection:** An Admin provides an NVIDIA API Key via the **Dashboard's "Applications" page**.  
-2. **CR Creation:** The Dashboard creates an **Opaque Secret** and an **Account CR** (referencing that secret) within the main system namespace (e.g., redhat-ods-applications).  
+2. **CR Creation:** The Dashboard creates an **Opaque Secret** (containing the collected API key) and an **Account CR** (referencing that secret) within the main system namespace (e.g., redhat-ods-applications).  
 3. **Controller Orchestration:** The odh-model-controller detects the Account CR and triggers a reconciliation loop. **At every step, the controller updates the Account's Status conditions to reflect progress:**  
    * **Model Discovery:** Fetches available models from a public NVIDIA endpoint (no API key required).  
    * **Key Validation:** Verifies the admin-provided API key against NVIDIA's validation endpoint.  
