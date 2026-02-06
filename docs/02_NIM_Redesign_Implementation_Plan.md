@@ -78,10 +78,10 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ## Dashboard Enhancements (odh-dashboard)
 
-### OdhDashboardConfig CRD Updates
+### Wizard Integration
 
 **Tasks:**
-- [ ] Add `nimConfig` section to OdhDashboardConfig spec:
+- [ ] Add `nimConfig` section to OdhDashboardConfig CRD:
   ```yaml
   nimConfig:
     customConfigMap:
@@ -89,16 +89,9 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
       namespace: "redhat-ods-applications"
     disableKeyValidation: false
   ```
-- [ ] Implement logic to read custom ConfigMap when specified
-- [ ] Implement toggle for key validation (for air-gap)
-
-### Wizard Integration
-
-**Tasks:**
 - [ ] Move API key collection from Application screen to Wizard
-- [ ] Implement direct NVIDIA API key validation in Wizard
-- [ ] Populate model dropdown from shipped ConfigMap
-- [ ] Support custom ConfigMap from OdhDashboardConfig
+- [ ] Implement direct NVIDIA API key validation in Wizard (with toggle for air-gap via `disableKeyValidation`)
+- [ ] Populate model dropdown from shipped ConfigMap (with custom ConfigMap override support)
 - [ ] Create resources directly in user's project:
   - Opaque Secret (API key for model download)
   - Pull Secret (for container image pull)
