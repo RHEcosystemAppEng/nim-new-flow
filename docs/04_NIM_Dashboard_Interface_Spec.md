@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document specifies the interface contracts and requirements for the Dashboard team to implement the new NIM integration flow. With this redesign, the Dashboard becomes the primary orchestrator for NIM deployments, eliminating the need for backend controller involvement.
+This document specifies the interface contracts and requirements for the NIM integration in the Dashboard. With this redesign, the Dashboard becomes the primary orchestrator for NIM deployments, eliminating the need for backend controller involvement.
 
 ---
 
@@ -10,63 +10,53 @@ This document specifies the interface contracts and requirements for the Dashboa
 
 ### 1. NIM Model ConfigMap
 
-The backend will ship a ConfigMap containing all NIM model metadata. The Dashboard reads this ConfigMap to populate the model selection dropdown.
+The backend ships a ConfigMap containing NIM model metadata. The Dashboard reads this ConfigMap to populate the model selection dropdown.
 
-**Location:** `<main-namespace>/nim-model-metadata` (e.g., `opendatahub/nim-model-metadata` or `redhat-ods-applications/nim-model-metadata`)
+**Location:** `<main-namespace>/<account-name>-cm` (e.g., `redhat-ods-applications/nvidia-nim-account-cm`)
 
-**Schema:**
+**Schema (existing):**
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nim-model-metadata
+  name: nvidia-nim-account-cm
   namespace: redhat-ods-applications
-  labels:
-    app.kubernetes.io/part-of: nim-integration
 data:
-  models.json: |
+  # Each key is a model name, value is JSON
+  meta/llama3-8b-instruct: |
     {
-      "schemaVersion": "1.0.0",
-      "generatedAt": "2026-02-05T12:00:00Z",
-      "models": [
-        {
-          "id": "nvidia/llama-3.1-8b-instruct",
-          "name": "Llama 3.1 8B Instruct",
-          "description": "Meta's Llama 3.1 8B instruction-tuned model",
-          "containerImage": "nvcr.io/nim/meta/llama-3.1-8b-instruct:1.1.2",
-          "tags": ["1.1.2", "1.1.1", "1.1.0"],
-          "latestTag": "1.1.2",
-          "minGPUMemoryGB": 16,
-          "recommendedGPUMemoryGB": 24,
-          "supportedGPUs": ["A100", "H100", "L40S"],
-          "euRestricted": false
-        },
-        {
-          "id": "nvidia/nemo-megatron-gpt-20b",
-          "name": "NeMo Megatron GPT 20B",
-          "description": "NVIDIA's NeMo Megatron GPT model",
-          "containerImage": "nvcr.io/nim/nvidia/nemo-megatron-gpt-20b:1.0.0",
-          "tags": ["1.0.0"],
-          "latestTag": "1.0.0",
-          "minGPUMemoryGB": 48,
-          "recommendedGPUMemoryGB": 80,
-          "supportedGPUs": ["A100", "H100"],
-          "euRestricted": true
-        }
-      ]
+      "name": "meta/llama3-8b-instruct",
+      "displayName": "Llama 3 8B Instruct",
+      "shortDescription": "Meta's Llama 3 8B instruction-tuned model",
+      "namespace": "nim/meta",
+      "tags": ["1.0.3", "1.0.2", "1.0.1"],
+      "latestTag": "1.0.3",
+      "updatedDate": "2026-02-05T12:00:00Z"
+    }
+  nvidia/nemo-megatron-gpt-20b: |
+    {
+      "name": "nvidia/nemo-megatron-gpt-20b",
+      "displayName": "NeMo Megatron GPT 20B",
+      "shortDescription": "NVIDIA's NeMo Megatron GPT model",
+      "namespace": "nim/nvidia",
+      "tags": ["1.0.0"],
+      "latestTag": "1.0.0",
+      "updatedDate": "2026-02-05T12:00:00Z"
     }
 ```
 
-**Key Fields:**
+**Model JSON Fields:**
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Unique model identifier (used for API calls) |
-| `name` | string | Human-readable display name |
-| `containerImage` | string | Full container image path with latest tag |
+| `name` | string | Model identifier (used as ConfigMap key) |
+| `displayName` | string | Human-readable display name |
+| `shortDescription` | string | Brief model description |
+| `namespace` | string | NGC namespace (e.g., `nim/meta`) |
 | `tags` | array | Available version tags |
 | `latestTag` | string | Recommended/default tag |
-| `minGPUMemoryGB` | number | Minimum GPU memory required |
-| `euRestricted` | boolean | If true, model is restricted in EU regions |
+| `updatedDate` | string | Last update timestamp |
+
+> **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`
 
 ---
 
@@ -209,7 +199,7 @@ When a user deploys a NIM model through the Wizard:
 3. **Display Model Selection**
    - Read ConfigMap (default or custom per OdhDashboardConfig)
    - Parse models.json
-   - Filter out `euRestricted: true` models if in EU (see EU Detection below)
+   - Filter EU-restricted models if applicable (see EU Detection below - TBD)
    - Populate dropdown with remaining models
 
 4. **Collect User Input**
@@ -317,10 +307,12 @@ The Dashboard needs to determine if it should filter EU-restricted models. Optio
 
 ### Filtering Logic
 
+> **Note:** The current ConfigMap schema does not include an EU restriction field. If build-time EU detection is feasible, the schema would need to be extended. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
+
 ```
 When populating model dropdown:
   For each model in ConfigMap:
-    If model.euRestricted == true AND cluster is in EU:
+    If model is EU-restricted AND cluster is in EU:
       Skip this model
     Else:
       Add to dropdown
@@ -377,7 +369,7 @@ When populating model dropdown:
 
 ---
 
-## Questions for Dashboard Team
+## Open Questions
 
 1. What's the preferred approach for EU region detection?
 2. Should we support multiple API keys per project?
