@@ -103,34 +103,6 @@ With externalized metadata and configuration:
 
 ---
 
-## 4. Model Favorites / Pinned Models
-
-### Concept
-
-Allow users or admins to "pin" frequently used models for easier access in the dropdown.
-
-### Proposed Implementation
-
-- Store preferences in Dashboard config or user settings
-- Show pinned models at top of dropdown
-- Admin-level pinning for organization-wide defaults
-
----
-
-## 5. Model Usage Analytics
-
-### Concept
-
-Track which models are deployed and usage patterns to inform future decisions.
-
-### Proposed Implementation
-
-- Aggregate deployment counts per model
-- Track deployment success/failure rates
-- Feed data to product telemetry (opt-in)
-
----
-
 ## Priority Assessment
 
 | Enhancement | Value | Complexity | Suggested Priority |
@@ -138,8 +110,6 @@ Track which models are deployed and usage patterns to inform future decisions.
 | API Key Rotation | High | Medium | P1 - Next iteration |
 | Dual-Protocol Support | Medium | Low | P1 - Next iteration |
 | Enhanced Air-Gap | High | High | P2 - Follow-up |
-| Model Favorites | Low | Low | P3 - Nice to have |
-| Usage Analytics | Medium | Medium | P3 - Nice to have |
 
 ---
 
