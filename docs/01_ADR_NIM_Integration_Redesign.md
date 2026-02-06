@@ -125,7 +125,6 @@ spec:
 
 ### For Engineering
 - **Reduced code complexity** - Remove entire controller
-- **Lower maintenance burden** - No runtime API dependencies
 - **Enable future features** - Key rotation, dual-protocol support (see [Future Enhancements](05_NIM_Future_Enhancements.md))
 
 ---
