@@ -56,7 +56,7 @@ data:
 | `latestTag` | string | Recommended/default tag |
 | `updatedDate` | string | Last update timestamp |
 
-> **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`
+> **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`. This may need to change to support air-gapped environments with mirrored registries - currently under investigation.
 
 ---
 
