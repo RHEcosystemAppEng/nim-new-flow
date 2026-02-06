@@ -1,0 +1,42 @@
+---
+description: NIM Integration Redesign - project context for all contributors
+alwaysApply: true
+---
+
+# NIM Integration Redesign
+
+This is a **planning and investigation repo**, not a code project. It contains documentation, scripts, and generated artifacts for redesigning the NVIDIA NIM integration in OpenDataHub / Red Hat OpenShift AI.
+
+## Architecture (One Paragraph)
+
+We are removing the backend Account CRD/Controller from `odh-model-controller` and the NIM component from the `DataScienceCluster CRD` in `opendatahub-operator`. Model metadata will be fetched at build time and shipped as an immutable ConfigMap. API key collection moves to the Dashboard Wizard on a per-project basis (personal keys only, no legacy keys). The Dashboard creates all deployment resources (Opaque Secret, Pull Secret, PVC, ServingRuntime, InferenceService) directly in the user's project.
+
+## Team
+
+- **Swati Kale** - Project Lead
+- **Tomer Figenblat** - Task Owner, Backend
+- **Marcus Trujillo** - Air-Gap Support, Backend
+- **Matan Talvi** - Wizard Onboarding, Frontend
+
+## Repo Structure
+
+- `docs/01-06` - Planning docs (read in order: ADR → Implementation → Dashboard Spec → EU Investigation → Future Enhancements → API Endpoints)
+- `nim_metadata.sh` - Reference script with two commands:
+  - `generate` - Fetches model metadata and outputs a ConfigMap YAML. Can run from anywhere.
+  - `detect-eu` - Probes models for HTTP 451 restrictions. **Must run from an EU region** (e.g., via SSH to an EU VM). Running from outside the EU will detect zero restricted models.
+- `generated/` - Script output (ConfigMap YAML, EU restricted models JSON)
+- `api-responses/` - Real NVIDIA API response examples (referenced from doc 06)
+- `images/` - Architecture diagrams
+
+## Key Constraints
+
+- Only **personal API keys** (`nvapi-`) are supported. Legacy keys are deprecated.
+- EU-restricted models return HTTP 451 from NVIDIA's API. Detection approach is still under investigation.
+- Resource names: `nvidia-nim-models-data` (ConfigMap), `nvidia-nim-runtime-http` (Template), `nvidia-nim-secrets` (Opaque Secret), `nvidia-nim-image-pull` (Pull Secret).
+- This repo plans changes across 3 projects: `opendatahub-operator`, `odh-model-controller`, `odh-dashboard`.
+
+## When Editing Docs
+
+- Do not add content that duplicates other docs. Check existing docs first.
+- Keep internal links consistent when renaming or renumbering files.
+- Do not hardcode personal info (API keys, SSH details, VM addresses).
