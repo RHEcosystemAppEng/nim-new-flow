@@ -159,8 +159,9 @@ spec:
 ## Next Steps
 
 1. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
-2. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
-3. Coordinate with Dashboard team on Wizard integration
+2. Get stakeholder alignment and approval
+3. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
+4. Coordinate with Dashboard team on Wizard integration
 
 ---
 
