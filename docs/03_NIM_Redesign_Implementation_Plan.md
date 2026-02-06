@@ -56,7 +56,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Build-Time) - TBD
 
-> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](06_NIM_EU_Regulation_Investigation.md).
+> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
 - [ ] Investigate whether models can be identified as EU-restricted at build time
@@ -120,7 +120,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Runtime) - TBD
 
-> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](06_NIM_EU_Regulation_Investigation.md).
+> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
 - [ ] Determine how to detect if filtering is needed (cluster region, config flag, etc.)
@@ -178,12 +178,24 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Coordination and Risks
+## Risks
 
-See [Coordination Matrix](04_NIM_Coordination_Matrix.md) for:
-- Cross-team dependencies and communication
-- Risk register and mitigation strategies
-- Contact list and Jira structure
+| Risk | Status | Mitigation |
+|------|--------|------------|
+| NVIDIA API key coordination delayed | Resolved | Coordination complete |
+| EU restriction list incomplete | Open | Conservative filtering |
+| Dashboard team bandwidth | Open | Early coordination |
+| Upgrade path complexity | Open | Thorough testing |
+
+---
+
+## Key Decisions
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-02-05 | Use build-time metadata | Eliminate enablement latency |
+| 2026-02-05 | Per-project secrets | Security isolation |
+| 2026-02-05 | Config-based EU region | Simple, works in air-gap |
 
 ---
 
@@ -208,4 +220,4 @@ The opendatahub-operator already has cleanup logic that runs during upgrades. We
 
 ## Future Enhancements (Out of Scope)
 
-See [Future Enhancements](07_NIM_Future_Enhancements.md) for features enabled by this redesign (key rotation, dual-protocol, enhanced air-gap).
+See [Future Enhancements](06_NIM_Future_Enhancements.md) for features enabled by this redesign (key rotation, dual-protocol, enhanced air-gap).

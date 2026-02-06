@@ -16,11 +16,10 @@ This repository contains the planning and design documentation for a significant
 |----------|-------------|
 | [01 - ADR: NIM Integration Redesign](docs/01_ADR_NIM_Integration_Redesign.md) | Architecture Decision Record detailing the proposed changes |
 | [02 - Stakeholder Brief](docs/02_NIM_Redesign_Stakeholder_Brief.md) | Executive summary for stakeholders |
-| [03 - Implementation Plan](docs/03_NIM_Redesign_Implementation_Plan.md) | Phased implementation plan across all projects |
-| [04 - Coordination Matrix](docs/04_NIM_Coordination_Matrix.md) | Cross-team dependencies and communication points |
-| [05 - Dashboard Interface Spec](docs/05_NIM_Dashboard_Interface_Spec.md) | Technical specification for Dashboard/Frontend team |
-| [06 - EU Regulation Investigation](docs/06_NIM_EU_Regulation_Investigation.md) | Investigation into EU model restrictions (HTTP 451) |
-| [07 - Future Enhancements](docs/07_NIM_Future_Enhancements.md) | Out-of-scope features enabled by this redesign |
+| [03 - Implementation Plan](docs/03_NIM_Redesign_Implementation_Plan.md) | Implementation plan with tasks, risks, and decisions |
+| [04 - Dashboard Interface Spec](docs/04_NIM_Dashboard_Interface_Spec.md) | Technical specification for Dashboard/Frontend team |
+| [05 - EU Regulation Investigation](docs/05_NIM_EU_Regulation_Investigation.md) | Investigation into EU model restrictions (HTTP 451) |
+| [06 - Future Enhancements](docs/06_NIM_Future_Enhancements.md) | Out-of-scope features enabled by this redesign |
 
 ## Projects Involved
 

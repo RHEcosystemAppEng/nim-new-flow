@@ -83,7 +83,7 @@ The solution shifts metadata fetching to build time and moves secret management 
 ### For Engineering
 - **Reduced code complexity** - Remove entire controller
 - **Lower maintenance burden** - No runtime API dependencies
-- **Enable future features** - Key rotation, dual-protocol support (see [Future Enhancements](07_NIM_Future_Enhancements.md))
+- **Enable future features** - Key rotation, dual-protocol support (see [Future Enhancements](06_NIM_Future_Enhancements.md))
 
 ---
 
@@ -91,9 +91,9 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 This work involves Backend, Model Serving, Dashboard, and Documentation teams. NVIDIA coordination for build-time API key usage is complete.
 
-See [Coordination Matrix](04_NIM_Coordination_Matrix.md) for full details on team responsibilities, dependencies, risks, and contacts.
+See [Implementation Plan](03_NIM_Redesign_Implementation_Plan.md) for risks and key decisions.
 
-**Key External Dependency:** [EU Regulation Handling](06_NIM_EU_Regulation_Investigation.md) - Some models may be restricted in EU regions.
+**Key External Dependency:** [EU Regulation Handling](05_NIM_EU_Regulation_Investigation.md) - Some models may be restricted in EU regions.
 
 ---
 
@@ -117,8 +117,7 @@ See [Coordination Matrix](04_NIM_Coordination_Matrix.md) for full details on tea
 
 - [ADR: NIM Integration Redesign](01_ADR_NIM_Integration_Redesign.md)
 - [Implementation Plan](03_NIM_Redesign_Implementation_Plan.md)
-- [Dashboard Interface Specification](05_NIM_Dashboard_Interface_Spec.md)
-- [Coordination Matrix](04_NIM_Coordination_Matrix.md)
+- [Dashboard Interface Specification](04_NIM_Dashboard_Interface_Spec.md)
 
 ---
 
