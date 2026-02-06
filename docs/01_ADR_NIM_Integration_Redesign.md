@@ -71,7 +71,7 @@ Alt text: Illustrates the heavy reliance on the odh-model-controller and the sec
 ### Backend Simplification
 
 * **Removal of Controller Logic:** The Account controller and all enablement-related logic in odh-model-controller are removed.  
-* **CRD Deletion:** The **Account CRD** is being removed entirely from the system. This eliminates the runtime reconciliation loop entirely.  
+* **Account CRD Deletion:** The **Account CRD** is being removed entirely from the system. This eliminates the runtime reconciliation loop entirely.  
 * **DSC CRD Update:** The NIM component is being removed from the **DataScienceCluster CRD** (currently under the KServe component in `spec.components.kserve.nim`).
 
 ### Dashboard Enhancements
