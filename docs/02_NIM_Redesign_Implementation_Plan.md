@@ -20,15 +20,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 **Tasks:**
 - [ ] Remove Account CRD definition
-- [ ] Remove Account controller reconciliation logic
-- [ ] Remove all supporting code:
-  - API key validation against NVIDIA endpoint
-  - Model metadata fetching logic
-  - Tags resolution per-model logic
-  - ConfigMap reconciliation for model data
-  - Template reconciliation for ServingRuntime
-  - Pull Secret reconciliation
-- [ ] Remove related status conditions handling
+- [ ] Remove Account controller and all supporting code (API validation, metadata fetching, ConfigMap/Template/Pull Secret reconciliation)
 - [ ] Remove related tests
 - [ ] Update documentation
 
@@ -41,18 +33,15 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 ### Add Build-Time Metadata Generation
 
 **Tasks:**
-- [ ] Create script to fetch NIM model metadata during CI/CD
-- [ ] Configure Red Hat-managed API key for CI/CD (secret management)
-- [ ] Generate immutable ConfigMap with model data
+- [ ] Create CI/CD script to fetch NIM model metadata and generate immutable ConfigMap (using Red Hat-managed API key)
 - [ ] Include ConfigMap in kustomization manifests
 - [ ] Create ServingRuntime Template as static resource
 - [ ] Include Template in kustomization manifests
 
 **New Files:**
-- `scripts/generate_nim_metadata.sh` (or Python equivalent)
-- `config/nim/configmap.yaml` (generated during build)
-- `config/nim/servingruntime-template.yaml`
-- `config/nim/kustomization.yaml`
+- `scripts/generate_nim_metadata.sh` (can be adapted to another language if needed)
+- `config/runtimes/nim-template.yaml` (alongside existing runtime templates)
+- ConfigMap YAML (generated during build, location TBD)
 
 ### EU Regulation Handling (Build-Time) - TBD
 
@@ -79,12 +68,11 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - Kserve component handling code
 - Related tests
 
-### Include NIM Resources in Component Image
+### Cleanup Obsolete NIM Resources
 
 **Tasks:**
-- [ ] Ensure NIM ConfigMap is deployed with component
-- [ ] Ensure ServingRuntime Template is deployed with component
-- [ ] Update kustomization to include NIM resources
+- [ ] Add cleanup logic to the operator's existing upgrade package for obsolete NIM resources (Account CRs, old ConfigMaps, Templates, Pull Secrets)
+- [ ] Document what gets cleaned up automatically
 
 ---
 
@@ -175,25 +163,6 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **Tasks:**
 - [ ] Test upgrade from current architecture to new architecture
 - [ ] Verify cleanup of obsolete resources (Account CR, etc.)
-
----
-
-## Migration/Upgrade Considerations
-
-### Cleanup Required
-
-When upgrading from the old architecture:
-- Account CRs will become orphaned (no controller)
-- Old ConfigMaps created by controller need cleanup
-- Old Templates created by controller need cleanup
-- Old Pull Secrets (prototypes) need cleanup
-
-### Cleanup Implementation
-
-The opendatahub-operator already has cleanup logic that runs during upgrades. We will extend this existing mechanism to handle NIM resource cleanup:
-
-- [ ] Add cleanup logic to opendatahub-operator for obsolete NIM resources
-- [ ] Document what gets cleaned up automatically vs. manually
 
 ---
 

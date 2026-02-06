@@ -146,11 +146,7 @@ spec:
    - Should Dashboard detect geographic location or rely on config?
    - See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)
 
-2. **Upgrade Path**
-   - What happens to existing Account CRs after upgrade?
-   - Do we need automatic cleanup or manual steps?
-
-3. **Application Screen**
+2. **Application Screen**
    - Should we keep the application screen enablement toggle?
    - If yes, what does it control without API key collection?
 
