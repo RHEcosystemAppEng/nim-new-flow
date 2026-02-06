@@ -12,14 +12,14 @@ This document specifies the interface contracts and requirements for the NIM int
 
 The backend ships a ConfigMap containing NIM model metadata. The Dashboard reads this ConfigMap to populate the model selection dropdown.
 
-**Location:** `<main-namespace>/<account-name>-cm` (e.g., `redhat-ods-applications/nvidia-nim-account-cm`)
+**Location:** `<main-namespace>/nvidia-nim-models-data` (e.g., `redhat-ods-applications/nvidia-nim-models-data`)
 
-**Schema (existing):**
+**Schema (based on existing):**
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nvidia-nim-account-cm
+  name: nvidia-nim-models-data
   namespace: redhat-ods-applications
 data:
   # Each key is a model name, value is JSON
