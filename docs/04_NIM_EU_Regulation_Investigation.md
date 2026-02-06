@@ -40,15 +40,7 @@ With build-time metadata fetching:
 - Check if model IDs or names follow a pattern for restricted models
 - Check if model metadata includes any regional availability info
 
-### Task 2: Determine Restriction Criteria
-
-**Questions to Answer:**
-- Is the restriction based on model type (e.g., certain LLMs)?
-- Is it based on model origin (e.g., certain vendors)?
-- Is it based on specific EU regulations (AI Act, GDPR)?
-- Does it change over time (need for updates)?
-
-### Task 3: Define Marking Strategy
+### Task 2: Define Marking Strategy
 
 **Option A: Build-Time Detection**
 - Run metadata script from both US and EU locations
@@ -126,7 +118,7 @@ nimConfig:
 ## Action Items
 
 - [ ] Contact NVIDIA for official EU restriction list
-- [ ] Set up EU test environment for validation
+- [x] Set up EU test environment for validation
 - [ ] Document findings from investigation
 - [ ] Propose final approach based on findings
 - [ ] Get legal review if needed
