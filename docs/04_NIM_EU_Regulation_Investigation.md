@@ -111,6 +111,23 @@ nimConfig:
 - Won't work for on-premise
 - Different APIs for each cloud
 
+### Option 4: Warning Tooltip
+
+**Mechanism:**
+- If EU-restricted models are marked in the ConfigMap, display them normally in the dropdown
+- When a user selects a restricted model, show a warning tooltip (e.g., "This model is not available in the EU due to regulatory restrictions")
+- Do not block selection — let the user decide
+
+**Pros:**
+- No need for the Dashboard to detect its region
+- Simple to implement — no filtering, just a visual indicator
+- Works offline (air-gap)
+- Users in non-EU regions are unaffected
+
+**Cons:**
+- Requires EU-restricted models to be marked in the ConfigMap
+- EU users could still attempt deployment (will fail at image pull/model download)
+
 > **Note:** Final approach will be determined after investigation and discussion with the Dashboard team.
 
 ---
