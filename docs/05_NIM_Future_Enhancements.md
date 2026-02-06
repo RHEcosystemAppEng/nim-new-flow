@@ -83,7 +83,7 @@ With externalized metadata and configuration:
 
 ### Proposed Implementation
 
-1. **Air-Gap Preparation Scripts**
+1. **Air-Gap Preparation**
    - Customer provides a list of required models
    - Script to mirror images to internal registry (based on that list)
    - Script to pre-load models into PVCs

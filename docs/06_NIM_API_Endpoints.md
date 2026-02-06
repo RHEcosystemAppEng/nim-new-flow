@@ -30,7 +30,7 @@ q={"query":"orgName:nim","page":0,"pageSize":1000}
 
 **Endpoint:** `POST https://api.ngc.nvidia.com/v3/keys/get-caller-info`
 
-**Purpose:** Validates a user's NVIDIA API key.
+**Purpose:** Validates a user's NVIDIA API key. **Only supports personal API keys (not legacy keys).**
 
 **Headers:**
 ```

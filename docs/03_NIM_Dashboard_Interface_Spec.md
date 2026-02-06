@@ -198,7 +198,7 @@ credentials=<api_key>
 When a user deploys a NIM model through the Wizard:
 
 1. **Collect API Key**
-   - Display secure input for user's NVIDIA API key
+   - Display secure input for user's NVIDIA API key (**personal keys only**, legacy keys are not supported)
    - Store temporarily in memory (not persisted until deployment)
 
 2. **Validate Key (if enabled)**

@@ -79,7 +79,7 @@ Alt text: Illustrates the heavy reliance on the odh-model-controller and the sec
 The Dashboard will now manage the deployment lifecycle directly within the user project:
 
 1. **Metadata Source:** The Dashboard reads the pre-shipped ConfigMap. A new flag in **OdhDashboardConfig** allows admins to specify a customConfigMap (Object Reference) to be used instead of the immutable version.  
-2. **Validation:** The Wizard validates the user's key against NVIDIA, governed by a flag in **OdhDashboardConfig** (can be disabled for air-gapped environments).  
+2. **Validation:** The Wizard validates the user's personal API key against NVIDIA (legacy keys are not supported), governed by a flag in **OdhDashboardConfig** (can be disabled for air-gapped environments).  
 3. **Local Secret Creation:** The Wizard creates the **Opaque Secret** and **Pull Secret** directly in the user’s project namespace.  
    * **Opaque Secret:** Mounted to the serving deployment as an environment variable and used to download models at runtime.  
    * **Pull Secret:** Used with the same deployment for pulling the model container image from NVIDIA's registry.  
@@ -135,6 +135,10 @@ spec:
 * **What is the user's key used for?** The user’s personal API key is used for both **pulling the container image** from the registry (via the Pull Secret) and **downloading the model** at runtime (via the Opaque Secret environment variable).  
 * **Operational Runtime Security:** From a user perspective, their API key will get validated by the dashboard. If validation passes but something else is broken, the image pull will fail at the cluster level, or the model download will fail at the container runtime level. In either scenario, the use of a Red Hat API key during the build phase to fetch tags does not leverage or expose that key at runtime.  
 * **How does this support Air-Gap?** While this architecture does not provide full air-gap support out-of-the-box today, it is a significant step in that direction. By shipping metadata with the product, we remove the requirement for the cluster to "discover" models. Admins can provide a customConfigMap for internal registries and disable key validation via the configuration above to facilitate restricted environment setups.  
+* **Legacy Key Deprecation:** This redesign only supports personal API keys. Legacy (org-level) keys are no longer supported.
+  
+  > **Note:** We will confirm with NVIDIA that they have completed the legacy key deprecation process on their side before finalizing this change.
+
 * **What about NVIDIA coordination?** We have informed NVIDIA and clarified our limited usage: we are only using a Red Hat key to fetch the list of available version strings. All subsequent operations, including verification, pulling, and downloading, rely on the user's personal key. Red Hat's keys are only present during build time within the CI/CD pipelines.
 
 ---
