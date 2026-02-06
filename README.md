@@ -35,6 +35,15 @@ This repository contains the planning and design documentation for a significant
 - Move API key collection to the Wizard (per-project)
 - Dashboard creates resources directly in user's project
 
+## Team
+
+| Name | Role |
+|------|------|
+| [Swati Kale](mailto:swkale@redhat.com) | Project Lead |
+| [Tomer Figenblat](mailto:tfigenbl@redhat.com) | Task Owner, Backend |
+| [Marcus Trujillo](mailto:matrujil@redhat.com) | Air-Gap Support, Backend |
+| [Matan Talvi](mailto:mtalvi@redhat.com) | Wizard Onboarding, Frontend |
+
 ## Script
 
 ### `nim_metadata.sh`
