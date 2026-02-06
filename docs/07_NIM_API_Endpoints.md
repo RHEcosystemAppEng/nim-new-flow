@@ -48,8 +48,9 @@ credentials=<api_key>
 - Any other status = Key not validated
 
 **Usage:**
-- Called by Dashboard to validate user's API key before deployment
-- Can be disabled via `OdhDashboardConfig.nimConfig.disableKeyValidation` for air-gap environments
+- Build-time: Validates Red Hat's API key before fetching metadata
+- Runtime: Called by Dashboard to validate user's API key before deployment
+  - Can be disabled via `OdhDashboardConfig.nimConfig.disableKeyValidation` for air-gap environments
 
 ---
 
