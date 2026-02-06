@@ -5,6 +5,18 @@ Date: Jan 20, 2026
 Jira: [NVPE-390](https://issues.redhat.com/browse/NVPE-390)  
 **Status**: Proposed
 
+## Executive Summary
+
+We are proposing a significant redesign of the NVIDIA NIM integration in OpenDataHub and Red Hat OpenShift AI. This redesign addresses critical user experience and security concerns while simplifying the codebase and enabling future enhancements.
+
+**Key Outcomes:**
+- Eliminate 2-minute enablement delay
+- Resolve security risk from shared API keys
+- Enable seamless Wizard integration
+- Reduce maintenance burden
+
+---
+
 # Context
 
 The existing architecture for NVIDIA NIM integration necessitates a redesign due to two major technical drawbacks: **high user-facing latency** and a **security risk**. The high latency is caused by an asynchronous backend process for scraping model metadata that is incompatible with the RHOAI deployment wizard's requirement for synchronous availability. The security risk stems from the Dashboard disseminating sensitive API credentials by copying them from an administrative namespace into individual user project namespaces.
@@ -99,6 +111,25 @@ spec:
     disableKeyValidation: false 
 ```
 
+## Benefits
+
+### For Users
+- **Instant enablement** - No more waiting for metadata scraping
+- **Better security** - Their API key stays in their project
+- **Seamless Wizard experience** - Synchronous operations
+
+### For Admins
+- **Simplified configuration** - Remove backend enablement flag
+- **Air-gap support** - Custom ConfigMap for restricted networks
+- **Clearer security model** - No cross-namespace secret copying
+
+### For Engineering
+- **Reduced code complexity** - Remove entire controller
+- **Lower maintenance burden** - No runtime API dependencies
+- **Enable future features** - Key rotation, dual-protocol support (see [Future Enhancements](05_NIM_Future_Enhancements.md))
+
+---
+
 ## Addressing Potential Concerns
 
 * **Why use a Red Hat key at build-time?** The key is used **only to fetch tags/versions** so the model list is populated immediately upon installation without scraping latency.  
@@ -107,4 +138,39 @@ spec:
 * **How does this support Air-Gap?** While this architecture does not provide full air-gap support out-of-the-box today, it is a significant step in that direction. By shipping metadata with the product, we remove the requirement for the cluster to "discover" models. Admins can provide a customConfigMap for internal registries and disable key validation via the configuration above to facilitate restricted environment setups.  
 * **What about NVIDIA coordination?** We have informed NVIDIA and clarified our limited usage: we are only using a Red Hat key to fetch the list of available version strings. All subsequent operations, including verification, pulling, and downloading, rely on the user's personal key. Red Hat's keys are only present during build time within the CI/CD pipelines.
 
+---
 
+## Open Questions
+
+1. **EU Regulation**
+   - How do we reliably determine which models are EU-restricted?
+   - Should Dashboard detect geographic location or rely on config?
+   - See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)
+
+2. **Upgrade Path**
+   - What happens to existing Account CRs after upgrade?
+   - Do we need automatic cleanup or manual steps?
+
+3. **Application Screen**
+   - Should we keep the application screen enablement toggle?
+   - If yes, what does it control without API key collection?
+
+---
+
+## Next Steps
+
+1. Share this ADR with stakeholders
+2. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
+3. Assign team members and create Jira tasks
+4. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
+5. Coordinate with Dashboard team on Wizard integration
+
+---
+
+## Related Documents
+
+- [Implementation Plan](02_NIM_Redesign_Implementation_Plan.md)
+- [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md)
+- [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)
+- [Future Enhancements](05_NIM_Future_Enhancements.md)
+- [API Endpoints](06_NIM_API_Endpoints.md)

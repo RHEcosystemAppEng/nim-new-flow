@@ -209,7 +209,7 @@ When a user deploys a NIM model through the Wizard:
 3. **Display Model Selection**
    - Read ConfigMap (default or custom per OdhDashboardConfig)
    - Parse model entries (each key is a model name, value is JSON)
-   - Filter EU-restricted models if applicable (out of scope - see [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md))
+   - Filter EU-restricted models if applicable (out of scope - see [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md))
    - Populate dropdown with remaining models
 
 4. **Collect User Input**
@@ -276,7 +276,7 @@ When a user deploys a NIM model through the Wizard:
 
 ## EU Region Handling
 
-> **Note:** The current ConfigMap schema does not include an EU restriction field. If build-time EU detection is feasible, the schema would need to be extended. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
+> **Note:** The current ConfigMap schema does not include an EU restriction field. If build-time EU detection is feasible, the schema would need to be extended. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
 
 ---
 

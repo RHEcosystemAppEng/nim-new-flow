@@ -56,7 +56,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Build-Time) - TBD
 
-> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
+> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
 - [ ] Investigate whether models can be identified as EU-restricted at build time
@@ -120,7 +120,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Runtime) - TBD
 
-> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
+> **Note:** Depends on whether EU-restricted models can be identified. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
 
 **Tasks:**
 - [ ] Determine how to detect if filtering is needed (cluster region, config flag, etc.)
@@ -199,4 +199,4 @@ The opendatahub-operator already has cleanup logic that runs during upgrades. We
 
 ## Future Enhancements (Out of Scope)
 
-See [Future Enhancements](06_NIM_Future_Enhancements.md) for features enabled by this redesign (key rotation, dual-protocol, enhanced air-gap).
+See [Future Enhancements](05_NIM_Future_Enhancements.md) for features enabled by this redesign (key rotation, dual-protocol, enhanced air-gap).
