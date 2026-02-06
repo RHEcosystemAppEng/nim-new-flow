@@ -22,7 +22,6 @@ With per-project key management in the new architecture:
 ### Proposed Implementation
 
 1. **Dashboard Key Management UI**
-   - View existing NIM deployments and their key status
    - Update key for a specific deployment
    - Validate new key before applying
 
@@ -35,7 +34,6 @@ With per-project key management in the new architecture:
 3. **Considerations**
    - Should key update trigger automatic pod restart?
    - How to handle validation failures during update?
-   - Audit logging for key changes?
 
 ---
 
@@ -88,13 +86,12 @@ With externalized metadata and configuration:
 1. **Air-Gap Preparation Scripts**
    - Script to identify required models
    - Script to mirror images to internal registry
-   - Script to pre-download model weights
+   - Script to pre-load models into PVCs
    - Script to generate custom ConfigMap
 
 2. **Offline Model Catalog**
    - Generate offline-compatible metadata
    - Update container image references to internal registry
-   - Include checksum validation
 
 3. **Documentation**
    - Step-by-step air-gap setup guide
