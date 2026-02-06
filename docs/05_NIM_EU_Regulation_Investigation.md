@@ -31,13 +31,7 @@ With build-time metadata fetching:
 
 ### Task 1: Identify EU-Restricted Models
 
-**Approach A: Direct Testing**
-- Set up a test environment in EU (or use VPN)
-- Iterate through all known NIM models
-- Record which return 451
-- Maintain a list
-
-**Approach B: NVIDIA Documentation/API**
+**Approach A: NVIDIA Documentation/API**
 - Contact NVIDIA for official list of EU-restricted models
 - Check if there's an API field indicating restriction
 - Request API enhancement if not available
@@ -125,16 +119,7 @@ nimConfig:
 - Won't work for on-premise
 - Different APIs for each cloud
 
-### Recommendation
-
-Use **Option 1 (Configuration-Based)** as the primary approach:
-- Simple and reliable
-- Works in all environments
-- Admin explicitly acknowledges regional restrictions
-
-Consider adding **Option 2** as a fallback or helper:
-- Could auto-detect and suggest region setting
-- Admin confirms or overrides
+> **Note:** Final approach will be determined after investigation and discussion with the Dashboard team.
 
 ---
 
