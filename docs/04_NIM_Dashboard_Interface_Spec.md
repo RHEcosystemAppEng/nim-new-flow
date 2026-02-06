@@ -202,17 +202,14 @@ When a user deploys a NIM model through the Wizard:
    - Store temporarily in memory (not persisted until deployment)
 
 2. **Validate Key (if enabled)**
-   ```
-   If OdhDashboardConfig.nimConfig.disableKeyValidation == false:
-     Call NVIDIA validation endpoint with user's key
-     If 401/403: Show error, do not proceed
-     If 200: Proceed to next step
-   ```
+   - If `OdhDashboardConfig.nimConfig.disableKeyValidation` is false, call NVIDIA validation endpoint
+   - If validation fails, show error and do not proceed
+   - If validation succeeds, proceed to next step
 
 3. **Display Model Selection**
    - Read ConfigMap (default or custom per OdhDashboardConfig)
-   - Parse models.json
-   - Filter EU-restricted models if applicable (see EU Detection below - TBD)
+   - Parse model entries (each key is a model name, value is JSON)
+   - Filter EU-restricted models if applicable (out of scope - see [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md))
    - Populate dropdown with remaining models
 
 4. **Collect User Input**
@@ -230,6 +227,8 @@ When a user deploys a NIM model through the Wizard:
    metadata:
      name: nim-api-key-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
+     labels:
+       opendatahub.io/managed: "true"
    type: Opaque
    data:
      api_key: <base64-encoded-api-key>
@@ -242,94 +241,42 @@ When a user deploys a NIM model through the Wizard:
    metadata:
      name: nim-pull-secret-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
+     labels:
+       opendatahub.io/managed: "true"
    type: kubernetes.io/dockerconfigjson
    data:
      .dockerconfigjson: <base64-encoded-docker-config>
    ```
    
-   Docker config format:
+   Docker config format (matches current account controller):
    ```json
    {
      "auths": {
        "nvcr.io": {
          "username": "$oauthtoken",
-         "password": "<api_key>",
-         "auth": "<base64(username:password)>"
+         "password": "<api_key>"
        }
      }
    }
    ```
 
    **5.3 PVC**
-   ```yaml
-   apiVersion: v1
-   kind: PersistentVolumeClaim
-   metadata:
-     name: nim-cache-${DEPLOYMENT_NAME}
-     namespace: ${USER_PROJECT}
-   spec:
-     accessModes:
-       - ReadWriteOnce
-     resources:
-       requests:
-         storage: ${USER_REQUESTED_SIZE}  # e.g., "50Gi"
-   ```
+   
+   > **Note:** PVC creation remains unchanged from current Dashboard implementation. The Dashboard already handles PVC creation for model deployments.
 
    **5.4 ServingRuntime**
    - Process the Template with parameters
    - Create ServingRuntime in user's project
 
    **5.5 InferenceService**
-   ```yaml
-   apiVersion: serving.kserve.io/v1beta1
-   kind: InferenceService
-   metadata:
-     name: ${DEPLOYMENT_NAME}
-     namespace: ${USER_PROJECT}
-   spec:
-     predictor:
-       model:
-         modelFormat:
-           name: nim
-         runtime: nim-runtime-${MODEL_NAME}
-         storageUri: "pvc://${PVC_NAME}/cache"
-   ```
+   
+   > **Note:** InferenceService creation remains unchanged from current Dashboard implementation. The Dashboard already handles InferenceService creation for model deployments.
 
 ---
 
 ## EU Region Handling
 
-### Detection Approaches
-
-The Dashboard needs to determine if it should filter EU-restricted models. Options:
-
-**Option A: Cluster Configuration (Recommended)**
-- Add field to OdhDashboardConfig: `nimConfig.region: "EU"` or `"US"` etc.
-- Admin sets this during installation
-- Simple, explicit, reliable
-
-**Option B: Runtime Detection**
-- Dashboard makes API call to determine region
-- Could use cloud provider metadata or geolocation service
-- More complex, may have edge cases
-
-**Option C: Probe NVIDIA API**
-- At Wizard load, probe a known EU-restricted model
-- If 451, assume EU and filter
-- Adds latency, not ideal for UX
-
-### Filtering Logic
-
 > **Note:** The current ConfigMap schema does not include an EU restriction field. If build-time EU detection is feasible, the schema would need to be extended. See [EU Regulation Investigation](05_NIM_EU_Regulation_Investigation.md).
-
-```
-When populating model dropdown:
-  For each model in ConfigMap:
-    If model is EU-restricted AND cluster is in EU:
-      Skip this model
-    Else:
-      Add to dropdown
-```
 
 ---
 
@@ -374,8 +321,8 @@ When populating model dropdown:
 4. **Air-Gap Mode**
    - Verify deployment works when validation is disabled
 
-5. **EU Filtering**
-   - Verify restricted models are hidden in EU clusters
+5. **EU Filtering** (if applicable)
+   - Verify restricted models are filtered appropriately
 
 6. **Rollback on Failure**
    - Verify partial deployments are cleaned up
