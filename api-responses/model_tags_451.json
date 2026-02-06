@@ -1,0 +1,6 @@
+{
+  "_comment": "HTTP 451 - Unavailable For Legal Reasons",
+  "_note": "Response body is empty. Only the HTTP status code 451 is returned.",
+  "_model": "nim/meta/llama-3.2-11b-vision-instruct",
+  "_location": "EU (eu-central-1)"
+}

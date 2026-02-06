@@ -1,0 +1,92 @@
+{
+  "labels": [
+    "DGX Spark",
+    "Llama3.1",
+    "Llama3.1-8b-instruct",
+    "NIM",
+    "NSPECT-ZP6P-5LPY",
+    "NVIDIA AI Enterprise Supported",
+    "NVIDIA NIM",
+    "_LABEL_FAILED_TO_RESOLVE_",
+    "_LABEL_FAILED_TO_RESOLVE_"
+  ],
+  "isMultiArchitecture": true,
+  "latestArchitectureVariants": [
+    {
+      "rating": "AA",
+      "modelNames": [],
+      "compressedSize": 10397285394,
+      "architecture": "amd64",
+      "createdDate": "2026-02-04T19:47:27.380Z",
+      "os": "linux",
+      "digest": "sha256:32c77282b1369b54eb7a9f2bf9abc8d19396cf88678f916e76d93b79cbae5c3c"
+    },
+    {
+      "rating": "AA",
+      "modelNames": [],
+      "compressedSize": 10294506717,
+      "architecture": "arm64",
+      "createdDate": "2026-02-04T19:47:27.380Z",
+      "os": "linux",
+      "digest": "sha256:bf186a61bfebe289052c7359291530604c9fa6c086350ca2b49e4e1f8690f123"
+    }
+  ],
+  "isMultinodeEnabled": false,
+  "logo": "https://assets.ngc.nvidia.com/products/api-catalog/images/llama-3_1-8b-instruct.jpg",
+  "shortDescription": "NVIDIA NIM for GPU accelerated Llama-3.1-8B-Instruct inference through OpenAI compatible APIs",
+  "manualScanEnabled": true,
+  "systemLabels": [
+    "Elastic NIM",
+    "_LABEL_FAILED_TO_RESOLVE_",
+    "signed images"
+  ],
+  "isReadOnly": true,
+  "namespace": "nim/meta",
+  "productNames": [
+    "nim-dev",
+    "nv-ai-enterprise"
+  ],
+  "hasSignedTag": true,
+  "latestImageSize": 10397285394,
+  "description": "# Llama-3.1-8B-Instruct Overview\n\n## **Description:**\n\nThis container houses the **Llama-3.1-8B-Instruct**, which is an 8 billion parameter, instruction-tuned large language model created by Meta. This model is part of the Llama 3.1 family of open-access models and is specifically optimized for dialogue and conversational use cases, making it highly capable of following user instructions to perform a wide variety of natural language processing tasks.\n\nThe container components are ready for commercial/non-commercial use.\n\n## **Third-Party Community Consideration**\n\nThis model is not owned or developed by NVIDIA. This model has been developed and built to a third-party's requirements for this application and use case; see link to Non-NVIDIA \\[meta-llama/Llama-3.1-8B-Instruct\\]  \n([https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct)). \n\n## **License/Terms of Use:**\n\n**GOVERNING TERMS:** The NIM container is governed by the [NVIDIA Software License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-software-license-agreement/) and the [Product-Specific Terms for NVIDIA AI Products](https://www.nvidia.com/en-us/agreements/enterprise-software/product-specific-terms-for-ai-products/); and the use of this model which is governed by the [NVIDIA Community Model License Agreement](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-community-models-license/). \n\n**ADDITIONAL INFORMATION**: [Llama 3.1 Community License Agreement](https://www.llama.com/llama3_1/license/). Built with Llama.\n\n**You are responsible for ensuring that your use of NVIDIA provided models complies with all applicable laws.**\n\n## **Deployment Geography:**\n\nGlobal \n\n## **Release Date:**\n\nBuild.Nvida.com 07/23/2024 via  \n(https://build.nvidia.com/meta/llama-3_1-8b-instruct)\n\nHuggingface 07/23/2024 via   \n(https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct)\n\n## **Llama-3.1-8B-Instruct** \n\nLlama-3.1-8B-Instruct Container includes the following model:\n\n| Model Name & Link | Use Case | How to Pull the Model |\n| :---- | :---- | :---- |\n| [Llama-3.1-8B-Instruct](https://catalog.ngc.nvidia.com/orgs/nim/teams/meta/models/llama-3.1-8b-instruct) | A conversational AI model for instruction-following, content generation, summarization, and coding assistance. | Automatic |\n\n## **Deployment Details:**\n\nVisit the [NIM Container LLM](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html) page for release documentation, deployment guides, and more.\n\n## **Enterprise Support**\n\nGet access to knowledge base articles and support cases or [submit a ticket](https://www.nvidia.com/en-us/data-center/products/ai-enterprise-suite/support/).\n\nOur AI models are designed and/or optimized to run on NVIDIA GPU-accelerated systems. By leveraging NVIDIA’s hardware (e.g. GPU cores) and software frameworks (e.g., CUDA libraries), the model achieves faster training and inference times compared to CPU-only solutions.\n\n## **Container Version(s):**\n\nLlama-3.1-8B-Instruct-1.15.5 <br>\n\n## **Get Help**\n\n### Enterprise Support\nGet access to knowledge base articles and support cases or [submit a ticket](https://www.nvidia.com/en-us/data-center/products/ai-enterprise-suite/support/).\n\n## **Ethical Considerations:**\n\nNVIDIA believes Trustworthy AI is a shared responsibility and we have established policies and practices to enable development for a wide array of AI applications. When downloaded or used in accordance with our terms of service, developers should work with their internal developer team to ensure this model meets requirements for the relevant industry and use case and addresses unforeseen product misuse.\n\nPlease report security vulnerabilities or NVIDIA AI Concerns [here](https://www.nvidia.com/en-us/support/submit-security-vulnerability/).\n\n**You are responsible for ensuring that your use of NVIDIA provided models complies with all applicable laws.**",
+  "tags": [
+    "1.15.5",
+    "1.15.4",
+    "1.15",
+    "1.13.1",
+    "1.13",
+    "1.12.0",
+    "1.12",
+    "1.10.1",
+    "1.10",
+    "1",
+    "latest",
+    "1.8.6",
+    "1.8.5",
+    "1.8.4",
+    "1.8.3",
+    "1.8",
+    "1.8.0-RTX",
+    "1.3.3",
+    "1.3",
+    "1.3.0",
+    "1.2.2",
+    "1.2",
+    "1.1.2",
+    "1.1.1",
+    "1.1",
+    "1.1.0"
+  ],
+  "sharedWithTeams": [
+    "nim/meta"
+  ],
+  "scanEnabled": true,
+  "publisher": "NVIDIA",
+  "displayName": "Llama-3.1-8B-Instruct",
+  "name": "llama-3.1-8b-instruct",
+  "accessType": "LISTED",
+  "showScanResults": true,
+  "updatedDate": "2026-02-04T19:47:27.380Z",
+  "latestTag": "latest",
+  "policyLabels": []
+}

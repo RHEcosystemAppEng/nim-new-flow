@@ -1,0 +1,412 @@
+{
+  "resultTotal": 180,
+  "resultPageTotal": 90,
+  "params": {
+    "orderBy": [
+      {
+        "field": "score",
+        "value": "DESC"
+      }
+    ],
+    "queryFields": [
+      "all",
+      "name",
+      "publisher",
+      "builtBy",
+      "displayName",
+      "description"
+    ],
+    "scoredSize": 2,
+    "pageSize": 2,
+    "fields": [
+      "weight_popular",
+      "ace_name",
+      "date_created",
+      "resource_type",
+      "description",
+      "display_name",
+      "created_by",
+      "weight_featured",
+      "team_name",
+      "labels",
+      "shared_with_orgs",
+      "date_modified",
+      "shared_with_teams",
+      "is_public",
+      "name",
+      "resource_id",
+      "attributes",
+      "org_name",
+      "guest_access",
+      "msg_timestamp",
+      "status"
+    ],
+    "page": 0,
+    "filters": [
+      {
+        "field": "orgName",
+        "value": "nim"
+      },
+      {
+        "field": "resourceType",
+        "value": "container"
+      },
+      {
+        "field": "accessType",
+        "value": "LISTED"
+      },
+      {
+        "field": "notAccessType",
+        "value": "NOT_LISTED"
+      },
+      {
+        "field": "isPublic",
+        "value": "true"
+      }
+    ],
+    "query": "*:*",
+    "groupBy": "resourceType"
+  },
+  "results": [
+    {
+      "totalCount": 2,
+      "groupValue": "_scored",
+      "resources": [
+        {
+          "orgName": "nim",
+          "resourceId": "nim/nvidia/cosmos-embed1",
+          "labels": [
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "builtBy"
+            },
+            {
+              "values": [
+                "NVIDIA AI Enterprise Supported",
+                "NSPECT-M33T-7OZX",
+                "Automotive / Transportation",
+                "NVIDIA NIM",
+                "Robotics"
+              ],
+              "key": "general"
+            },
+            {
+              "values": [
+                "signed images"
+              ],
+              "key": "system"
+            },
+            {
+              "values": [
+                "true"
+              ],
+              "key": "hasSignedTag"
+            },
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "publisher"
+            },
+            {
+              "values": [
+                "nim-dev",
+                "nv-ai-enterprise"
+              ],
+              "key": "productNames"
+            }
+          ],
+          "sharedWithTeams": [
+            "nim/nvidia"
+          ],
+          "teamName": "nvidia",
+          "msgTimestamp": 1762433427925,
+          "dateModified": "2025-11-06T12:50:27.925Z",
+          "sharedWithOrgs": [],
+          "description": "Cosmos Embed1 NIM is an NVIDIA Inference Microservice (NIM) that provides access to the **Cosmos-Embed1** joint video-text embedding model via a standard HTTP API.",
+          "accessType": "LISTED",
+          "dateCreated": "2025-09-08T19:55:20.151Z",
+          "weightPopular": 3320.1,
+          "createdBy": "ump9hejl7s8kt8foag1jokg1ia",
+          "displayName": "cosmos-embed1",
+          "name": "cosmos-embed1",
+          "resourceType": "CONTAINER",
+          "attributes": [
+            {
+              "key": "latestTag",
+              "value": "1.0.0"
+            },
+            {
+              "key": "size",
+              "value": "17807803875"
+            },
+            {
+              "key": "hasSignedTag",
+              "value": "true"
+            },
+            {
+              "key": "oneClickDeploy",
+              "value": "false"
+            },
+            {
+              "key": "latestTagPushedDate",
+              "value": "2025-09-08T19:58:53.408Z"
+            }
+          ]
+        },
+        {
+          "orgName": "nim",
+          "resourceId": "nim/kakaocorp/kanana-1.5-8b-instruct-2505",
+          "labels": [
+            {
+              "values": [
+                "NVIDIA AI Enterprise Supported",
+                "NSPECT-MYRG-P6YA",
+                "NVIDIA NIM"
+              ],
+              "key": "general"
+            },
+            {
+              "values": [
+                "signed images"
+              ],
+              "key": "system"
+            },
+            {
+              "values": [
+                "true"
+              ],
+              "key": "hasSignedTag"
+            },
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "publisher"
+            },
+            {
+              "values": [
+                "nim-dev",
+                "nv-ai-enterprise"
+              ],
+              "key": "productNames"
+            }
+          ],
+          "sharedWithTeams": [
+            "nim/kakaocorp"
+          ],
+          "teamName": "kakaocorp",
+          "msgTimestamp": 1762428371442,
+          "dateModified": "2025-11-06T11:26:11.442Z",
+          "sharedWithOrgs": [],
+          "description": "NVIDIA NIM for GPU accelerated kanana-1.5-8b-instruct-2505 inference through OpenAI compatible APIs",
+          "accessType": "LISTED",
+          "dateCreated": "2025-07-28T17:11:23.749Z",
+          "weightPopular": 5680.5,
+          "createdBy": "ump9hejl7s8kt8foag1jokg1ia",
+          "displayName": "kanana-1.5-8b-instruct-2505",
+          "name": "kanana-1.5-8b-instruct-2505",
+          "resourceType": "CONTAINER",
+          "attributes": [
+            {
+              "key": "latestTag",
+              "value": "1.10.1"
+            },
+            {
+              "key": "size",
+              "value": "10876782229"
+            },
+            {
+              "key": "hasSignedTag",
+              "value": "true"
+            },
+            {
+              "key": "oneClickDeploy",
+              "value": "false"
+            },
+            {
+              "key": "latestTagPushedDate",
+              "value": "2025-07-28T17:13:04.071Z"
+            },
+            {
+              "key": "logo",
+              "value": "https://huggingface.co/kakaocorp/kanana-1.5-8b-instruct-2505/resolve/main/assets/logo/kanana-logo.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "totalCount": 180,
+      "groupValue": "CONTAINER",
+      "resources": [
+        {
+          "orgName": "nim",
+          "resourceId": "nim/nvidia/cosmos-embed1",
+          "labels": [
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "builtBy"
+            },
+            {
+              "values": [
+                "NVIDIA AI Enterprise Supported",
+                "NSPECT-M33T-7OZX",
+                "Automotive / Transportation",
+                "NVIDIA NIM",
+                "Robotics"
+              ],
+              "key": "general"
+            },
+            {
+              "values": [
+                "signed images"
+              ],
+              "key": "system"
+            },
+            {
+              "values": [
+                "true"
+              ],
+              "key": "hasSignedTag"
+            },
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "publisher"
+            },
+            {
+              "values": [
+                "nim-dev",
+                "nv-ai-enterprise"
+              ],
+              "key": "productNames"
+            }
+          ],
+          "sharedWithTeams": [
+            "nim/nvidia"
+          ],
+          "teamName": "nvidia",
+          "msgTimestamp": 1762433427925,
+          "dateModified": "2025-11-06T12:50:27.925Z",
+          "sharedWithOrgs": [],
+          "description": "Cosmos Embed1 NIM is an NVIDIA Inference Microservice (NIM) that provides access to the **Cosmos-Embed1** joint video-text embedding model via a standard HTTP API.",
+          "accessType": "LISTED",
+          "dateCreated": "2025-09-08T19:55:20.151Z",
+          "weightPopular": 3320.1,
+          "createdBy": "ump9hejl7s8kt8foag1jokg1ia",
+          "displayName": "cosmos-embed1",
+          "name": "cosmos-embed1",
+          "resourceType": "CONTAINER",
+          "attributes": [
+            {
+              "key": "latestTag",
+              "value": "1.0.0"
+            },
+            {
+              "key": "size",
+              "value": "17807803875"
+            },
+            {
+              "key": "hasSignedTag",
+              "value": "true"
+            },
+            {
+              "key": "oneClickDeploy",
+              "value": "false"
+            },
+            {
+              "key": "latestTagPushedDate",
+              "value": "2025-09-08T19:58:53.408Z"
+            }
+          ]
+        },
+        {
+          "orgName": "nim",
+          "resourceId": "nim/kakaocorp/kanana-1.5-8b-instruct-2505",
+          "labels": [
+            {
+              "values": [
+                "NVIDIA AI Enterprise Supported",
+                "NSPECT-MYRG-P6YA",
+                "NVIDIA NIM"
+              ],
+              "key": "general"
+            },
+            {
+              "values": [
+                "signed images"
+              ],
+              "key": "system"
+            },
+            {
+              "values": [
+                "true"
+              ],
+              "key": "hasSignedTag"
+            },
+            {
+              "values": [
+                "NVIDIA"
+              ],
+              "key": "publisher"
+            },
+            {
+              "values": [
+                "nim-dev",
+                "nv-ai-enterprise"
+              ],
+              "key": "productNames"
+            }
+          ],
+          "sharedWithTeams": [
+            "nim/kakaocorp"
+          ],
+          "teamName": "kakaocorp",
+          "msgTimestamp": 1762428371442,
+          "dateModified": "2025-11-06T11:26:11.442Z",
+          "sharedWithOrgs": [],
+          "description": "NVIDIA NIM for GPU accelerated kanana-1.5-8b-instruct-2505 inference through OpenAI compatible APIs",
+          "accessType": "LISTED",
+          "dateCreated": "2025-07-28T17:11:23.749Z",
+          "weightPopular": 5680.5,
+          "createdBy": "ump9hejl7s8kt8foag1jokg1ia",
+          "displayName": "kanana-1.5-8b-instruct-2505",
+          "name": "kanana-1.5-8b-instruct-2505",
+          "resourceType": "CONTAINER",
+          "attributes": [
+            {
+              "key": "latestTag",
+              "value": "1.10.1"
+            },
+            {
+              "key": "size",
+              "value": "10876782229"
+            },
+            {
+              "key": "hasSignedTag",
+              "value": "true"
+            },
+            {
+              "key": "oneClickDeploy",
+              "value": "false"
+            },
+            {
+              "key": "latestTagPushedDate",
+              "value": "2025-07-28T17:13:04.071Z"
+            },
+            {
+              "key": "logo",
+              "value": "https://huggingface.co/kakaocorp/kanana-1.5-8b-instruct-2505/resolve/main/assets/logo/kanana-logo.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

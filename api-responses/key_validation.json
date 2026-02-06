@@ -1,0 +1,93 @@
+{
+  "userId": "REDACTED",
+  "orgName": "REDACTED",
+  "type": "PERSONAL_KEY",
+  "products": [
+    "ai-foundations",
+    "nv-cloud-functions",
+    "private-registry",
+    "artifact-catalog"
+  ],
+  "user": {
+    "id": 0,
+    "clientId": "REDACTED",
+    "starfleetId": "REDACTED",
+    "name": "REDACTED",
+    "email": "REDACTED",
+    "hasSignedPrivacyPolicy": true,
+    "hasSignedEULA": true,
+    "hasSignedNvidiaEULA": false,
+    "hasSignedEgxEULA": false,
+    "hasSignedFleetCommandEULA": false,
+    "hasSignedNVAIEEULA": true,
+    "hasSignedBaseCommandEULA": false,
+    "hasSignedOmniverseEULA": false,
+    "hasSignedLlmEULA": false,
+    "hasSignedBioNeMoEULA": false,
+    "hasSignedThirdPartyRegistryShareEULA": true,
+    "hasSignedContainerPublishingEULA": false,
+    "hasSignedCuOptEULA": false,
+    "hasSubscribedToEmail": false,
+    "hasBetaAccess": false,
+    "isActive": false,
+    "isDeleted": false,
+    "isSAML": false,
+    "createdDate": "2024-06-24T15:48:02.000Z",
+    "updatedDate": "2026-01-09T15:16:22.000Z",
+    "firstLoginDate": "2024-06-24T15:48:02.000Z",
+    "lastLoginDate": "2026-01-08T20:53:12.000Z",
+    "roles": [
+      {
+        "org": {
+          "id": 0,
+          "name": "REDACTED",
+          "displayName": "REDACTED",
+          "industry": "",
+          "country": "US",
+          "type": "ENTERPRISE",
+          "repoScanSettings": {},
+          "infinityManagerSettings": {},
+          "isSeparateInfluxDbUsed": false,
+          "pecSfdcId": "REDACTED",
+          "alternateContact": {}
+        },
+        "orgRoles": [
+          "NVIDIA_AI_ENTERPRISE_VIEWER",
+          "ORG_OWNER",
+          "PUBLIC_API_ENDPOINTS_USER",
+          "REGISTRY-ADMIN",
+          "REGISTRY-READ",
+          "REGISTRY-WRITE",
+          "REGISTRY_ADMIN",
+          "USER-ADMIN",
+          "USER-READ",
+          "USER-WRITE",
+          "USER_ADMIN"
+        ],
+        "orgRolesByUserGroupId": [
+          {
+            "userGroupId": "NO_GROUP",
+            "roles": [
+              "NVIDIA_AI_ENTERPRISE_VIEWER",
+              "ORG_OWNER",
+              "PUBLIC_API_ENDPOINTS_USER",
+              "REGISTRY-ADMIN",
+              "REGISTRY-READ",
+              "REGISTRY-WRITE",
+              "REGISTRY_ADMIN",
+              "USER-ADMIN",
+              "USER-READ",
+              "USER-WRITE",
+              "USER_ADMIN"
+            ]
+          }
+        ],
+        "membershipRolesOnly": false
+      }
+    ],
+    "idpType": "NVIDIA",
+    "idpId": "REDACTED",
+    "idpName": "NVIDIA-J",
+    "externalId": "REDACTED"
+  }
+}

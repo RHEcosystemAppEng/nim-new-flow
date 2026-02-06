@@ -24,6 +24,8 @@ q={"query":"orgName:nim","page":0,"pageSize":1000}
 - Returns model metadata including resource IDs, names, and attributes
 - No API key required for this endpoint
 
+**Example response:** [catalog_search.json](../api-responses/catalog_search.json)
+
 ---
 
 ## 2. API Key Validation
@@ -51,6 +53,8 @@ credentials=<api_key>
 - Build-time: Validates Red Hat's API key before fetching metadata
 - Runtime: Called by Dashboard to validate user's API key before deployment
   - Can be disabled via `OdhDashboardConfig.nimConfig.disableKeyValidation` for air-gap environments
+
+**Example response:** [key_validation.json](../api-responses/key_validation.json) (personal data redacted)
 
 ---
 
@@ -81,6 +85,10 @@ resolve-labels=true
 - Used at build time to fetch available tags for each model
 - Requires one API call per model (can be slow for large catalogs)
 - The `451` response indicates a model restricted in EU regions
+
+**Example responses:**
+- [model_tags.json](../api-responses/model_tags.json) (200 - success)
+- [model_tags_451.json](../api-responses/model_tags_451.json) (451 - EU restricted)
 
 ---
 
