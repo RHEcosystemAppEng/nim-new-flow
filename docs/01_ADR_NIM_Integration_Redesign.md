@@ -28,7 +28,7 @@ The enablement phase is an administrative requirement to prepare the cluster for
    * **Key Validation:** Verifies the admin-provided API key against NVIDIA's validation endpoint.  
    * **Tag Resolution (Versions):** Fetches tags for each model. **This step requires an API key and involves an individual API call per model.** This takes 1–2 minutes, creating a significant delay before the integration is reported as available for use.  
    * **Metadata Storage:** The controller creates a **ConfigMap** in the main system namespace containing the aggregated model data and resolved tags.  
-   * **Resource Injection:** Upon success, the controller creates a ServingRuntime (from the Template CR) and a "Prototype Pull Secret" in the main namespace.
+   * **Resource Injection:** Upon success, the controller creates a Template CR (containing a ServingRuntime) and a "Prototype Pull Secret" in the main namespace.
 
 ### 
 
