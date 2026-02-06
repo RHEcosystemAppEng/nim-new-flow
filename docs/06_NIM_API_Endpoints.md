@@ -67,7 +67,7 @@ credentials=<api_key>
 Authorization: Bearer <api_key>
 ```
 
-**Query Parameters (optional):**
+**Query Parameters:**
 ```
 resolve-labels=true
 ```
