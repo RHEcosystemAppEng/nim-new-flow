@@ -42,8 +42,6 @@ The enablement phase is an administrative requirement to prepare the cluster for
    * **Metadata Storage:** The controller creates a **ConfigMap** in the main system namespace containing the aggregated model data and resolved tags.  
    * **Resource Injection:** Upon success, the controller creates a Template CR (containing a ServingRuntime) and a "Prototype Pull Secret" in the main namespace.
 
-### 
-
 ### The Deployment Process
 
 Once enablement is reported as successful:
@@ -52,8 +50,6 @@ Once enablement is reported as successful:
 2. **Resource Deployment:** When a user deploys a NIM, the Dashboard handles the resource setup:  
    * **Secret Propagation (Security Risk):** The Dashboard copies the **Opaque Secret** and the **Pull Secret Prototype** from the main system namespace into the User’s Project namespace.  
    * **Model Deployment:** The Dashboard creates the **PVC, ServingRuntime, and InferenceService** resources.
-
-### 
 
 ![Current Architecture](../images/current-architecture.jpg)
 
@@ -153,6 +149,10 @@ spec:
 2. **Application Screen**
    - Should we keep the application screen enablement toggle?
    - If yes, what does it control without API key collection?
+
+3. **Multiple API Keys per Project**
+   - Current design uses fixed secret names (`nvidia-nim-secrets`, `nvidia-nim-image-pull`) per project, meaning one API key per project
+   - Should we support multiple API keys (e.g., per deployment) in the future? This would require deployment-specific secret naming
 
 ---
 

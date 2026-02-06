@@ -94,7 +94,7 @@ spec:
 
 The backend ships a Template CR containing the ServingRuntime definition.
 
-**Location:** `<main-namespace>/<account-name>-template` (currently Account-based, will change to static name)
+**Location:** `<main-namespace>/nvidia-nim-runtime-http`
 
 **Actual ServingRuntime (from `odh-model-controller`):**
 ```yaml
@@ -225,7 +225,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nim-api-key-${DEPLOYMENT_NAME}
+     name: nvidia-nim-secrets
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
@@ -239,7 +239,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nim-pull-secret-${DEPLOYMENT_NAME}
+     name: nvidia-nim-image-pull
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
