@@ -94,59 +94,75 @@ spec:
 
 The backend ships a Template CR containing the ServingRuntime definition.
 
-**Location:** `<main-namespace>/nim-serving-runtime-template`
+**Location:** `<main-namespace>/<account-name>-template` (currently Account-based, will change to static name)
 
-**Example:**
+**Actual ServingRuntime (from `odh-model-controller`):**
 ```yaml
-apiVersion: template.openshift.io/v1
-kind: Template
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
 metadata:
-  name: nim-serving-runtime-template
-  namespace: redhat-ods-applications
+  name: nvidia-nim-runtime
+  annotations:
+    opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
+    openshift.io/display-name: NVIDIA NIM
+    opendatahub.io/nim-runtime: "true"
   labels:
-    app.kubernetes.io/part-of: nim-integration
-objects:
-  - apiVersion: serving.kserve.io/v1alpha1
-    kind: ServingRuntime
-    metadata:
-      name: nim-runtime-${MODEL_NAME}
-      labels:
-        opendatahub.io/dashboard: "true"
-    spec:
-      supportedModelFormats:
-        - name: nim
-          autoSelect: true
-      containers:
-        - name: kserve-container
-          image: ${CONTAINER_IMAGE}
-          ports:
-            - containerPort: 8000
-              protocol: TCP
-          env:
-            - name: NIM_CACHE_PATH
-              value: /mnt/models/cache
-            - name: NGC_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: ${API_SECRET_NAME}
-                  key: api_key
-          volumeMounts:
-            - name: nim-cache
-              mountPath: /mnt/models/cache
-      volumes:
+    opendatahub.io/dashboard: "true"
+spec:
+  multiModel: false
+  protocolVersions:
+    - grpc-v2
+    - v2
+  supportedModelFormats:
+    - name: replace-me  # Replaced at deployment time
+  containers:
+    - name: kserve-container
+      image: ""  # Set at deployment time
+      ports:
+        - containerPort: 8000
+          protocol: TCP
+      env:
+        - name: NIM_CACHE_PATH
+          value: /mnt/models/cache
+        - name: NGC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nvidia-nim-secrets
+              key: NGC_API_KEY
+      resources:
+        limits:
+          cpu: "2"
+          memory: 8Gi
+          nvidia.com/gpu: "2"
+        requests:
+          cpu: "1"
+          memory: 4Gi
+          nvidia.com/gpu: "2"
+      volumeMounts:
+        - name: shm
+          mountPath: /dev/shm
+        - name: nim-pvc
+          mountPath: /mnt/models/cache
+        - name: nim-workspace
+          mountPath: /opt/nim/workspace
         - name: nim-cache
-          persistentVolumeClaim:
-            claimName: ${PVC_NAME}
-parameters:
-  - name: MODEL_NAME
-    required: true
-  - name: CONTAINER_IMAGE
-    required: true
-  - name: API_SECRET_NAME
-    required: true
-  - name: PVC_NAME
-    required: true
+          mountPath: /.cache
+  imagePullSecrets:
+    - name: ngc-secret
+  volumes:
+    - name: nim-pvc
+      persistentVolumeClaim:
+        claimName: nim-pvc
+    - name: nim-workspace
+      emptyDir: {}
+    - name: nim-cache
+      emptyDir: {}
+    - name: shm
+      emptyDir:
+        medium: Memory
 ```
+
+> **Note:** The Template wraps this ServingRuntime. At deployment, the Dashboard processes the template and customizes fields like `image`, `supportedModelFormats`, secret names, and PVC name based on user input.
 
 ---
 
