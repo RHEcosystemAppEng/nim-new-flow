@@ -91,7 +91,7 @@ The solution shifts metadata fetching to build time and moves secret management 
 
 This work involves Backend, Model Serving, Dashboard, and Documentation teams. NVIDIA coordination for build-time API key usage is complete.
 
-See [Implementation Plan](03_NIM_Redesign_Implementation_Plan.md) for risks and key decisions.
+See [Implementation Plan](03_NIM_Redesign_Implementation_Plan.md) for detailed tasks.
 
 **Key External Dependency:** [EU Regulation Handling](05_NIM_EU_Regulation_Investigation.md) - Some models may be restricted in EU regions.
 

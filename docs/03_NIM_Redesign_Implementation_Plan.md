@@ -178,27 +178,6 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
-## Risks
-
-| Risk | Status | Mitigation |
-|------|--------|------------|
-| NVIDIA API key coordination delayed | Resolved | Coordination complete |
-| EU restriction list incomplete | Open | Conservative filtering |
-| Dashboard team bandwidth | Open | Early coordination |
-| Upgrade path complexity | Open | Thorough testing |
-
----
-
-## Key Decisions
-
-| Date | Decision | Rationale |
-|------|----------|-----------|
-| 2026-02-05 | Use build-time metadata | Eliminate enablement latency |
-| 2026-02-05 | Per-project secrets | Security isolation |
-| 2026-02-05 | Config-based EU region | Simple, works in air-gap |
-
----
-
 ## Migration/Upgrade Considerations
 
 ### Cleanup Required
