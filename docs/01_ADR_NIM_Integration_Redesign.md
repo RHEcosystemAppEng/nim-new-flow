@@ -158,11 +158,9 @@ spec:
 
 ## Next Steps
 
-1. Share this ADR with stakeholders
-2. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
-3. Assign team members and create Jira tasks
-4. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
-5. Coordinate with Dashboard team on Wizard integration
+1. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
+2. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
+3. Coordinate with Dashboard team on Wizard integration
 
 ---
 
