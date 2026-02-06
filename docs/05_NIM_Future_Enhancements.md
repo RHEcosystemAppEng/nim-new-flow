@@ -53,9 +53,9 @@ With build-time template shipping:
 
 ### Proposed Implementation
 
-1. **Multiple ServingRuntime Templates**
-   - `nvidia-nim-runtime-http` - HTTP/REST protocol
-   - `nvidia-nim-runtime-grpc` - gRPC protocol
+1. **Add gRPC ServingRuntime Template**
+   - `nvidia-nim-runtime-http` already ships with the initial redesign
+   - Add `nvidia-nim-runtime-grpc` for gRPC protocol
 
 2. **Wizard Protocol Selection**
    - Add protocol dropdown to deployment wizard

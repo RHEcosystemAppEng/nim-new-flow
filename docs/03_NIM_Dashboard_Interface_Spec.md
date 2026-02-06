@@ -101,7 +101,7 @@ The backend ships a Template CR containing the ServingRuntime definition.
 apiVersion: serving.kserve.io/v1alpha1
 kind: ServingRuntime
 metadata:
-  name: nvidia-nim-runtime
+  name: nvidia-nim-runtime-http
   annotations:
     opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
     openshift.io/display-name: NVIDIA NIM

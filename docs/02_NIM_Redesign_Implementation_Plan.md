@@ -14,6 +14,17 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ---
 
+## Resource Names
+
+| Resource | Name | Namespace |
+|----------|------|-----------|
+| ConfigMap (model metadata) | `nvidia-nim-models-data` | Main namespace |
+| ServingRuntime Template | `nvidia-nim-runtime-http` | Main namespace |
+| Opaque Secret (per deployment) | `nvidia-nim-secrets` | User project |
+| Pull Secret (per deployment) | `nvidia-nim-image-pull` | User project |
+
+---
+
 ## Model Serving Changes (odh-model-controller)
 
 ### Remove Account CRD and Controller
@@ -40,7 +51,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 **New Files:**
 - `scripts/generate_nim_metadata.sh` (can be adapted to another language if needed)
-- `config/runtimes/nim-template.yaml` (alongside existing runtime templates)
+- `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates)
 - ConfigMap YAML (generated during build, location TBD)
 
 ### EU Regulation Handling (Build-Time) - TBD
