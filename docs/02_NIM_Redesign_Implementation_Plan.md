@@ -50,7 +50,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Include Template in kustomization manifests
 
 **New Files:**
-- `scripts/generate_nim_metadata.sh` (can be adapted to another language if needed)
+- `scripts/generate_nim_metadata.sh` (can be based on the reference script in this repo, and adapted to another language if needed)
 - `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates)
 - ConfigMap YAML (generated during build, location TBD)
 

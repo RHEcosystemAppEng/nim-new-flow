@@ -1,0 +1,26 @@
+[
+  {
+    "name": "llama-4-maverick-17b-128e-instruct",
+    "resourceId": "nim/meta/llama-4-maverick-17b-128e-instruct",
+    "org": "nim",
+    "team": "meta"
+  },
+  {
+    "name": "llama-3.2-11b-vision-instruct",
+    "resourceId": "nim/meta/llama-3.2-11b-vision-instruct",
+    "org": "nim",
+    "team": "meta"
+  },
+  {
+    "name": "llama-3.2-90b-vision-instruct",
+    "resourceId": "nim/meta/llama-3.2-90b-vision-instruct",
+    "org": "nim",
+    "team": "meta"
+  },
+  {
+    "name": "llama-4-scout-17b-16e-instruct",
+    "resourceId": "nim/meta/llama-4-scout-17b-16e-instruct",
+    "org": "nim",
+    "team": "meta"
+  }
+]

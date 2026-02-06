@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NIM: Generate Metadata",
+      "type": "shell",
+      "command": "./nim_metadata.sh generate ${input:apiKey}",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "NIM: Detect EU Restricted Models",
+      "type": "shell",
+      "command": "scp -i ${input:sshKey} nim_metadata.sh ${input:vmUser}@${input:vmHost}:~/ && ssh -i ${input:sshKey} ${input:vmUser}@${input:vmHost} \"~/nim_metadata.sh detect-eu ${input:apiKey}\" && scp -i ${input:sshKey} ${input:vmUser}@${input:vmHost}:~/generated/eu_restricted_models.json generated/eu_restricted_models.json",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "apiKey",
+      "type": "promptString",
+      "description": "NVIDIA personal API key (nvapi-...)",
+      "password": true
+    },
+    {
+      "id": "sshKey",
+      "type": "promptString",
+      "description": "Path to SSH private key",
+      "default": "~/.ssh/id_ed25519"
+    },
+    {
+      "id": "vmUser",
+      "type": "promptString",
+      "description": "VM username",
+      "default": ""
+    },
+    {
+      "id": "vmHost",
+      "type": "promptString",
+      "description": "VM hostname (e.g. ec2-x-x-x-x.eu-central-1.compute.amazonaws.com)",
+      "default": ""
+    }
+  ]
+}
