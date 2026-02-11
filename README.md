@@ -84,4 +84,5 @@ Only personal API keys (starting with `nvapi-`) are supported.
 
 ## Related Jira
 
-- [NVPE-390](https://issues.redhat.com/browse/NVPE-390)
+- [NVPE-409](https://issues.redhat.com/browse/NVPE-409) - Implementation
+- [NVPE-390](https://issues.redhat.com/browse/NVPE-390) - Exploration (completed)

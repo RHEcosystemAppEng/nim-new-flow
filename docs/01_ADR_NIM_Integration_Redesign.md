@@ -2,8 +2,8 @@
 
 Owner: [Tomer Figenblat](mailto:tfigenbl@redhat.com)  
 Date: Jan 20, 2026  
-Jira: [NVPE-390](https://issues.redhat.com/browse/NVPE-390)  
-**Status**: Proposed
+Jira: [NVPE-390](https://issues.redhat.com/browse/NVPE-390) (exploration), [NVPE-409](https://issues.redhat.com/browse/NVPE-409) (implementation)  
+**Status**: Approved
 
 ## Executive Summary
 
