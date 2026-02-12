@@ -118,6 +118,12 @@ See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for 
 - [ ] Test upgrade from current architecture to new architecture
 - [ ] Verify cleanup of obsolete resources (Account CR, etc.)
 
+### Air-Gap Testing
+
+**Jira:** [NVPE-415](https://issues.redhat.com/browse/NVPE-415)
+
+Validate the solution in an air-gapped environment and document setup instructions. See Jira for acceptance criteria.
+
 ---
 
 ## Future Enhancements (Out of Scope)
