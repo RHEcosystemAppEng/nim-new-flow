@@ -84,5 +84,12 @@ Only personal API keys (starting with `nvapi-`) are supported.
 
 ## Related Jira
 
-- [NVPE-409](https://issues.redhat.com/browse/NVPE-409) - Implementation
+**Backend:**
+- [NVPE-409](https://issues.redhat.com/browse/NVPE-409) - Implementation (story with subtasks)
 - [NVPE-390](https://issues.redhat.com/browse/NVPE-390) - Exploration (completed)
+
+**Frontend:**
+- [NVPE-397](https://issues.redhat.com/browse/NVPE-397) - New UI Wizard changes for NIM
+- [NVPE-387](https://issues.redhat.com/browse/NVPE-387) - Investigation new UI wizard (completed)
+- [RHAIRFE-767](https://issues.redhat.com/browse/RHAIRFE-767) - RFE
+- [RHAISTRAT-1202](https://issues.redhat.com/browse/RHAISTRAT-1202) - STRAT

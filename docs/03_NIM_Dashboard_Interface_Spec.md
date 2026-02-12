@@ -1,5 +1,7 @@
 # NIM Integration - Dashboard Interface Specification
 
+**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397) (implementation), [NVPE-387](https://issues.redhat.com/browse/NVPE-387) (investigation - completed)
+
 ## Overview
 
 This document specifies the interface contracts and requirements for the NIM integration in the Dashboard. With this redesign, the Dashboard becomes the primary orchestrator for NIM deployments, eliminating the need for backend controller involvement.

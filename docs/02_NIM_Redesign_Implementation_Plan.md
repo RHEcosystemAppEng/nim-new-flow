@@ -29,6 +29,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### Remove Account CRD and Controller
 
+**Jira:** [NVPE-410](https://issues.redhat.com/browse/NVPE-410)
+
 **Tasks:**
 - [ ] Remove Account CRD definition
 - [ ] Remove Account controller and all supporting code (API validation, metadata fetching, ConfigMap/Template/Pull Secret reconciliation)
@@ -42,6 +44,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - Related tests
 
 ### Add Build-Time Metadata Generation
+
+**Jira:** [NVPE-411](https://issues.redhat.com/browse/NVPE-411) (metadata script), [NVPE-412](https://issues.redhat.com/browse/NVPE-412) (ServingRuntime template)
 
 **Tasks:**
 - [ ] Create CI/CD script to fetch NIM model metadata and generate immutable ConfigMap (using Red Hat-managed API key)
@@ -69,6 +73,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### Remove NIM Component from DataScienceCluster
 
+**Jira:** [NVPE-413](https://issues.redhat.com/browse/NVPE-413)
+
 **Tasks:**
 - [ ] Remove NIM-specific enablement flag from DataScienceCluster CRD
 - [ ] Update Kserve component configuration
@@ -81,6 +87,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### Cleanup Obsolete NIM Resources
 
+**Jira:** [NVPE-414](https://issues.redhat.com/browse/NVPE-414)
+
 **Tasks:**
 - [ ] Add cleanup logic to the operator's existing upgrade package for obsolete NIM resources (Account CRs, old ConfigMaps, Templates, Pull Secrets)
 - [ ] Document what gets cleaned up automatically
@@ -88,6 +96,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 ---
 
 ## Dashboard Enhancements (odh-dashboard)
+
+**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397)
 
 See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for detailed technical requirements and resource contracts.
 
