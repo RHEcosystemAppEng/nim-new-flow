@@ -96,6 +96,31 @@ With externalized metadata and configuration:
 
 ---
 
+## 4. CI Automation for Metadata Generation
+
+### Current State
+
+The NIM models ConfigMap is generated manually by maintainers prior to each release. This allows the process to be validated with QE and enables generation of model diff reports for testing.
+
+### Future Implementation
+
+Once the manual process is stable:
+1. **CI Integration**
+   - Add GitHub Action or Tekton task to run metadata generation script
+   - Trigger on release branches or via manual dispatch
+   - Auto-commit updated ConfigMap or create PR for review
+
+2. **QE Reporting**
+   - Generate diff report showing added/removed/updated models
+   - Attach report to release artifacts for QE validation
+
+3. **Considerations**
+   - Secure storage of Red Hat API key in CI secrets
+   - Failure handling if NVIDIA API is unavailable
+   - Review gate vs auto-merge for ConfigMap updates
+
+---
+
 ## Priority Assessment
 
 | Enhancement | Value | Complexity | Suggested Priority |
@@ -103,6 +128,7 @@ With externalized metadata and configuration:
 | Enhanced Air-Gap | High | High | P1 - Next iteration |
 | API Key Rotation | High | Medium | P2 - Follow-up |
 | Dual-Protocol Support | Medium | Low | P2 - Follow-up |
+| CI Metadata Automation | Medium | Low | P3 - Post-stabilization |
 
 ---
 

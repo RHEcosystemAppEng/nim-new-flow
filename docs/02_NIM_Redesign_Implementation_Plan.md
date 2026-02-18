@@ -48,15 +48,19 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **Jira:** [NVPE-411](https://issues.redhat.com/browse/NVPE-411) (metadata script), [NVPE-412](https://issues.redhat.com/browse/NVPE-412) (ServingRuntime template)
 
 **Tasks:**
-- [ ] Create CI/CD script to fetch NIM model metadata and generate immutable ConfigMap (using Red Hat-managed API key)
-- [ ] Include ConfigMap in kustomization manifests
+- [ ] Add NIM models ConfigMap to odh-model-controller kustomize manifests
+- [ ] Create metadata generation script (reference: `nim_metadata.sh` in this repo)
+- [ ] Add Makefile target for developers to regenerate ConfigMap safely
+- [ ] Document manual release process: run script and commit updated ConfigMap prior to each release
 - [ ] Create ServingRuntime Template as static resource
 - [ ] Include Template in kustomization manifests
 
+> **Note:** CI automation for metadata generation is deferred. Initially, maintainers will run the script manually before each release. This allows the process to be validated with QE and enables generation of model diff reports for testing.
+
 **New Files:**
-- `scripts/generate_nim_metadata.sh` (can be based on the reference script in this repo, and adapted to another language if needed)
+- `scripts/generate_nim_metadata.sh` (based on the reference script in this repo)
+- `config/nim/nvidia-nim-models-data.yaml` (generated ConfigMap, committed to repo)
 - `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates)
-- ConfigMap YAML (generated during build, location TBD)
 
 ### EU Regulation Handling (Build-Time) - TBD
 

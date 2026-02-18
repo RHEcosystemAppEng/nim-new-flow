@@ -60,7 +60,7 @@ Alt text: Illustrates the heavy reliance on the odh-model-controller and the sec
 
 ### Build-Time Phase (Metadata Fetching)
 
-* **Metadata Scraping:** A script will run during the CI/CD process using a Red Hat-managed API key. **This key is used exclusively to fetch model tags;** all other model metadata is publicly accessible.  
+* **Metadata Scraping:** A script is run manually by maintainers prior to each release, using a Red Hat-managed API key. **This key is used exclusively to fetch model tags;** all other model metadata is publicly accessible. CI automation is deferred until the release process is validated with QE.  
 * **Immutable ConfigMap:** This metadata is saved as a static ConfigMap and shipped with the product.  
 * **Template Integration:** ServingRuntime templates are defined at build-time, removing dynamic generation from the controller.
 
@@ -135,7 +135,7 @@ spec:
   
   > **Note:** We will confirm with NVIDIA that they have completed the legacy key deprecation process on their side before finalizing this change.
 
-* **What about NVIDIA coordination?** We have informed NVIDIA and clarified our limited usage: we are only using a Red Hat key to fetch the list of available version strings. All subsequent operations, including verification, pulling, and downloading, rely on the user's personal key. Red Hat's keys are only present during build time within the CI/CD pipelines.
+* **What about NVIDIA coordination?** We have informed NVIDIA and clarified our limited usage: we are only using a Red Hat key to fetch the list of available version strings. All subsequent operations, including verification, pulling, and downloading, rely on the user's personal key. Red Hat's keys are used only by maintainers when generating the metadata ConfigMap prior to releases.
 
 ---
 
