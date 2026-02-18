@@ -8,6 +8,9 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 - **Open Question #4**: Dashboard external API calls - documented finding that odh-dashboard backend makes zero external calls, outlined options (frontend direct, backend proxy, validating webhook). ([ADR](docs/01_ADR_NIM_Integration_Redesign.md))
 
 ### Changed
+- **EU Dashboard handling resolved**: Chose Option 4 (Warning Tooltip) - Dashboard shows warning when user selects EU-restricted model, without blocking selection. Updated ADR, Implementation Plan, Dashboard Spec, and EU Investigation docs.
+
+### Changed
 - **Next Steps cleanup**: Removed completed items 3 and 4 (implementation begun, Dashboard coordination ongoing via Jiras).
 
 ## 2026-02-13

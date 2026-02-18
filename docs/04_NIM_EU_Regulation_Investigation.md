@@ -44,6 +44,8 @@ With build-time metadata fetching:
 
 ## Dashboard Handling Options
 
+> **Resolution:** Option 4 (Warning Tooltip) was chosen. The Dashboard will show a warning tooltip when a user selects an EU-restricted model, without blocking selection.
+
 ### Option 1: Configuration-Based Region
 
 **Mechanism:**
@@ -95,12 +97,12 @@ nimConfig:
 - Won't work for on-premise
 - Different APIs for each cloud
 
-### Option 4: Warning Tooltip
+### Option 4: Warning Tooltip ✓ CHOSEN
 
 **Mechanism:**
-- If EU-restricted models are marked in the ConfigMap, display them normally in the dropdown
-- When a user selects a restricted model, show a warning tooltip (e.g., "This model is not available in the EU due to regulatory restrictions")
-- Do not block selection — let the user decide
+- EU-restricted models (`euRestricted: true`) are displayed normally in the model dropdown
+- When a user selects a restricted model, show a warning tooltip (e.g., "This model may not be available in the EU due to regulatory restrictions")
+- Do not block selection — let the user proceed with deployment
 
 **Pros:**
 - No need for the Dashboard to detect its region

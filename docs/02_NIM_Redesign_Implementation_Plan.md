@@ -64,7 +64,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Build-Time)
 
-**Approach:** Run `detect-eu` script from an EU location to identify restricted models, then run `generate` which adds `euRestricted: true` to flagged models. Dashboard UX handling TBD.
+**Approach:** Run `detect-eu` script from an EU location to identify restricted models, then run `generate` which adds `euRestricted: true` to flagged models. Dashboard shows a warning tooltip when user selects an EU-restricted model.
 
 **Tasks:**
 - [x] Investigate whether models can be identified as EU-restricted at build time

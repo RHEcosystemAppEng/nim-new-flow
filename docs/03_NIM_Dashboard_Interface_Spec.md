@@ -283,7 +283,7 @@ When a user deploys a NIM model through the Wizard:
 
 EU-restricted models are marked with `euRestricted: true` in the ConfigMap. This is determined at build time by running the `detect-eu` script from an EU location.
 
-**Dashboard behavior:** TBD by Dashboard team. Options include showing a warning tooltip or hiding restricted models from selection. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for options.
+**Dashboard behavior:** When a user selects an EU-restricted model (`euRestricted: true`), show a warning tooltip (e.g., "This model may not be available in the EU due to regulatory restrictions"). Users can still proceed with deployment.
 
 See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for details.
 

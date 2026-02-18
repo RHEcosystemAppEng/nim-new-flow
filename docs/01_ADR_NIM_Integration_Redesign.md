@@ -143,11 +143,10 @@ spec:
 
 ## Open Questions
 
-1. ~~**EU Regulation**~~
+1. **EU Regulation** - Resolved
    - ~~How do we reliably determine which models are EU-restricted?~~
    - ~~Should Dashboard detect geographic location or rely on config?~~
-   - ~~See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)~~
-   - **Resolved (detection):** Using build-time detection. Run `detect-eu` from EU location, then `generate` adds `euRestricted: true` to flagged models. Dashboard UX handling (tooltip vs hide) TBD by Dashboard team.
+   - Using build-time detection: run `detect-eu` from EU location, then `generate` adds `euRestricted: true` to flagged models. Dashboard shows a warning tooltip when a user selects an EU-restricted model. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
 
 2. **Application Screen**
    - Should we keep the application screen enablement toggle?
