@@ -1,0 +1,41 @@
+# Changelog
+
+Significant changes to the NIM Integration Redesign documentation and tooling.
+
+## 2026-02-13
+
+### Changed
+- **Metadata generation process**: Clarified that ConfigMap generation is a manual process run by maintainers prior to each release. CI automation is deferred until the process is validated with QE. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md), [Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
+- **Future Enhancements**: Added CI Metadata Automation as P3 (post-stabilization) item. ([Future Enhancements](docs/05_NIM_Future_Enhancements.md))
+
+## 2026-02-06
+
+### Added
+- **Air-gap testing subtask**: Added NVPE-415 for testing NIM deployment in air-gapped environments. ([Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
+- **Jira references**: Added ticket references throughout documentation for traceability (NVPE-409, NVPE-410-415, NVPE-397, NVPE-387, RHAIRFE-767, RHAISTRAT-1202).
+
+## 2026-01-27
+
+### Added
+- **Metadata generation script**: Added `nim_metadata.sh` for generating NIM models ConfigMap. Supports `generate` and `detect-eu` commands.
+- **API response examples**: Added `orig.json` and `new.json` for reference.
+
+### Changed
+- **Resource naming**: Standardized resource names across all docs (`nvidia-nim-models-data`, `nvidia-nim-secrets`, `nvidia-nim-image-pull`).
+
+## 2026-01-23
+
+### Added
+- **EU Regulation Investigation**: New document exploring options for handling EU-restricted models. ([EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
+- **API Endpoints Reference**: Documented NVIDIA NGC API endpoints used by the integration. ([API Endpoints](docs/06_NIM_API_Endpoints.md))
+
+### Changed
+- **Dashboard Interface Spec**: Updated to use actual ServingRuntime code from odh-model-controller. ([Interface Spec](docs/03_NIM_Dashboard_Interface_Spec.md))
+
+## 2026-01-20
+
+### Added
+- **Initial proposal**: ADR for NIM integration redesign addressing latency and security concerns. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md))
+- **Implementation Plan**: Task breakdown for backend and frontend work. ([Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
+- **Dashboard Interface Spec**: Contract for Dashboard/backend integration. ([Interface Spec](docs/03_NIM_Dashboard_Interface_Spec.md))
+- **Future Enhancements**: Roadmap for post-redesign features. ([Future Enhancements](docs/05_NIM_Future_Enhancements.md))
