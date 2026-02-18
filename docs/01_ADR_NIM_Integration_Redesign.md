@@ -78,7 +78,7 @@ The Dashboard will now manage the deployment lifecycle directly within the user 
 
 1. **Metadata Source:** The Dashboard reads the pre-shipped ConfigMap. A new flag in **OdhDashboardConfig** allows admins to specify a customConfigMap (Object Reference) to be used instead of the immutable version.  
 2. **Validation:** The Wizard validates the user's personal API key against NVIDIA (legacy keys are not supported). In disconnected environments, key collection and validation are disabled via `OdhDashboardConfig.spec.nimConfig.disconnected.disableKeyCollection`.  
-3. **Local Secret Creation:** The Wizard creates the **Opaque Secret** and **Pull Secret** directly in the user’s project namespace.  
+3. **Local Secret Creation:** The Wizard creates deployment-specific **Opaque Secret** and **Pull Secret** directly in the user’s project namespace.  
    * **Opaque Secret:** Mounted to the ServingRuntime container as an environment variable (`NGC_API_KEY`) and used to download models at runtime.  
    * **Pull Secret:** Referenced by the ServingRuntime's `imagePullSecrets` for pulling the model container image from NVIDIA's registry.  
 4. **Resource Deployment:** The Dashboard creates the **PVC, ServingRuntime, and InferenceService**.  
@@ -155,9 +155,10 @@ spec:
    - Should we keep the application screen enablement toggle?
    - If yes, what does it control without API key collection?
 
-3. **Multiple API Keys per Project**
-   - Current design uses fixed secret names (`nvidia-nim-secrets`, `nvidia-nim-image-pull`) per project, meaning one API key per project
-   - Should we support multiple API keys (e.g., per deployment) in the future? This would require deployment-specific secret naming
+3. **Multiple API Keys per Project** - Resolved
+   - ~~Current design uses fixed secret names (`nvidia-nim-secrets`, `nvidia-nim-image-pull`) per project, meaning one API key per project~~
+   - ~~Should we support multiple API keys (e.g., per deployment) in the future? This would require deployment-specific secret naming~~
+   - Adopted **key-per-deployment**: each deployment gets its own secrets (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). This avoids key reuse across deployments, simplifies Dashboard implementation, and enables per-deployment key rotation.
 
 4. **Dashboard External API Calls**
    - The current design requires the Dashboard/Wizard to call NVIDIA's API to validate the user's API key before deployment

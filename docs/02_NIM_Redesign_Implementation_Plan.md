@@ -20,8 +20,8 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 |----------|------|-----------|
 | ConfigMap (model metadata) | `nvidia-nim-models-data` | Main namespace |
 | ServingRuntime Template | `nvidia-nim-runtime-http` | Main namespace |
-| Opaque Secret (per deployment) | `nvidia-nim-secrets` | User project |
-| Pull Secret (per deployment) | `nvidia-nim-image-pull` | User project |
+| Opaque Secret (per deployment) | `nvidia-nim-secrets-{deployment-name}` | User project |
+| Pull Secret (per deployment) | `nvidia-nim-image-pull-{deployment-name}` | User project |
 
 ---
 

@@ -14,9 +14,9 @@ With the existing architecture, API keys are scattered across multiple namespace
 
 ### Enabled by Redesign
 
-With per-project key management in the new architecture:
-- Each project has its own API key stored locally
-- Keys are not shared between projects
+With per-deployment key management in the new architecture:
+- Each deployment has its own API key (`nvidia-nim-secrets-{deployment-name}`)
+- Keys are not shared between deployments, even within the same project
 - Clear ownership and lifecycle per deployment
 
 ### Proposed Implementation
@@ -28,7 +28,7 @@ With per-project key management in the new architecture:
 2. **Key Update Flow**
    - User provides new API key
    - Dashboard validates against NVIDIA API
-   - Dashboard updates the Opaque Secret and Pull Secret in the project
+   - Dashboard updates the deployment's Opaque Secret and Pull Secret
    - Pod restart triggers new key usage
 
 3. **Considerations**

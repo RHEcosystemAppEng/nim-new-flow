@@ -16,6 +16,7 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 
 ### Changed
 - **Secrets removed from ServingRuntime template**: The shipped template no longer contains `NGC_API_KEY` env or `imagePullSecrets`. The Dashboard adds these secret references when creating the ServingRuntime in the user's namespace, alongside other customizations (image, model format, PVC). The resulting ServingRuntime and InferenceService look the same as the current integration. Updated ADR, Implementation Plan, and Dashboard Interface Spec.
+- **Key-per-deployment**: Adopted deployment-specific secret naming (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). Each deployment gets its own secrets — no key reuse across deployments. Resolved Open Question #3 in ADR. Updated ADR, Implementation Plan, Dashboard Interface Spec, and Future Enhancements.
 - **EU Dashboard handling resolved**: Chose Option 4 (Warning Tooltip) - Dashboard shows warning when user selects EU-restricted model, without blocking selection. Updated ADR, Implementation Plan, Dashboard Spec, and EU Investigation docs.
 
 ### Changed

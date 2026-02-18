@@ -226,7 +226,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nvidia-nim-secrets
+     name: nvidia-nim-secrets-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
@@ -240,7 +240,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nvidia-nim-image-pull
+     name: nvidia-nim-image-pull-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
@@ -267,7 +267,7 @@ When a user deploys a NIM model through the Wizard:
 
    **5.4 ServingRuntime**
    - Process the Template with parameters (image, model format, PVC name)
-   - Add secret references: `NGC_API_KEY` env var via `secretKeyRef` on the container, and `imagePullSecrets` at spec level
+   - Add deployment-specific secret references: `NGC_API_KEY` env var via `secretKeyRef` pointing to `nvidia-nim-secrets-{deployment-name}`, and `imagePullSecrets` referencing `nvidia-nim-image-pull-{deployment-name}`
    - Create ServingRuntime in user's project
    
    > The resulting ServingRuntime looks the same as the current integration — secrets live on the ServingRuntime, not the InferenceService. The only difference is that the **template** ships without secrets and the Dashboard adds them during deployment.
