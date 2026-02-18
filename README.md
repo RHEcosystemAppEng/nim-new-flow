@@ -33,8 +33,18 @@ This repository contains the planning and design documentation for a significant
 - Remove Account CRD and Controller from odh-model-controller
 - Remove NIM component from DataScienceCluster CRD
 - Fetch model metadata at build time, ship as immutable ConfigMap
-- Move API key collection to the Wizard (per-project)
+- Move API key collection to the Wizard (per-deployment)
 - Dashboard creates resources directly in user's project
+
+## Timeline
+
+Targeting **RHOAI 3.5.EA1**. Fallback is EA2 if needed.
+
+| Milestone | Code Freeze | Release |
+|-----------|-------------|---------|
+| **3.5.EA1** (target) | May 15 | Jun 18 |
+| 3.5.EA2 (fallback) | Jun 19 | Jul 16 |
+| 3.5 GA | Jul 24 | Aug 20 |
 
 ## Team
 
