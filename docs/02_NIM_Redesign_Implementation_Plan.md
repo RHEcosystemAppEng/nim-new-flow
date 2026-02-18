@@ -46,7 +46,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Create metadata generation script (reference: `nim_metadata.sh` in this repo)
 - [ ] Add Makefile target for developers to regenerate ConfigMap safely
 - [ ] Document release process (see below)
-- [ ] Create ServingRuntime Template as static resource
+- [ ] Create ServingRuntime Template as static resource (**no secrets** — no `NGC_API_KEY` env, no `imagePullSecrets`)
 - [ ] Include Template in kustomization manifests
 
 **Release Process:**
@@ -60,7 +60,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **New Files:**
 - `scripts/generate_nim_metadata.sh` (based on the reference script in this repo)
 - `config/nim/nvidia-nim-models-data.yaml` (generated ConfigMap, committed to repo)
-- `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates)
+- `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates; ships without secrets — the Dashboard adds secret references to the ServingRuntime when creating it in the user's namespace)
 
 ### EU Regulation Handling (Build-Time)
 
@@ -101,6 +101,8 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 **Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397)
 
 See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for detailed technical requirements and resource contracts.
+
+**Key implementation detail:** The ServingRuntime **template** ships without secrets. When the Dashboard creates the ServingRuntime in the user's namespace, it adds the secret references (`NGC_API_KEY` env var via `secretKeyRef`, `imagePullSecrets`) alongside other customizations (image, model format, PVC name). The resulting ServingRuntime looks the same as the current integration. The InferenceService is unchanged.
 
 ---
 

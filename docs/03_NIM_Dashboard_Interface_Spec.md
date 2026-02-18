@@ -130,11 +130,6 @@ spec:
       env:
         - name: NIM_CACHE_PATH
           value: /mnt/models/cache
-        - name: NGC_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: nvidia-nim-secrets
-              key: NGC_API_KEY
       resources:
         limits:
           cpu: "2"
@@ -153,8 +148,6 @@ spec:
           mountPath: /opt/nim/workspace
         - name: nim-cache
           mountPath: /.cache
-  imagePullSecrets:
-    - name: ngc-secret
   volumes:
     - name: nim-pvc
       persistentVolumeClaim:
@@ -168,7 +161,7 @@ spec:
         medium: Memory
 ```
 
-> **Note:** The Template wraps this ServingRuntime. At deployment, the Dashboard processes the template and customizes fields like `image`, `supportedModelFormats`, secret names, and PVC name based on user input.
+> **Important:** The ServingRuntime **template** ships without secrets — no `NGC_API_KEY` env var, no `imagePullSecrets`. When the Dashboard creates the ServingRuntime in the user's namespace, it adds the secret references alongside the other customizations (image, model format, PVC name). The resulting ServingRuntime in the namespace looks the same as it does today — secrets on the container env and `imagePullSecrets` at spec level. The InferenceService is unchanged.
 
 ---
 
@@ -273,12 +266,17 @@ When a user deploys a NIM model through the Wizard:
    > **Note:** PVC creation remains unchanged from current Dashboard implementation. The Dashboard already handles PVC creation for model deployments.
 
    **5.4 ServingRuntime**
-   - Process the Template with parameters
+   - Process the Template with parameters (image, model format, PVC name)
+   - Add secret references: `NGC_API_KEY` env var via `secretKeyRef` on the container, and `imagePullSecrets` at spec level
    - Create ServingRuntime in user's project
+   
+   > The resulting ServingRuntime looks the same as the current integration — secrets live on the ServingRuntime, not the InferenceService. The only difference is that the **template** ships without secrets and the Dashboard adds them during deployment.
+   >
+   > **Disconnected mode:** When `disconnected.disableKeyCollection` is true, the Dashboard skips adding `NGC_API_KEY` and `imagePullSecrets` to the ServingRuntime. Image pulling relies on the cluster's global pull secret.
 
    **5.5 InferenceService**
    
-   > **Note:** InferenceService creation remains unchanged from current Dashboard implementation. The Dashboard already handles InferenceService creation for model deployments.
+   > **Note:** InferenceService creation remains unchanged from current Dashboard implementation. The Dashboard already handles InferenceService creation for model deployments. No secrets are placed on the InferenceService.
 
 ---
 

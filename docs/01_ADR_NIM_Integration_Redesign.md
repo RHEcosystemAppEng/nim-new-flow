@@ -79,9 +79,11 @@ The Dashboard will now manage the deployment lifecycle directly within the user 
 1. **Metadata Source:** The Dashboard reads the pre-shipped ConfigMap. A new flag in **OdhDashboardConfig** allows admins to specify a customConfigMap (Object Reference) to be used instead of the immutable version.  
 2. **Validation:** The Wizard validates the user's personal API key against NVIDIA (legacy keys are not supported). In disconnected environments, key collection and validation are disabled via `OdhDashboardConfig.spec.nimConfig.disconnected.disableKeyCollection`.  
 3. **Local Secret Creation:** The Wizard creates the **Opaque Secret** and **Pull Secret** directly in the user’s project namespace.  
-   * **Opaque Secret:** Mounted to the serving deployment as an environment variable and used to download models at runtime.  
-   * **Pull Secret:** Used with the same deployment for pulling the model container image from NVIDIA's registry.  
-4. **Resource Deployment:** The Dashboard creates the **PVC, ServingRuntime, and InferenceService**.
+   * **Opaque Secret:** Mounted to the ServingRuntime container as an environment variable (`NGC_API_KEY`) and used to download models at runtime.  
+   * **Pull Secret:** Referenced by the ServingRuntime's `imagePullSecrets` for pulling the model container image from NVIDIA's registry.  
+4. **Resource Deployment:** The Dashboard creates the **PVC, ServingRuntime, and InferenceService**.  
+   * The ServingRuntime **template** ships without secrets. The Dashboard adds the secret references (`NGC_API_KEY` env, `imagePullSecrets`) when creating the ServingRuntime in the user's namespace, alongside other customizations (image, model format, PVC name). The resulting ServingRuntime looks the same as the current integration.  
+   * The **InferenceService** remains unchanged — model format, resources, and runtime reference only.
 
 ![Proposed Architecture](../images/proposed-architecture.jpg)
 
