@@ -157,6 +157,17 @@ spec:
    - Current design uses fixed secret names (`nvidia-nim-secrets`, `nvidia-nim-image-pull`) per project, meaning one API key per project
    - Should we support multiple API keys (e.g., per deployment) in the future? This would require deployment-specific secret naming
 
+4. **Dashboard External API Calls**
+   - The current design requires the Dashboard/Wizard to call NVIDIA's API to validate the user's API key before deployment
+   - The odh-dashboard backend currently makes **zero external internet calls**. All HTTP calls are to internal cluster services (K8s API, Prometheus). Adding NVIDIA API validation would be the first external call.
+   - **Options:**
+     - **A. Frontend direct call:** Dashboard frontend calls NVIDIA API directly (blocked by CORS, likely not viable)
+     - **B. Backend proxy endpoint:** Add a new endpoint to odh-dashboard backend that proxies validation requests to NVIDIA.
+     - **C. Validating admission webhook:** A webhook in odh-model-controller intercepts Secret creation, validates the key with NVIDIA, and annotates the Secret with validation status. Dashboard polls/watches for the annotation. Keeps external calls in the controller layer.
+   - **Trade-offs:**
+     - Option B is simpler but introduces external dependencies to the dashboard
+     - Option C is more complex but keeps the dashboard stateless and works better for air-gapped (webhook can be disabled)
+
 ---
 
 ## Next Steps

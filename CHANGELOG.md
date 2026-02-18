@@ -2,6 +2,14 @@
 
 Significant changes to the NIM Integration Redesign documentation and tooling.
 
+## 2026-02-18
+
+### Added
+- **Open Question #4**: Dashboard external API calls - documented finding that odh-dashboard backend makes zero external calls, outlined options (frontend direct, backend proxy, validating webhook). ([ADR](docs/01_ADR_NIM_Integration_Redesign.md))
+
+### Changed
+- **Next Steps cleanup**: Removed completed items 3 and 4 (implementation begun, Dashboard coordination ongoing via Jiras).
+
 ## 2026-02-13
 
 ### Added

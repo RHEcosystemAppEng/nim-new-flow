@@ -40,3 +40,4 @@ We are removing the backend Account CRD/Controller from `odh-model-controller` a
 - Do not add content that duplicates other docs. Check existing docs first.
 - Keep internal links consistent when renaming or renumbering files.
 - Do not hardcode personal info (API keys, SSH details, VM addresses).
+- **Changelog**: When making significant changes, update `CHANGELOG.md`. If uncertain whether a change warrants an entry, ask before committing.
