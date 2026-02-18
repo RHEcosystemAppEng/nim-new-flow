@@ -51,25 +51,33 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Add NIM models ConfigMap to odh-model-controller kustomize manifests
 - [ ] Create metadata generation script (reference: `nim_metadata.sh` in this repo)
 - [ ] Add Makefile target for developers to regenerate ConfigMap safely
-- [ ] Document manual release process: run script and commit updated ConfigMap prior to each release
+- [ ] Document release process (see below)
 - [ ] Create ServingRuntime Template as static resource
 - [ ] Include Template in kustomization manifests
 
-> **Note:** CI automation for metadata generation is deferred. Initially, maintainers will run the script manually before each release. This allows the process to be validated with QE and enables generation of model diff reports for testing.
+**Release Process:**
+1. NIM team checks if NVIDIA catalog has new/updated models
+2. Run metadata generation script locally
+3. Submit PR with updated ConfigMap to odh-model-controller
+4. PR is reviewed, merged, and included in the next release
+
+> **Note:** This is a manual PR-based workflow, not automated CI. CI automation may be considered in the future after the process is validated with QE.
 
 **New Files:**
 - `scripts/generate_nim_metadata.sh` (based on the reference script in this repo)
 - `config/nim/nvidia-nim-models-data.yaml` (generated ConfigMap, committed to repo)
 - `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates)
 
-### EU Regulation Handling (Build-Time) - TBD
+### EU Regulation Handling (Build-Time)
 
-> **Note:** It is not yet confirmed whether EU-restricted models can be identified at build time. The NVIDIA API does not expose structured region data. Further investigation is needed. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
+**Approach:** Run `detect-eu` script from an EU location to identify restricted models, then run `generate` which adds `euRestricted: true` to flagged models. Dashboard displays warning tooltip for restricted models.
 
 **Tasks:**
-- [ ] Investigate whether models can be identified as EU-restricted at build time
-- [ ] If feasible, modify metadata generation script to mark restricted models
-- [ ] Document the approach for EU model restrictions
+- [x] Investigate whether models can be identified as EU-restricted at build time
+- [x] Modify metadata generation script to mark restricted models
+- [x] Document the approach for EU model restrictions
+
+See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for details.
 
 ---
 

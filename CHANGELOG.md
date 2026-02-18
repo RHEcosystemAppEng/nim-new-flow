@@ -8,7 +8,7 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 - **EU restriction support**: Added `euRestricted` field to ConfigMap schema. The `generate` script now reads `eu_restricted_models.json` and marks flagged models. ([Dashboard Interface Spec](docs/03_NIM_Dashboard_Interface_Spec.md), [EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
 
 ### Changed
-- **Metadata generation process**: Clarified that ConfigMap generation is a manual process run by maintainers prior to each release. CI automation is deferred until the process is validated with QE. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md), [Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
+- **Metadata generation process**: Clarified that "build-time" means manual PR-based updates to the repository, NOT automated CI. NIM team checks for catalog updates and submits PRs with regenerated ConfigMap. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md), [Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
 - **EU detection approach**: Chose Option A (Build-Time Detection) - run `detect-eu` from EU, then `generate` integrates the results. ([EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
 - **Future Enhancements**: Added CI Metadata Automation as P3 (post-stabilization) item. ([Future Enhancements](docs/05_NIM_Future_Enhancements.md))
 

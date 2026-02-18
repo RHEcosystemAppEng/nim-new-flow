@@ -60,8 +60,10 @@ Alt text: Illustrates the heavy reliance on the odh-model-controller and the sec
 
 ### Build-Time Phase (Metadata Fetching)
 
-* **Metadata Scraping:** A script is run manually by maintainers prior to each release, using a Red Hat-managed API key. **This key is used exclusively to fetch model tags;** all other model metadata is publicly accessible. CI automation is deferred until the release process is validated with QE.  
-* **Immutable ConfigMap:** This metadata is saved as a static ConfigMap and shipped with the product.  
+> **Important:** "Build-time" means the ConfigMap is updated via **pull requests** to the odh-model-controller repository, not via automated CI. The NIM team is responsible for checking whether an update is needed (e.g., new models in NVIDIA's catalog) and submitting a PR with the regenerated ConfigMap prior to each release.
+
+* **Metadata Scraping:** A script is run manually by the NIM team using a Red Hat-managed API key. **This key is used exclusively to fetch model tags;** all other model metadata is publicly accessible.  
+* **Immutable ConfigMap:** This metadata is saved as a static ConfigMap, committed to the repository, and shipped with the product.  
 * **Template Integration:** ServingRuntime templates are defined at build-time, removing dynamic generation from the controller.
 
 ### Backend Simplification
