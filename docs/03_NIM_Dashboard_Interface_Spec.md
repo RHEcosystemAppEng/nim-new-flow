@@ -33,7 +33,8 @@ data:
       "namespace": "nim/meta",
       "tags": ["1.0.3", "1.0.2", "1.0.1"],
       "latestTag": "1.0.3",
-      "updatedDate": "2026-02-05T12:00:00Z"
+      "updatedDate": "2026-02-05T12:00:00Z",
+      "euRestricted": false
     }
   nvidia/nemo-megatron-gpt-20b: |
     {
@@ -43,7 +44,8 @@ data:
       "namespace": "nim/nvidia",
       "tags": ["1.0.0"],
       "latestTag": "1.0.0",
-      "updatedDate": "2026-02-05T12:00:00Z"
+      "updatedDate": "2026-02-05T12:00:00Z",
+      "euRestricted": false
     }
 ```
 
@@ -57,6 +59,7 @@ data:
 | `tags` | array | Available version tags |
 | `latestTag` | string | Recommended/default tag |
 | `updatedDate` | string | Last update timestamp |
+| `euRestricted` | boolean | `true` if model is not available in EU due to regulations |
 
 > **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`. This may need to change to support air-gapped environments with mirrored registries - currently under investigation.
 
@@ -278,7 +281,11 @@ When a user deploys a NIM model through the Wizard:
 
 ## EU Region Handling
 
-> **Note:** The current ConfigMap schema does not include an EU restriction field. If build-time EU detection is feasible, the schema would need to be extended. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md).
+EU-restricted models are marked with `euRestricted: true` in the ConfigMap. This is determined at build time by running the `detect-eu` script from an EU location.
+
+**Dashboard behavior:** When displaying a model with `euRestricted: true`, show a warning tooltip (e.g., "This model may not be available in the EU due to regulatory restrictions"). Do not block selection - let the user decide.
+
+See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for details.
 
 ---
 

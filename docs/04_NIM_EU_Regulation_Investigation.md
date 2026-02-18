@@ -42,10 +42,10 @@ With build-time metadata fetching:
 
 ### Task 2: Define Marking Strategy
 
-**Option A: Build-Time Detection**
-- Run metadata script from both US and EU locations
-- Compare results to identify EU-restricted models
-- Add `euRestricted: true` flag to ConfigMap
+**Option A: Build-Time Detection** ✅ **CHOSEN**
+- Run `detect-eu` script from an EU location to generate `eu_restricted_models.json`
+- Run `generate` script which reads the restricted list and adds `euRestricted: true` to flagged models
+- Both scripts are run manually by maintainers prior to each release
 
 **Option B: Hardcoded List**
 - Maintain a static list of restricted model IDs

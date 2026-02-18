@@ -151,6 +151,18 @@ cmd_generate() {
         model_count=${filtered_count}
     fi
 
+    # Load EU restricted models list if available
+    local eu_restricted_file="${OUTPUT_DIR}/eu_restricted_models.json"
+    local eu_restricted_names=""
+    if [[ -f "${eu_restricted_file}" ]]; then
+        eu_restricted_names=$(jq -r '.[].name' "${eu_restricted_file}" | tr '\n' '|' | sed 's/|$//')
+        local eu_count
+        eu_count=$(jq 'length' "${eu_restricted_file}")
+        log_info "Loaded ${eu_count} EU-restricted models from ${eu_restricted_file}"
+    else
+        log_warn "No EU restricted models file found at ${eu_restricted_file}. Run 'detect-eu' first to mark restricted models."
+    fi
+
     log_info "Fetching tags for each model (this may take a while)..."
     mkdir -p "$(dirname "${output_file}")"
 
@@ -193,17 +205,24 @@ HEADER
             continue
         fi
 
-        local response model_json cm_key
+        local response model_json cm_key is_eu_restricted
         response=$(cat /tmp/nim_model_response.json)
 
-        model_json=$(echo "${response}" | jq -c '{
+        # Check if this model is EU-restricted
+        is_eu_restricted="false"
+        if [[ -n "${eu_restricted_names}" ]] && echo "${image}" | grep -qE "^(${eu_restricted_names})$"; then
+            is_eu_restricted="true"
+        fi
+
+        model_json=$(echo "${response}" | jq -c --argjson euRestricted "${is_eu_restricted}" '{
             name: .name,
             displayName: .displayName,
             shortDescription: .shortDescription,
             namespace: .namespace,
             tags: .tags,
             latestTag: .latestTag,
-            updatedDate: .updatedDate
+            updatedDate: .updatedDate,
+            euRestricted: $euRestricted
         }')
 
         cm_key=$(echo "${model_json}" | jq -r '.name')
