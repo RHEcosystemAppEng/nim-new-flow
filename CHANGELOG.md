@@ -2,6 +2,13 @@
 
 Significant changes to the NIM Integration Redesign documentation and tooling.
 
+## 2026-02-03
+
+### Changed
+- **Disconnected environment support**: Replaced `disableKeyValidation` with structured `nimConfig.disconnected` config containing `disableKeyCollection` (boolean). Documented reliance on OpenShift's standard disconnected mechanisms: ImageTagMirrorSet for registry mirroring, global pull secret for authentication. No per-namespace secrets needed for image pulls in disconnected mode. Updated ADR, Dashboard Spec, Implementation Plan, Future Enhancements, and API Endpoints docs.
+- **Renamed `disableKeyValidation` to `disableKeyCollection`**: Better reflects that the entire key collection step is skipped in disconnected mode, not just validation.
+- **Air-gap preparation steps**: Added concrete admin prerequisites in Future Enhancements doc, including ITMS example config, global pull secret setup, and links to OCP 4.21 docs.
+
 ## 2026-02-18
 
 ### Added

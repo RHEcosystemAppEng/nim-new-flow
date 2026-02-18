@@ -52,7 +52,7 @@ credentials=<api_key>
 **Usage:**
 - Build-time: Validates Red Hat's API key before fetching metadata
 - Runtime: Called by Dashboard to validate user's API key before deployment
-  - Can be disabled via `OdhDashboardConfig.nimConfig.disableKeyValidation` for air-gap environments
+  - Skipped when `OdhDashboardConfig.spec.nimConfig.disconnected.disableKeyCollection` is true (disconnected environments)
 
 **Example response:** [key_validation.json](../api-responses/key_validation.json) (personal data redacted)
 

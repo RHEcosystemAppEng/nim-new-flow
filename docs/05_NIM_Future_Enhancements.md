@@ -73,23 +73,41 @@ With build-time template shipping:
 
 ### Current State
 
-Air-gap support requires manual configuration and custom ConfigMaps. No tooling exists to simplify the process.
-
-### Enabled by Redesign
-
-With externalized metadata and configuration:
-- `disableKeyValidation` flag for offline environments
-- Custom ConfigMap override mechanism
+Basic disconnected support is provided via `OdhDashboardConfig.spec.nimConfig` (see [Dashboard Interface Spec](03_NIM_Dashboard_Interface_Spec.md)):
+- `disconnected.disableKeyCollection: true` skips API key collection and validation
+- `customConfigMap` allows admins to provide their own model metadata
 
 ### Proposed Implementation
 
-1. **Air-Gap Preparation**
-   - Customer provides a list of required models
-   - Script to mirror images to internal registry (based on that list)
-   - Script to pre-load models into PVCs
-   - Script to generate custom ConfigMap
+1. **Air-Gap Preparation (Admin Prerequisites)**
+   - **Mirror NIM images** to internal registry using `skopeo copy` or `oc mirror`
+   - **Configure [ImageTagMirrorSet](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/config_apis/imagetagmirrorset-config-openshift-io-v1)** to redirect `nvcr.io` to the internal registry:
+     ```yaml
+     apiVersion: config.openshift.io/v1
+     kind: ImageTagMirrorSet
+     metadata:
+       name: nim-registry-mirror
+     spec:
+       imageTagMirrors:
+         - source: nvcr.io
+           mirrors:
+             - internal-registry.company.com
+     ```
+   - **Update the [global pull secret](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/postinstallation_configuration/post-install-image-config)** with internal registry credentials (if not already configured for the disconnected cluster)
+   - **Set `disconnected` config** in OdhDashboardConfig:
+     ```yaml
+     nimConfig:
+       disconnected:
+         disableKeyCollection: true
+     ```
+     > **Note:** No `registry` override is needed in the Dashboard config. The ImageTagMirrorSet transparently redirects `nvcr.io` requests to the mirror at the cluster level.
 
-2. **Documentation**
+2. **Automation Scripts** (future)
+   - Script to mirror NIM images to internal registry (based on a provided model list)
+   - Script to pre-load models into PVCs
+   - Script to generate custom ConfigMap from mirrored registry
+
+3. **Documentation**
    - Step-by-step air-gap setup guide
    - Troubleshooting common issues
    - Upgrade procedures for air-gap environments

@@ -110,17 +110,19 @@ See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for 
 
 > **Note:** Integration testing approach to be determined in coordination with QE. This includes end-to-end deployment flow, upgrade testing, and cleanup verification.
 
-### Air-Gap Testing
+### Disconnected (Air-Gap) Testing
 
 **Jira:** [NVPE-415](https://issues.redhat.com/browse/NVPE-415)
 
 **Tasks:**
-- [ ] Validate `disableKeyValidation` flag works correctly
+- [ ] Validate `disconnected.disableKeyCollection` flag works correctly (key UI hidden, no secrets created)
 - [ ] Test custom ConfigMap override pointing to internal registry
+- [ ] Test ImageTagMirrorSet-based registry mirroring for `nvcr.io`
+- [ ] Verify global pull secret handles internal registry authentication
 - [ ] Deploy NIM model in air-gapped cluster
 - [ ] Identify blockers, gaps, or improvements needed
 
-> **Note:** Full air-gap documentation is out of scope for this task (see [Future Enhancements](05_NIM_Future_Enhancements.md)).
+> **Note:** Full air-gap documentation and automation scripts are out of scope for this task (see [Future Enhancements](05_NIM_Future_Enhancements.md)).
 
 ---
 

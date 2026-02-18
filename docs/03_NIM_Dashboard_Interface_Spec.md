@@ -61,7 +61,7 @@ data:
 | `updatedDate` | string | Last update timestamp |
 | `euRestricted` | boolean | `true` if model is not available in EU due to regulations |
 
-> **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`. This may need to change to support air-gapped environments with mirrored registries - currently under investigation.
+> **Note:** Container image is derived from namespace + name + tag: `nvcr.io/{namespace}/{name}:{tag}`. In disconnected environments, admins configure an [ImageTagMirrorSet](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/config_apis/imagetagmirrorset-config-openshift-io-v1) to transparently redirect `nvcr.io` to their internal registry.
 
 ---
 
@@ -84,14 +84,15 @@ spec:
       name: "custom-nim-models"
       namespace: "redhat-ods-applications"
     
-    # Toggle for key validation (for air-gap environments)
-    # Set to 'true' to disable outbound validation calls
-    disableKeyValidation: false
+    # Disconnected (air-gapped) environment settings
+    disconnected:
+      # Skip API key collection and validation in the Wizard
+      disableKeyCollection: true
 ```
 
 **Behavior:**
 - If `customConfigMap` is specified, use it instead of the default shipped ConfigMap
-- If `disableKeyValidation` is true, skip the NVIDIA API key validation step
+- If `disconnected.disableKeyCollection` is true, skip API key collection and validation entirely (no Opaque Secret or Pull Secret created)
 
 ---
 
@@ -202,12 +203,12 @@ credentials=<api_key>
 
 When a user deploys a NIM model through the Wizard:
 
-1. **Collect API Key**
+1. **Collect API Key** (skipped if `disconnected.disableKeyCollection` is true)
    - Display secure input for user's NVIDIA API key (**personal keys only**, legacy keys are not supported)
    - Store temporarily in memory (not persisted until deployment)
 
-2. **Validate Key (if enabled)**
-   - If `OdhDashboardConfig.nimConfig.disableKeyValidation` is false, call NVIDIA validation endpoint
+2. **Validate Key** (skipped if `disconnected.disableKeyCollection` is true)
+   - Call NVIDIA validation endpoint
    - If validation fails, show error and do not proceed
    - If validation succeeds, proceed to next step
 
@@ -224,6 +225,8 @@ When a user deploys a NIM model through the Wizard:
    - GPU/resource requirements
 
 5. **Create Resources (in user's project namespace)**
+
+   > **Disconnected mode:** When `disconnected.disableKeyCollection` is true, steps 5.1 and 5.2 are skipped entirely. No secrets are created. Image pulling relies on the cluster's [global pull secret](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/postinstallation_configuration/post-install-image-config) and optional [ImageTagMirrorSet](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/config_apis/imagetagmirrorset-config-openshift-io-v1) configuration.
 
    **5.1 Opaque Secret (API Key)**
    ```yaml
@@ -311,8 +314,11 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 3. **Custom ConfigMap**
    - Verify OdhDashboardConfig override works correctly
 
-4. **Air-Gap Mode**
-   - Verify deployment works when validation is disabled
+4. **Disconnected (Air-Gap) Mode**
+   - Verify deployment works when `disconnected.disableKeyCollection` is true
+   - Verify key collection UI is hidden
+   - Verify no secrets are created in user namespace
+   - Verify ImageTagMirrorSet-based registry mirroring works
 
 5. **EU Filtering** (if applicable)
    - Verify restricted models are filtered appropriately

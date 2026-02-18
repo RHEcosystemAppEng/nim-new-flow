@@ -77,7 +77,7 @@ Alt text: Illustrates the heavy reliance on the odh-model-controller and the sec
 The Dashboard will now manage the deployment lifecycle directly within the user project:
 
 1. **Metadata Source:** The Dashboard reads the pre-shipped ConfigMap. A new flag in **OdhDashboardConfig** allows admins to specify a customConfigMap (Object Reference) to be used instead of the immutable version.  
-2. **Validation:** The Wizard validates the user's personal API key against NVIDIA (legacy keys are not supported), governed by a flag in **OdhDashboardConfig** (can be disabled for air-gapped environments).  
+2. **Validation:** The Wizard validates the user's personal API key against NVIDIA (legacy keys are not supported). In disconnected environments, key collection and validation are disabled via `OdhDashboardConfig.spec.nimConfig.disconnected.disableKeyCollection`.  
 3. **Local Secret Creation:** The Wizard creates the **Opaque Secret** and **Pull Secret** directly in the user’s project namespace.  
    * **Opaque Secret:** Mounted to the serving deployment as an environment variable and used to download models at runtime.  
    * **Pull Secret:** Used with the same deployment for pulling the model container image from NVIDIA's registry.  
@@ -104,9 +104,10 @@ spec:
     customConfigMap: 
       name: "custom-nim-models"
       namespace: "redhat-ods-applications"
-    # Toggle for the Dashboard Wizard to perform outbound key validation
-    # Set to 'true' to disable validation for restricted networks
-    disableKeyValidation: false 
+    # Disconnected (air-gapped) environment settings
+    disconnected:
+      # Skip API key collection and validation in the Wizard
+      disableKeyCollection: true
 ```
 
 ## Benefits
@@ -132,7 +133,7 @@ spec:
 * **Why use a Red Hat key at build-time?** The key is used **only to fetch tags/versions** so the model list is populated immediately upon installation without scraping latency.  
 * **What is the user's key used for?** The user’s personal API key is used for both **pulling the container image** from the registry (via the Pull Secret) and **downloading the model** at runtime (via the Opaque Secret environment variable).  
 * **Operational Runtime Security:** From a user perspective, their API key will get validated by the dashboard. If validation passes but something else is broken, the image pull will fail at the cluster level, or the model download will fail at the container runtime level. In either scenario, the use of a Red Hat API key during the build phase to fetch tags does not leverage or expose that key at runtime.  
-* **How does this support Air-Gap?** While this architecture does not provide full air-gap support out-of-the-box today, it is a significant step in that direction. By shipping metadata with the product, we remove the requirement for the cluster to "discover" models. Admins can provide a customConfigMap for internal registries and disable key validation via the configuration above to facilitate restricted environment setups.  
+* **How does this support Air-Gap?** By shipping metadata with the product, we remove the requirement for the cluster to "discover" models. For disconnected environments, admins configure `spec.nimConfig.disconnected` to disable key collection. Image pulling is handled by OpenShift's standard disconnected mechanisms: [ImageTagMirrorSet](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/config_apis/imagetagmirrorset-config-openshift-io-v1) to redirect `nvcr.io` to an internal mirror, and the [global pull secret](https://docs.redhat.com/en/documentation/openshift_container_platform/4.21/html/postinstallation_configuration/post-install-image-config) for registry authentication. No per-namespace secrets are needed for image pulls. See [Future Enhancements - Enhanced Air-Gap Support](05_NIM_Future_Enhancements.md#3-enhanced-air-gap-support) for setup steps.  
 * **Legacy Key Deprecation:** This redesign only supports personal API keys. Legacy (org-level) keys are no longer supported.
   
   > **Note:** We will confirm with NVIDIA that they have completed the legacy key deprecation process on their side before finalizing this change.
