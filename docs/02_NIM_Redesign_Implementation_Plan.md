@@ -37,12 +37,6 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 - [ ] Remove related tests
 - [ ] Update documentation
 
-**Files to Modify/Remove:**
-- Account CRD definition
-- Account controller and reconciliation logic
-- NIM utility functions
-- Related tests
-
 ### Add Build-Time Metadata Generation
 
 **Jira:** [NVPE-411](https://issues.redhat.com/browse/NVPE-411) (metadata script), [NVPE-412](https://issues.redhat.com/browse/NVPE-412) (ServingRuntime template)
@@ -70,7 +64,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### EU Regulation Handling (Build-Time)
 
-**Approach:** Run `detect-eu` script from an EU location to identify restricted models, then run `generate` which adds `euRestricted: true` to flagged models. Dashboard displays warning tooltip for restricted models.
+**Approach:** Run `detect-eu` script from an EU location to identify restricted models, then run `generate` which adds `euRestricted: true` to flagged models. Dashboard UX handling TBD.
 
 **Tasks:**
 - [x] Investigate whether models can be identified as EU-restricted at build time
@@ -92,11 +86,6 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 - [ ] Update Kserve component configuration
 - [ ] Update documentation
 
-**Files to Modify:**
-- CRD definition for DataScienceCluster
-- Kserve component handling code
-- Related tests
-
 ### Cleanup Obsolete NIM Resources
 
 **Jira:** [NVPE-414](https://issues.redhat.com/browse/NVPE-414)
@@ -117,24 +106,21 @@ See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for 
 
 ## Testing and Validation
 
-### Unit Tests
-
-**Tasks:**
-- [ ] Remove tests for removed Account controller
-- [ ] Add tests for new ConfigMap loading logic
-
 ### Integration Tests
 
-**Tasks:**
-- [ ] Test end-to-end NIM deployment flow
-- [ ] Test upgrade from current architecture to new architecture
-- [ ] Verify cleanup of obsolete resources (Account CR, etc.)
+> **Note:** Integration testing approach to be determined in coordination with QE. This includes end-to-end deployment flow, upgrade testing, and cleanup verification.
 
 ### Air-Gap Testing
 
 **Jira:** [NVPE-415](https://issues.redhat.com/browse/NVPE-415)
 
-Validate the solution in an air-gapped environment and document setup instructions. See Jira for acceptance criteria.
+**Tasks:**
+- [ ] Validate `disableKeyValidation` flag works correctly
+- [ ] Test custom ConfigMap override pointing to internal registry
+- [ ] Deploy NIM model in air-gapped cluster
+- [ ] Identify blockers, gaps, or improvements needed
+
+> **Note:** Full air-gap documentation is out of scope for this task (see [Future Enhancements](05_NIM_Future_Enhancements.md)).
 
 ---
 

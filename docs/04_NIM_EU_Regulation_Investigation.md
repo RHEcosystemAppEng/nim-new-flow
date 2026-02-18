@@ -4,7 +4,7 @@
 
 Some NVIDIA NIM models are not available in the European Union due to regulatory restrictions. When attempting to access metadata for these models from an EU location, the NVIDIA API returns HTTP status code 451 ("Unavailable For Legal Reasons").
 
-This creates a challenge for our redesigned NIM integration, where model metadata is fetched at build time. If build servers are outside the EU, they will successfully fetch metadata for EU-restricted models, but EU users won't be able to deploy them.
+This creates a challenge for our redesigned NIM integration, where model metadata is fetched at build time (manually by the NIM team prior to each release). If the script is run from outside the EU, it will successfully fetch metadata for EU-restricted models, but EU users won't be able to deploy them.
 
 ---
 
@@ -20,41 +20,25 @@ With the existing runtime metadata fetching:
 ### New Architecture Challenge
 
 With build-time metadata fetching:
-- Build servers (likely US-based) will successfully fetch all models
+- If the script is run from outside the EU, it will successfully fetch all models
 - EU users will see models they cannot deploy
 - Deployment will fail at image pull or model download stage
 - Poor user experience
 
 ---
 
-## Investigation Tasks
+## Identification and Marking Approach
 
-### Task 1: Identify EU-Restricted Models
+**Identify and Mark EU-Restricted Models:**
+1. Run `detect-eu` script from an EU location - models returning HTTP 451 are saved to `eu_restricted_models.json`
+2. Run `generate` script which reads the restricted list and adds `euRestricted: true` to flagged models in the ConfigMap
+3. Both scripts are run manually by the NIM team prior to each release
 
-**Approach A: NVIDIA Documentation/API**
-- Contact NVIDIA for official list of EU-restricted models
-- Check if there's an API field indicating restriction
-- Request API enhancement if not available
-
-**Approach B: Model Metadata Analysis**
-- Check if model IDs or names follow a pattern for restricted models
-- Check if model metadata includes any regional availability info
-
-### Task 2: Define Marking Strategy
-
-**Option A: Build-Time Detection** ✅ **CHOSEN**
-- Run `detect-eu` script from an EU location to generate `eu_restricted_models.json`
-- Run `generate` script which reads the restricted list and adds `euRestricted: true` to flagged models
-- Both scripts are run manually by maintainers prior to each release
-
-**Option B: Hardcoded List**
-- Maintain a static list of restricted model IDs
-- Apply flag during ConfigMap generation
-- Requires manual updates when list changes
-
-**Option C: Model-Level Metadata**
-- Request NVIDIA to add regional availability to their API
-- Parse and include in our ConfigMap
+**Other approaches considered:**
+- Contact NVIDIA for official list (no structured data available)
+- Analyze model metadata for patterns (no reliable indicators found)
+- Maintain a hardcoded list (requires manual updates when list changes)
+- Request NVIDIA to add regional availability to their API (out of our control)
 
 ---
 
@@ -125,18 +109,14 @@ nimConfig:
 - Users in non-EU regions are unaffected
 
 **Cons:**
-- Requires EU-restricted models to be marked in the ConfigMap
 - EU users could still attempt deployment (will fail at image pull/model download)
-
-> **Note:** Final approach will be determined after investigation and discussion with the Dashboard team.
 
 ---
 
 ## Action Items
 
-- [ ] Contact NVIDIA for official EU restriction list
+- [x] Contact NVIDIA for official EU restriction list
 - [x] Set up EU test environment for validation
-- [ ] Document findings from investigation
-- [ ] Propose final approach based on findings
-- [ ] Get legal review if needed
-- [ ] Update ADR with EU handling section
+- [x] Document findings from investigation
+- [x] Propose final approach based on findings
+- [x] Update ADR with EU handling section

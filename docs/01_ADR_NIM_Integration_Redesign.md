@@ -147,7 +147,7 @@ spec:
    - ~~How do we reliably determine which models are EU-restricted?~~
    - ~~Should Dashboard detect geographic location or rely on config?~~
    - ~~See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)~~
-   - **Resolved:** Using build-time detection. Run `detect-eu` from EU location, then `generate` adds `euRestricted: true` to flagged models. Dashboard shows warning tooltip.
+   - **Resolved (detection):** Using build-time detection. Run `detect-eu` from EU location, then `generate` adds `euRestricted: true` to flagged models. Dashboard UX handling (tooltip vs hide) TBD by Dashboard team.
 
 2. **Application Screen**
    - Should we keep the application screen enablement toggle?
@@ -162,9 +162,7 @@ spec:
 ## Next Steps
 
 1. ~~Coordinate with NVIDIA on build-time API key usage~~ Done
-2. Get stakeholder alignment and approval
-3. [Begin implementation](02_NIM_Redesign_Implementation_Plan.md)
-4. Coordinate with Dashboard team on Wizard integration
+2. ~~Get stakeholder alignment and approval~~ Done
 
 ---
 

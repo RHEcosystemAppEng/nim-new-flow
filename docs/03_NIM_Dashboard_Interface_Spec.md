@@ -214,8 +214,8 @@ When a user deploys a NIM model through the Wizard:
 3. **Display Model Selection**
    - Read ConfigMap (default or custom per OdhDashboardConfig)
    - Parse model entries (each key is a model name, value is JSON)
-   - Filter EU-restricted models if applicable (out of scope - see [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md))
-   - Populate dropdown with remaining models
+   - Handle EU-restricted models (see [EU Region Handling](#eu-region-handling) below)
+   - Populate dropdown with models
 
 4. **Collect User Input**
    - Model selection (from dropdown)
@@ -283,7 +283,7 @@ When a user deploys a NIM model through the Wizard:
 
 EU-restricted models are marked with `euRestricted: true` in the ConfigMap. This is determined at build time by running the `detect-eu` script from an EU location.
 
-**Dashboard behavior:** When displaying a model with `euRestricted: true`, show a warning tooltip (e.g., "This model may not be available in the EU due to regulatory restrictions"). Do not block selection - let the user decide.
+**Dashboard behavior:** TBD by Dashboard team. Options include showing a warning tooltip or hiding restricted models from selection. See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for options.
 
 See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for details.
 
@@ -320,8 +320,3 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 6. **Rollback on Failure**
    - Verify partial deployments are cleaned up
 
----
-
-## Open Questions
-
-1. What's the preferred approach for EU region detection?

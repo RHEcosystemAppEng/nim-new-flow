@@ -55,20 +55,20 @@ Utility for NIM model metadata operations. Requires `curl` and `jq`.
 
 | Command | Description |
 |---------|-------------|
-| `generate` | Fetch model metadata and generate a ConfigMap YAML |
 | `detect-eu` | Probe models and list EU-restricted ones (HTTP 451) |
+| `generate` | Fetch model metadata and generate a ConfigMap YAML (uses `eu_restricted_models.json` if present) |
 
 **Usage:**
 ```bash
-# Generate ConfigMap
-./nim_metadata.sh generate <personal-api-key>
-
 # Detect EU-restricted models (run from EU location)
 ./nim_metadata.sh detect-eu <personal-api-key>
 
+# Generate ConfigMap (uses eu_restricted_models.json if present)
+./nim_metadata.sh generate <personal-api-key>
+
 # Override default output path
-./nim_metadata.sh generate --output /custom/path.yaml <personal-api-key>
 ./nim_metadata.sh detect-eu --output /custom/path.json <personal-api-key>
+./nim_metadata.sh generate --output /custom/path.yaml <personal-api-key>
 
 # Use environment variable instead of argument
 NGC_API_KEY=<personal-api-key> ./nim_metadata.sh generate
@@ -80,8 +80,8 @@ Only personal API keys (starting with `nvapi-`) are supported.
 
 | Command | Default Path | Format |
 |---------|-------------|--------|
-| `generate` | `generated/nvidia-nim-models-data.yaml` | Kubernetes ConfigMap YAML |
 | `detect-eu` | `generated/eu_restricted_models.json` | JSON array (`name`, `resourceId`, `org`, `team`) |
+| `generate` | `generated/nvidia-nim-models-data.yaml` | Kubernetes ConfigMap YAML |
 
 ## Related Jira
 

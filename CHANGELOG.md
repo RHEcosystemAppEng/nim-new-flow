@@ -11,6 +11,7 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 - **Metadata generation process**: Clarified that "build-time" means manual PR-based updates to the repository, NOT automated CI. NIM team checks for catalog updates and submits PRs with regenerated ConfigMap. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md), [Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))
 - **EU detection approach**: Chose Option A (Build-Time Detection) - run `detect-eu` from EU, then `generate` integrates the results. ([EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
 - **Future Enhancements**: Added CI Metadata Automation as P3 (post-stabilization) item. ([Future Enhancements](docs/05_NIM_Future_Enhancements.md))
+- **Documentation cleanup**: Consolidated EU investigation tasks, removed duplicate sections, simplified testing section, marked completed action items.
 
 ## 2026-02-06
 
@@ -22,7 +23,6 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 
 ### Added
 - **Metadata generation script**: Added `nim_metadata.sh` for generating NIM models ConfigMap. Supports `generate` and `detect-eu` commands.
-- **API response examples**: Added `orig.json` and `new.json` for reference.
 
 ### Changed
 - **Resource naming**: Standardized resource names across all docs (`nvidia-nim-models-data`, `nvidia-nim-secrets`, `nvidia-nim-image-pull`).
