@@ -32,7 +32,7 @@ We are removing the backend Account CRD/Controller from `odh-model-controller` a
 
 - Only **personal API keys** (`nvapi-`) are supported. Legacy keys are deprecated.
 - EU-restricted models return HTTP 451 from NVIDIA's API. Detection approach is still under investigation.
-- Resource names: `nvidia-nim-models-data` (ConfigMap), `nvidia-nim-http-template` (Template CR encapsulating ServingRuntime), `nvidia-nim-secrets-{deployment-name}` (Opaque Secret, per deployment), `nvidia-nim-image-pull-{deployment-name}` (Pull Secret, per deployment).
+- Resource names: `nim-models-data` (ConfigMap), `nim-http-template` (Template CR encapsulating ServingRuntime), `nim-api-key-{deployment-name}` (Opaque Secret, per deployment), `nim-image-pull-{deployment-name}` (Pull Secret, per deployment).
 - This repo plans changes across 3 projects: `opendatahub-operator`, `odh-model-controller`, `odh-dashboard`.
 
 ## When Editing Docs

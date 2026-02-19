@@ -158,7 +158,7 @@ spec:
 3. **Multiple API Keys per Project** - Resolved
    - ~~Current design uses fixed secret names (`nvidia-nim-secrets`, `nvidia-nim-image-pull`) per project, meaning one API key per project~~
    - ~~Should we support multiple API keys (e.g., per deployment) in the future? This would require deployment-specific secret naming~~
-   - Adopted **key-per-deployment**: each deployment gets its own secrets (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). This avoids key reuse across deployments, simplifies Dashboard implementation, and enables per-deployment key rotation.
+   - Adopted **key-per-deployment**: each deployment gets its own secrets (`nim-api-key-{deployment-name}`, `nim-image-pull-{deployment-name}`). This avoids key reuse across deployments, simplifies Dashboard implementation, and enables per-deployment key rotation.
 
 4. **Dashboard External API Calls**
    - The current design requires the Dashboard/Wizard to call NVIDIA's API to validate the user's API key before deployment

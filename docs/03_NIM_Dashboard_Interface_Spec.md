@@ -14,14 +14,14 @@ This document specifies the interface contracts and requirements for the NIM int
 
 The backend ships a ConfigMap containing NIM model metadata. The Dashboard reads this ConfigMap to populate the model selection dropdown.
 
-**Location:** `<main-namespace>/nvidia-nim-models-data` (e.g., `redhat-ods-applications/nvidia-nim-models-data`)
+**Location:** `<main-namespace>/nim-models-data` (e.g., `redhat-ods-applications/nim-models-data`)
 
 **Schema (based on existing):**
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nvidia-nim-models-data
+  name: nim-models-data
   namespace: redhat-ods-applications
 data:
   # Each key is a model name, value is JSON
@@ -99,7 +99,7 @@ spec:
 ### 3. Template CR (ServingRuntime)
 
 The backend ships an OpenShift `template.openshift.io/v1` Template CR containing a ServingRuntime definition in its `objects` array.
-**Location:** `<main-namespace>/nvidia-nim-http-template`
+**Location:** `<main-namespace>/nim-http-template`
 
 **Template CR (from `odh-model-controller`):**
 ```yaml
@@ -113,12 +113,12 @@ metadata:
     opendatahub.io/modelServingSupport: '["single"]'
     opendatahub.io/apiProtocol: REST
     openshift.io/display-name: NVIDIA NIM ServingRuntime for KServe
-  name: nvidia-nim-http-template
+  name: nim-http-template
 objects:
   - apiVersion: serving.kserve.io/v1alpha1
     kind: ServingRuntime
     metadata:
-      name: nvidia-nim-runtime
+      name: nim-http-runtime
       annotations:
         opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
         openshift.io/display-name: NVIDIA NIM
@@ -236,7 +236,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nvidia-nim-secrets-${DEPLOYMENT_NAME}
+     name: nim-api-key-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
@@ -250,7 +250,7 @@ When a user deploys a NIM model through the Wizard:
    apiVersion: v1
    kind: Secret
    metadata:
-     name: nvidia-nim-image-pull-${DEPLOYMENT_NAME}
+     name: nim-image-pull-${DEPLOYMENT_NAME}
      namespace: ${USER_PROJECT}
      labels:
        opendatahub.io/managed: "true"
@@ -277,7 +277,7 @@ When a user deploys a NIM model through the Wizard:
 
    **5.4 ServingRuntime**
    - Process the Template with parameters (image, model format, PVC name)
-   - Add deployment-specific secret references: `NGC_API_KEY` env var via `secretKeyRef` pointing to `nvidia-nim-secrets-{deployment-name}`, and `imagePullSecrets` referencing `nvidia-nim-image-pull-{deployment-name}`
+   - Add deployment-specific secret references: `NGC_API_KEY` env var via `secretKeyRef` pointing to `nim-api-key-{deployment-name}`, and `imagePullSecrets` referencing `nim-image-pull-{deployment-name}`
    - Create ServingRuntime in user's project
    
    > The resulting ServingRuntime looks the same as the current integration — secrets live on the ServingRuntime, not the InferenceService. The only difference is that the **template** ships without secrets and the Dashboard adds them during deployment.

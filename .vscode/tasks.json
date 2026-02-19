@@ -15,7 +15,7 @@
     {
       "label": "NIM: Detect EU Restricted Models",
       "type": "shell",
-      "command": "scp -i ${input:sshKey} nim_metadata.sh ${input:vmUser}@${input:vmHost}:~/ && ssh -i ${input:sshKey} ${input:vmUser}@${input:vmHost} \"~/nim_metadata.sh detect-eu ${input:apiKey}\" && scp -i ${input:sshKey} ${input:vmUser}@${input:vmHost}:~/generated/eu_restricted_models.json generated/eu_restricted_models.json",
+      "command": "scp -i ${input:sshKey} nim_metadata.sh ${input:vmUser}@${input:vmHost}:~/ && ssh -i ${input:sshKey} ${input:vmUser}@${input:vmHost} \"~/nim_metadata.sh detect-eu ${input:apiKey}\" && scp -i ${input:sshKey} ${input:vmUser}@${input:vmHost}:~/generated/nim_eu_restricted.json generated/nim_eu_restricted.json",
       "group": "build",
       "presentation": {
         "reveal": "always",

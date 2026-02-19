@@ -12,7 +12,7 @@ This guide provides optional steps for admins who want to migrate a specific exi
 
 Existing deployments use **shared secrets** — all NIM deployments in a namespace reference the same `nvidia-nim-secrets` (Opaque) and `ngc-secret` (Pull Secret). These are the admin's API key, copied from the main namespace during the deployment process.
 
-The new design uses **per-deployment secrets**: `nvidia-nim-secrets-{deployment-name}` and `nvidia-nim-image-pull-{deployment-name}`. Each deployment gets its own key, enabling:
+The new design uses **per-deployment secrets**: `nim-api-key-{deployment-name}` and `nim-image-pull-{deployment-name}`. Each deployment gets its own key, enabling:
 
 - **API key rotation** per deployment without affecting others
 - **Per-deployment key management** in the Dashboard UI
@@ -24,8 +24,8 @@ The new design uses **per-deployment secrets**: `nvidia-nim-secrets-{deployment-
 
 | | Before (shared) | After (per-deployment) |
 |--|-----------------|----------------------|
-| Opaque Secret | `nvidia-nim-secrets` | `nvidia-nim-secrets-{deployment-name}` |
-| Pull Secret | `ngc-secret` | `nvidia-nim-image-pull-{deployment-name}` |
+| Opaque Secret | `nvidia-nim-secrets` | `nim-api-key-{deployment-name}` |
+| Pull Secret | `ngc-secret` | `nim-image-pull-{deployment-name}` |
 | ServingRuntime | References shared names | References deployment-specific names |
 | InferenceService | No changes | No changes |
 | PVC | No changes | No changes |
@@ -64,12 +64,12 @@ DEPLOYMENT="<deployment-name>"
 API_KEY="nvapi-..."
 
 # Opaque Secret
-oc create secret generic "nvidia-nim-secrets-${DEPLOYMENT}" \
+oc create secret generic "nim-api-key-${DEPLOYMENT}" \
   --namespace="${NAMESPACE}" \
   --from-literal=NGC_API_KEY="${API_KEY}"
 
 # Pull Secret
-oc create secret docker-registry "nvidia-nim-image-pull-${DEPLOYMENT}" \
+oc create secret docker-registry "nim-image-pull-${DEPLOYMENT}" \
   --namespace="${NAMESPACE}" \
   --docker-server=nvcr.io \
   --docker-username='$oauthtoken' \
@@ -90,8 +90,8 @@ oc patch servingruntime "${DEPLOYMENT}" \
   --namespace="${NAMESPACE}" \
   --type='json' \
   -p='[
-    {"op": "replace", "path": "/spec/containers/0/env/1/valueFrom/secretKeyRef/name", "value": "nvidia-nim-secrets-'"${DEPLOYMENT}"'"},
-    {"op": "replace", "path": "/spec/imagePullSecrets/0/name", "value": "nvidia-nim-image-pull-'"${DEPLOYMENT}"'"}
+    {"op": "replace", "path": "/spec/containers/0/env/1/valueFrom/secretKeyRef/name", "value": "nim-api-key-'"${DEPLOYMENT}"'"},
+    {"op": "replace", "path": "/spec/imagePullSecrets/0/name", "value": "nim-image-pull-'"${DEPLOYMENT}"'"}
   ]'
 ```
 

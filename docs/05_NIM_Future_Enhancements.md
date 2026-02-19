@@ -15,13 +15,13 @@ With the existing architecture, API keys are scattered across multiple namespace
 ### Enabled by Redesign
 
 With per-deployment key management in the new architecture:
-- Each deployment has its own API key (`nvidia-nim-secrets-{deployment-name}`)
+- Each deployment has its own API key (`nim-api-key-{deployment-name}`)
 - Keys are not shared between deployments, even within the same project
 - Clear ownership and lifecycle per deployment
 
 ### Prerequisites
 
-Existing deployments must use per-deployment secret naming (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). See [Deployment Migration Guide](07_NIM_Deployment_Migration_Guide.md) for migrating older deployments.
+Existing deployments must use per-deployment secret naming (`nim-api-key-{deployment-name}`, `nim-image-pull-{deployment-name}`). See [Deployment Migration Guide](07_NIM_Deployment_Migration_Guide.md) for migrating older deployments.
 
 ### Proposed Implementation
 
@@ -58,8 +58,8 @@ With build-time Template CR shipping:
 ### Proposed Implementation
 
 1. **Add gRPC Template CR**
-   - `nvidia-nim-http-template` already ships with the initial redesign (HTTP)
-   - Add `nvidia-nim-grpc-template` for gRPC protocol
+   - `nim-http-template` already ships with the initial redesign (HTTP)
+   - Add `nim-grpc-template` for gRPC protocol
 
 2. **Wizard Protocol Selection**
    - Add protocol dropdown to deployment wizard

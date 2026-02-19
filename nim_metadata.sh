@@ -15,8 +15,8 @@
 #   NGC_API_KEY=<api_key> ./nim_metadata.sh generate
 #
 # Default output:
-#   generate:   generated/nvidia-nim-models-data.yaml
-#   detect-eu:  generated/eu_restricted_models.json
+#   generate:   generated/nim-models-data.yaml
+#   detect-eu:  generated/nim_eu_restricted.json
 
 set -euo pipefail
 
@@ -138,7 +138,7 @@ discover_models() {
 cmd_generate() {
     local api_key="$1"
     local runtimes="$2"
-    local output_file="${3:-${OUTPUT_DIR}/nvidia-nim-models-data.yaml}"
+    local output_file="${3:-${OUTPUT_DIR}/nim-models-data.yaml}"
     local model_count
     model_count=$(echo "${runtimes}" | jq 'length')
 
@@ -152,7 +152,7 @@ cmd_generate() {
     fi
 
     # Load EU restricted models list if available
-    local eu_restricted_file="${OUTPUT_DIR}/eu_restricted_models.json"
+    local eu_restricted_file="${OUTPUT_DIR}/nim_eu_restricted.json"
     local eu_restricted_names=""
     if [[ -f "${eu_restricted_file}" ]]; then
         eu_restricted_names=$(jq -r '.[].name' "${eu_restricted_file}" | tr '\n' '|' | sed 's/|$//')
@@ -170,7 +170,7 @@ cmd_generate() {
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nvidia-nim-models-data
+  name: nim-models-data
   labels:
     opendatahub.io/managed: "true"
 data:
@@ -250,7 +250,7 @@ HEADER
 cmd_detect_eu() {
     local api_key="$1"
     local runtimes="$2"
-    local output_file="${3:-${OUTPUT_DIR}/eu_restricted_models.json}"
+    local output_file="${3:-${OUTPUT_DIR}/nim_eu_restricted.json}"
     local model_count
     model_count=$(echo "${runtimes}" | jq 'length')
 

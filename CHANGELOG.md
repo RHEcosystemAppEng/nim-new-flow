@@ -8,7 +8,7 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 - **Deployment Migration Guide**: Optional guide and script (`migrate_nim_deployment.sh`) for admins to migrate existing deployments from shared secrets to per-deployment secrets. Includes warning about double resource requirements during rollout restart. ([Migration Guide](docs/07_NIM_Deployment_Migration_Guide.md))
 
 ### Changed
-- **Template CR clarification**: Clarified that "ServingRuntime Template" refers to an OpenShift `template.openshift.io/v1` Template CR encapsulating a ServingRuntime. Updated Dashboard Interface Spec to show the full Template CR YAML (based on live cluster resource). Renamed resource to `nvidia-nim-http-template`. Updated all docs for consistent terminology.
+- **Template CR clarification**: Clarified that "ServingRuntime Template" refers to an OpenShift `template.openshift.io/v1` Template CR encapsulating a ServingRuntime. Updated Dashboard Interface Spec to show the full Template CR YAML (based on live cluster resource). Renamed resource to `nim-http-template`. Updated all docs for consistent terminology.
 
 ## 2026-02-18
 
@@ -20,14 +20,14 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 - **Renamed `disableKeyValidation` to `disableKeyCollection`**: Better reflects that the entire key collection step is skipped in disconnected mode, not just validation.
 - **Air-gap preparation steps**: Added concrete admin prerequisites in Future Enhancements doc, including ITMS example config, global pull secret setup, and links to OCP 4.21 docs.
 - **Secrets removed from Template CR**: The shipped `template.openshift.io/v1` Template CR (encapsulating the ServingRuntime) no longer contains `NGC_API_KEY` env or `imagePullSecrets`. The Dashboard adds these secret references when creating the ServingRuntime in the user's namespace, alongside other customizations (image, model format, PVC). The resulting ServingRuntime and InferenceService look the same as the current integration. Updated ADR, Implementation Plan, and Dashboard Interface Spec.
-- **Key-per-deployment**: Adopted deployment-specific secret naming (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). Each deployment gets its own secrets — no key reuse across deployments. Resolved Open Question #3 in ADR. Updated ADR, Implementation Plan, Dashboard Interface Spec, and Future Enhancements.
+- **Key-per-deployment**: Adopted deployment-specific secret naming (`nim-api-key-{deployment-name}`, `nim-image-pull-{deployment-name}`). Each deployment gets its own secrets — no key reuse across deployments. Resolved Open Question #3 in ADR. Updated ADR, Implementation Plan, Dashboard Interface Spec, and Future Enhancements.
 - **EU Dashboard handling resolved**: Chose Option 4 (Warning Tooltip) - Dashboard shows warning when user selects EU-restricted model, without blocking selection. Updated ADR, Implementation Plan, Dashboard Spec, and EU Investigation docs.
 - **Next Steps cleanup**: Removed completed items 3 and 4 (implementation begun, Dashboard coordination ongoing via Jiras).
 
 ## 2026-02-13
 
 ### Added
-- **EU restriction support**: Added `euRestricted` field to ConfigMap schema. The `generate` script now reads `eu_restricted_models.json` and marks flagged models. ([Dashboard Interface Spec](docs/03_NIM_Dashboard_Interface_Spec.md), [EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
+- **EU restriction support**: Added `euRestricted` field to ConfigMap schema. The `generate` script now reads `nim_eu_restricted.json` and marks flagged models. ([Dashboard Interface Spec](docs/03_NIM_Dashboard_Interface_Spec.md), [EU Investigation](docs/04_NIM_EU_Regulation_Investigation.md))
 
 ### Changed
 - **Metadata generation process**: Clarified that "build-time" means manual PR-based updates to the repository, NOT automated CI. NIM team checks for catalog updates and submits PRs with regenerated ConfigMap. ([ADR](docs/01_ADR_NIM_Integration_Redesign.md), [Implementation Plan](docs/02_NIM_Redesign_Implementation_Plan.md))

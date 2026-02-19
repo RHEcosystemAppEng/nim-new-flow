@@ -30,7 +30,7 @@ With build-time metadata fetching:
 ## Identification and Marking Approach
 
 **Identify and Mark EU-Restricted Models:**
-1. Run `detect-eu` script from an EU location - models returning HTTP 451 are saved to `eu_restricted_models.json`
+1. Run `detect-eu` script from an EU location - models returning HTTP 451 are saved to `nim_eu_restricted.json`
 2. Run `generate` script which reads the restricted list and adds `euRestricted: true` to flagged models in the ConfigMap
 3. Both scripts are run manually by the NIM team prior to each release
 

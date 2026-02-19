@@ -119,8 +119,8 @@ if [[ ! "$API_KEY" == nvapi-* ]]; then
   exit 1
 fi
 
-OPAQUE_SECRET="nvidia-nim-secrets-${DEPLOYMENT}"
-PULL_SECRET="nvidia-nim-image-pull-${DEPLOYMENT}"
+OPAQUE_SECRET="nim-api-key-${DEPLOYMENT}"
+PULL_SECRET="nim-image-pull-${DEPLOYMENT}"
 
 echo "=== Migrating deployment '${DEPLOYMENT}' in namespace '${NAMESPACE}' ==="
 echo "  Opaque Secret: ${OPAQUE_SECRET}"

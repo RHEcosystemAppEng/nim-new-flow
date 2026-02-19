@@ -18,10 +18,10 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 | Resource | Name | Namespace |
 |----------|------|-----------|
-| ConfigMap (model metadata) | `nvidia-nim-models-data` | Main namespace |
-| Template CR (ServingRuntime) | `nvidia-nim-http-template` | Main namespace |
-| Opaque Secret (per deployment) | `nvidia-nim-secrets-{deployment-name}` | User project |
-| Pull Secret (per deployment) | `nvidia-nim-image-pull-{deployment-name}` | User project |
+| ConfigMap (model metadata) | `nim-models-data` | Main namespace |
+| Template CR (ServingRuntime) | `nim-http-template` | Main namespace |
+| Opaque Secret (per deployment) | `nim-api-key-{deployment-name}` | User project |
+| Pull Secret (per deployment) | `nim-image-pull-{deployment-name}` | User project |
 
 ---
 
@@ -59,7 +59,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 **New Files:**
 - `scripts/generate_nim_metadata.sh` (based on the reference script in this repo)
-- `config/nim/nvidia-nim-models-data.yaml` (generated ConfigMap, committed to repo)
+- `config/nim/nim-models-data.yaml` (generated ConfigMap, committed to repo)
 - `config/runtimes/nim-http-template.yaml` (Template CR alongside existing runtime templates like `vllm-cuda-template.yaml`; ships without secrets — the Dashboard adds secret references to the ServingRuntime when creating it in the user's namespace)
 
 ### EU Regulation Handling (Build-Time)
