@@ -201,7 +201,7 @@ When a user deploys a NIM model through the Wizard:
    - Store temporarily in memory (not persisted until deployment)
 
 2. **Validate Key** (skipped if `disconnected.disableKeyCollection` is true)
-   - Call NVIDIA validation endpoint
+   - Call NVIDIA validation endpoint (see [ADR Open Question #4](01_ADR_NIM_Integration_Redesign.md#open-questions) for implementation options — backend proxy vs. webhook)
    - If validation fails, show error and do not proceed
    - If validation succeeds, proceed to next step
 
