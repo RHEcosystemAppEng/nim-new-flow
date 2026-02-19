@@ -20,6 +20,7 @@ This repository contains the planning and design documentation for a significant
 | [04 - EU Regulation Investigation](docs/04_NIM_EU_Regulation_Investigation.md) | Investigation into EU model restrictions (HTTP 451) |
 | [05 - Future Enhancements](docs/05_NIM_Future_Enhancements.md) | Out-of-scope features enabled by this redesign |
 | [06 - API Endpoints](docs/06_NIM_API_Endpoints.md) | NVIDIA API endpoints used by the integration |
+| [07 - Deployment Migration Guide](docs/07_NIM_Deployment_Migration_Guide.md) | Optional guide for migrating existing deployments to per-deployment secrets |
 | [Changelog](CHANGELOG.md) | Track significant changes to these docs |
 
 ## Projects Involved

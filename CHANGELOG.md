@@ -4,6 +4,9 @@ Significant changes to the NIM Integration Redesign documentation and tooling.
 
 ## 2026-02-19
 
+### Added
+- **Deployment Migration Guide**: Optional guide and script (`migrate_nim_deployment.sh`) for admins to migrate existing deployments from shared secrets to per-deployment secrets. Includes warning about double resource requirements during rollout restart. ([Migration Guide](docs/07_NIM_Deployment_Migration_Guide.md))
+
 ### Changed
 - **Template CR clarification**: Clarified that "ServingRuntime Template" refers to an OpenShift `template.openshift.io/v1` Template CR encapsulating a ServingRuntime. Updated Dashboard Interface Spec to show the full Template CR YAML (based on live cluster resource). Renamed resource to `nvidia-nim-http-template`. Updated all docs for consistent terminology.
 

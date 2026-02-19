@@ -187,3 +187,4 @@ spec:
 - [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md)
 - [Future Enhancements](05_NIM_Future_Enhancements.md)
 - [API Endpoints](06_NIM_API_Endpoints.md)
+- [Deployment Migration Guide](07_NIM_Deployment_Migration_Guide.md)

@@ -19,6 +19,10 @@ With per-deployment key management in the new architecture:
 - Keys are not shared between deployments, even within the same project
 - Clear ownership and lifecycle per deployment
 
+### Prerequisites
+
+Existing deployments must use per-deployment secret naming (`nvidia-nim-secrets-{deployment-name}`, `nvidia-nim-image-pull-{deployment-name}`). See [Deployment Migration Guide](07_NIM_Deployment_Migration_Guide.md) for migrating older deployments.
+
 ### Proposed Implementation
 
 1. **Dashboard Key Management UI**
