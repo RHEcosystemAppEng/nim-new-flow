@@ -19,7 +19,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 | Resource | Name | Namespace |
 |----------|------|-----------|
 | ConfigMap (model metadata) | `nvidia-nim-models-data` | Main namespace |
-| ServingRuntime Template | `nvidia-nim-runtime-http` | Main namespace |
+| Template CR (ServingRuntime) | `nvidia-nim-http-template` | Main namespace |
 | Opaque Secret (per deployment) | `nvidia-nim-secrets-{deployment-name}` | User project |
 | Pull Secret (per deployment) | `nvidia-nim-image-pull-{deployment-name}` | User project |
 
@@ -39,14 +39,14 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 
 ### Add Build-Time Metadata Generation
 
-**Jira:** [NVPE-411](https://issues.redhat.com/browse/NVPE-411) (metadata script), [NVPE-412](https://issues.redhat.com/browse/NVPE-412) (ServingRuntime template)
+**Jira:** [NVPE-411](https://issues.redhat.com/browse/NVPE-411) (metadata script), [NVPE-412](https://issues.redhat.com/browse/NVPE-412) (Template CR)
 
 **Tasks:**
 - [ ] Add NIM models ConfigMap to odh-model-controller kustomize manifests
 - [ ] Create metadata generation script (reference: `nim_metadata.sh` in this repo)
 - [ ] Add Makefile target for developers to regenerate ConfigMap safely
 - [ ] Document release process (see below)
-- [ ] Create ServingRuntime Template as static resource (**no secrets** — no `NGC_API_KEY` env, no `imagePullSecrets`)
+- [ ] Create Template CR (`template.openshift.io/v1`) containing the ServingRuntime as a static resource (**no secrets** — no `NGC_API_KEY` env, no `imagePullSecrets`)
 - [ ] Include Template in kustomization manifests
 
 **Release Process:**
@@ -60,7 +60,7 @@ This document outlines the implementation plan for redesigning the NVIDIA NIM in
 **New Files:**
 - `scripts/generate_nim_metadata.sh` (based on the reference script in this repo)
 - `config/nim/nvidia-nim-models-data.yaml` (generated ConfigMap, committed to repo)
-- `config/runtimes/nim-http-template.yaml` (alongside existing runtime templates; ships without secrets — the Dashboard adds secret references to the ServingRuntime when creating it in the user's namespace)
+- `config/runtimes/nim-http-template.yaml` (Template CR alongside existing runtime templates like `vllm-cuda-template.yaml`; ships without secrets — the Dashboard adds secret references to the ServingRuntime when creating it in the user's namespace)
 
 ### EU Regulation Handling (Build-Time)
 
@@ -102,7 +102,7 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 
 See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for detailed technical requirements and resource contracts.
 
-**Key implementation detail:** The ServingRuntime **template** ships without secrets. When the Dashboard creates the ServingRuntime in the user's namespace, it adds the secret references (`NGC_API_KEY` env var via `secretKeyRef`, `imagePullSecrets`) alongside other customizations (image, model format, PVC name). The resulting ServingRuntime looks the same as the current integration. The InferenceService is unchanged.
+**Key implementation detail:** The Template CR ships without secrets — the ServingRuntime inside has no `NGC_API_KEY` env var and no `imagePullSecrets`. When the Dashboard processes this Template and creates the ServingRuntime in the user's namespace, it adds the deployment-specific secret references (`NGC_API_KEY` env var via `secretKeyRef`, `imagePullSecrets`) alongside other customizations (image, model format, PVC name). The resulting ServingRuntime looks the same as the current integration. The InferenceService is unchanged.
 
 ---
 

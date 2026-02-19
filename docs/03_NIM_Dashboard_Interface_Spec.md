@@ -96,72 +96,82 @@ spec:
 
 ---
 
-### 3. ServingRuntime Template
+### 3. Template CR (ServingRuntime)
 
-The backend ships a Template CR containing the ServingRuntime definition.
+The backend ships an OpenShift `template.openshift.io/v1` Template CR containing a ServingRuntime definition in its `objects` array.
+**Location:** `<main-namespace>/nvidia-nim-http-template`
 
-**Location:** `<main-namespace>/nvidia-nim-runtime-http`
-
-**Actual ServingRuntime (from `odh-model-controller`):**
+**Template CR (from `odh-model-controller`):**
 ```yaml
-apiVersion: serving.kserve.io/v1alpha1
-kind: ServingRuntime
+apiVersion: template.openshift.io/v1
+kind: Template
 metadata:
-  name: nvidia-nim-runtime-http
-  annotations:
-    opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
-    openshift.io/display-name: NVIDIA NIM
-    opendatahub.io/nim-runtime: "true"
   labels:
     opendatahub.io/dashboard: "true"
-spec:
-  multiModel: false
-  protocolVersions:
-    - grpc-v2
-    - v2
-  supportedModelFormats:
-    - name: replace-me  # Replaced at deployment time
-  containers:
-    - name: kserve-container
-      image: ""  # Set at deployment time
-      ports:
-        - containerPort: 8000
-          protocol: TCP
-      env:
-        - name: NIM_CACHE_PATH
-          value: /mnt/models/cache
-      resources:
-        limits:
-          cpu: "2"
-          memory: 8Gi
-          nvidia.com/gpu: "2"
-        requests:
-          cpu: "1"
-          memory: 4Gi
-          nvidia.com/gpu: "2"
-      volumeMounts:
-        - name: shm
-          mountPath: /dev/shm
+    opendatahub.io/ootb: "true"
+  annotations:
+    opendatahub.io/modelServingSupport: '["single"]'
+    opendatahub.io/apiProtocol: REST
+    openshift.io/display-name: NVIDIA NIM ServingRuntime for KServe
+  name: nvidia-nim-http-template
+objects:
+  - apiVersion: serving.kserve.io/v1alpha1
+    kind: ServingRuntime
+    metadata:
+      name: nvidia-nim-runtime
+      annotations:
+        opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
+        openshift.io/display-name: NVIDIA NIM
+        runtimes.opendatahub.io/nvidia-nim: "true"
+      labels:
+        opendatahub.io/dashboard: "true"
+    spec:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8000"
+      multiModel: false
+      protocolVersions:
+        - grpc-v2
+        - v2
+      supportedModelFormats:
+        - name: replace-me  # Replaced at deployment time
+      containers:
+        - name: kserve-container
+          image: ""  # Set at deployment time
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: NIM_CACHE_PATH
+              value: /mnt/models/cache
+          resources:
+            limits:
+              cpu: "2"
+              memory: 8Gi
+              nvidia.com/gpu: "2"
+            requests:
+              cpu: "1"
+              memory: 4Gi
+              nvidia.com/gpu: "2"
+          volumeMounts:
+            - name: shm
+              mountPath: /dev/shm
+            - name: nim-pvc
+              mountPath: /mnt/models/cache
+            - name: nim-workspace
+              mountPath: /opt/nim/workspace
+      volumes:
         - name: nim-pvc
-          mountPath: /mnt/models/cache
+          persistentVolumeClaim:
+            claimName: nim-pvc
         - name: nim-workspace
-          mountPath: /opt/nim/workspace
-        - name: nim-cache
-          mountPath: /.cache
-  volumes:
-    - name: nim-pvc
-      persistentVolumeClaim:
-        claimName: nim-pvc
-    - name: nim-workspace
-      emptyDir: {}
-    - name: nim-cache
-      emptyDir: {}
-    - name: shm
-      emptyDir:
-        medium: Memory
+          emptyDir: {}
+        - name: shm
+          emptyDir:
+            medium: Memory
 ```
 
-> **Important:** The ServingRuntime **template** ships without secrets — no `NGC_API_KEY` env var, no `imagePullSecrets`. When the Dashboard creates the ServingRuntime in the user's namespace, it adds the secret references alongside the other customizations (image, model format, PVC name). The resulting ServingRuntime in the namespace looks the same as it does today — secrets on the container env and `imagePullSecrets` at spec level. The InferenceService is unchanged.
+> **Important:** The Template CR ships without secrets — the ServingRuntime inside has no `NGC_API_KEY` env var and no `imagePullSecrets`. When the Dashboard processes this Template and creates the ServingRuntime in the user's namespace, it adds the deployment-specific secret references alongside other customizations (image, model format, PVC name). The resulting ServingRuntime in the namespace looks the same as it does today — secrets on the container env and `imagePullSecrets` at spec level. The InferenceService is unchanged.
 
 ---
 

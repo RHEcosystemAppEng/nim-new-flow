@@ -42,20 +42,20 @@ With per-deployment key management in the new architecture:
 
 ### Current State
 
-The current ServingRuntime template only supports one protocol configuration. Users cannot choose between HTTP and gRPC serving.
+The current Template CR contains a single ServingRuntime configured for one protocol. Users cannot choose between HTTP and gRPC serving.
 
 ### Enabled by Redesign
 
-With build-time template shipping:
-- Multiple templates can be included in the product
+With build-time Template CR shipping:
+- Multiple Template CRs can be included in the product (one per protocol)
 - Templates are static and well-tested
 - No runtime generation complexity
 
 ### Proposed Implementation
 
-1. **Add gRPC ServingRuntime Template**
-   - `nvidia-nim-runtime-http` already ships with the initial redesign
-   - Add `nvidia-nim-runtime-grpc` for gRPC protocol
+1. **Add gRPC Template CR**
+   - `nvidia-nim-http-template` already ships with the initial redesign (HTTP)
+   - Add `nvidia-nim-grpc-template` for gRPC protocol
 
 2. **Wizard Protocol Selection**
    - Add protocol dropdown to deployment wizard
