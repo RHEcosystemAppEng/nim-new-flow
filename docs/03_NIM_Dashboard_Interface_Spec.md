@@ -1,6 +1,6 @@
 # NIM Integration - Dashboard Interface Specification
 
-**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397) (implementation), [NVPE-387](https://issues.redhat.com/browse/NVPE-387) (investigation - completed)
+**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397) (Onboard NIM to the new deployment Wizard), [NVPE-387](https://issues.redhat.com/browse/NVPE-387) (investigation - completed)
 
 ## Overview
 
