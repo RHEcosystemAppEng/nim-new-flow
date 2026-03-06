@@ -98,7 +98,7 @@ See [EU Regulation Investigation](04_NIM_EU_Regulation_Investigation.md) for det
 
 ## Dashboard Enhancements (odh-dashboard)
 
-**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397)
+**Jira:** [NVPE-397](https://issues.redhat.com/browse/NVPE-397), [NVPE-418](https://issues.redhat.com/browse/NVPE-418) (mockups & demo)
 
 See [Dashboard Interface Specification](03_NIM_Dashboard_Interface_Spec.md) for detailed technical requirements and resource contracts.
 
